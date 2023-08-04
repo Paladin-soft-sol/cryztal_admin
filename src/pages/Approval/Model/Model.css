@@ -1,0 +1,47 @@
+.Heading_color .MuiTypography-root {
+	color: #62636c8c;
+	font-family: Poppins;
+}
+.customarData {
+	color: #2c3051 !important;
+	font-family: Poppins !important;
+	font-size: 15px !important;
+	font-weight: 600 !important;
+}
+.main_div {
+	padding-bottom: 15px;
+	padding-top: 15px;
+}
+.second_div {
+	border-bottom: 1px dashed #0000003d;
+}
+.Footer {
+	padding-top: 20px;
+}
+.logo_pic {
+	width: 100px;
+}
+.logo_pic img {
+	width: 100%;
+	padding-top: 10px;
+}
+.Discount_Image {
+	width: 224px;
+	height: 202px;
+}
+.Discount_Image img {
+	width: 100%;
+	height: 100%;
+}
+.btnEdit {
+	display: flex;
+}
+.lineInnerEdit {
+	display: flex;
+	justify-content: space-between;
+}
+@media screen and ((max-width: 768px)) {
+	.dealApproveGrid {
+		padding: 10px 0px 0px 16px !important;
+	}
+}

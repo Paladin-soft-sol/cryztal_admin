@@ -1,0 +1,14 @@
+@media screen and ((max-width: 1024px)) {
+	.layoutSecondPart {
+		padding-left: 40px !important;
+	}
+}
+@media screen and ((max-width: 768px)) {
+	.layoutSecondPart {
+		padding-left: 40px !important;
+	}
+}
+
+.headText {
+	font-size: 20px !important;
+}

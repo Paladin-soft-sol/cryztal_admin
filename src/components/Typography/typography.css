@@ -1,0 +1,10 @@
+.required {
+  color: var(--error);
+  /* padding-left: 2px; */
+  font-size: 14px;
+}
+.errorText {
+  color: red !important;
+  /* padding-top: 10px; */
+  font-size: 14px !important;
+}

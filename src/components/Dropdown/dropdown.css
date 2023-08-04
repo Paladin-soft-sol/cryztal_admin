@@ -1,0 +1,23 @@
+.dropdown select {
+  font-size: 13px;
+  width: 100%;
+  color: var(--bluePrimary);
+  padding: 2px;
+  border: 1px solid #687a81 !important;
+  border-radius: 5px;
+  font-family: 'Roboto';
+  background: var(--whitePrimary);
+}
+
+.dropdown select::after {
+  content: '';
+  top: 14px;
+  right: 10px;
+  width: 30px;
+  height: 20px;
+  border: 6px solid var(--whiteTertiary);
+}
+
+.dropdown select:focus-visible {
+  outline: none !important;
+}

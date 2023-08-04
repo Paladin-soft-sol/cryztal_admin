@@ -1,0 +1,62 @@
+.cardContainer {
+  padding: 15px;
+  border-radius: 20px;
+  min-height: 180px;
+  width: 100%;
+}
+
+.commonCard {
+  display: flex;
+  justify-content: space-between;
+}
+
+.commonCard .MuiTypography-root {
+  font-size: 20px;
+  color: white !important;
+}
+
+.icon img {
+  bottom: 112px;
+  left: 100px;
+  width: 28px;
+}
+
+.leftEdit .MuiTypography-root {
+  line-height: 0;
+  height: 22px;
+}
+
+.dashHead {
+  color: white !important;
+  font-size: 16px;
+}
+
+.partnerCount {
+  font-size: 25px !important;
+  color: white !important;
+}
+
+.product {
+  padding-top: 30px;
+}
+
+.count {
+  padding-top: 32px;
+  font-size: 20px;
+  color: white;
+  line-height: 3;
+}
+
+.activeCount {
+  font-size: 20px;
+  color: white !important;
+}
+@media screen and ((max-width: 768px)) {
+  .cardResponsive {
+    justify-content: unset !important;
+    -webkit-justify-content: unset !important;
+  }
+  .cardContainer {
+    width: 100%;
+  }
+}

@@ -1,0 +1,22 @@
+@font-face {
+  font-family: Roboto;
+  src: url(/src/assets/fonts/Roboto-Regular.ttf);
+}
+@font-face {
+  font-family:Roboto_medium;
+  src: url(/src/assets/fonts/Roboto-Regular.ttf);
+}
+@font-face {
+  font-family: Poppins;
+  src: url(/src/assets/fonts/Poppins-Regular.ttf);
+}
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}

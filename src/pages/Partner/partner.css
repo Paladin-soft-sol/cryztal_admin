@@ -1,0 +1,84 @@
+.headTextReg {
+	color: #204768 !important;
+	font-size: 23px !important;
+	font-weight: 600 !important;
+	margin: 0;
+}
+.add_icon {
+	width: 40px;
+	height: 40px;
+	background-color: #f4a01c;
+	font-size: 31px;
+	position: relative;
+	right: 15px;
+	display: flex;
+	color: #ffff;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	top: 20px;
+}
+.title_head {
+	display: flex;
+	justify-content: space-between;
+}
+.crossedIcon {
+	width: 35px;
+	height: 35px;
+	background-color: #f4a01c;
+	font-size: 31px;
+	position: relative;
+	right: 15px;
+	display: flex;
+	color: #ffff;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+
+}
+
+.table.MuiFormControl-root {
+	top: 12px;
+}
+.tableTitle .MuiTypography-root {
+	margin: 0 !important;
+}
+@media screen and ((max-width: 768px)) {
+	.headTextReg {
+		padding-top: 10px !important;
+	}
+}
+.MuiFormLabel-root-MuiInputLabel-root {
+	padding: 11px 1px 9px 34px;
+}
+.css-on0jet-MuiTypography-root {
+	color: black;
+}
+.uploadImageContainer {
+	color: black;
+	position: relative;
+	top: 30px;
+}
+.tbody {
+	overflow: auto;
+}
+.shop_img {
+	position: absolute;
+
+	width: 100px;
+	object-fit: cover;
+
+	top: 100px;
+}
+.shop_img img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.flex {
+	display: inline-flex;
+	position: relative;
+}
+.shop_img_align {
+	position: relative;
+}

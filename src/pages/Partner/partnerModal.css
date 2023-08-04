@@ -1,0 +1,140 @@
+.statusPassword .MuiTypography-root {
+	color: #f5ca2e !important;
+	padding-left: 50px !important;
+	font-weight: bolder;
+	font-size: 16px;
+}
+.storeName {
+	color: #2c3051 !important;
+	font-size: 13px !important;
+	padding-top: 20px;
+}
+
+.store_id .MuiTypography-root {
+	color: black !important;
+	background-color: #ffdf68;
+	text-align: center;
+	border-radius: 15px;
+	padding: 5px 10px;
+	font-size: large;
+}
+
+.first_page {
+	display: flex;
+	flex-direction: column !important;
+	justify-content: center;
+	align-items: center;
+	border-right: 1px dashed #8f9da24a;
+}
+.logo_Image {
+	width: 230px;
+	height: 182px;
+}
+.logo_Image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.store_id {
+	padding: 10px;
+}
+
+.modalBox {
+	position: absolute;
+	top: 16%;
+	left: 8%;
+	width: 86%;
+	height: 585px;
+	/* box-shadow: 0px 11px 15px -7pxrgba (0, 0, 0, 0.2),
+		0px 24px 38px 3pxrgba (0, 0, 0, 0.14), 0px 9px 46px 8pxrgba (0, 0, 0, 0.12); */
+	padding: 32px;
+	background: white;
+}
+.modalbox:focus-visible {
+	outline: none !important;
+}
+.modalHeader {
+	font-size: 1.3rem !important;
+	font-weight: 700 !important;
+	font-family: 'Poppins' !important;
+}
+.storeDataLabel {
+	font-size: 1.1rem !important;
+	font-weight: 600 !important;
+	font-family: 'Poppins' !important;
+	
+}
+.storeData {
+	font-size: 0.9rem !important;
+	color: #8f9da2 !important;
+	font-family: 'Poppins' !important;
+	word-wrap: break-word;
+	padding-right: 10px;
+	
+
+}
+.section1 {
+	border-bottom: 1px dashed #8f9da24a;
+	padding-bottom: 5px;
+}
+.img_logo {
+	width: 230px;
+	height: 114px;
+}
+.img_logo img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.inActive {
+	color: red !important;
+	font-size: 0.9rem !important;
+	font-weight: 600 !important;
+	font-family: 'Poppins' !important;
+}
+
+.active {
+	color: green !important;
+	font-size: 0.9rem !important;
+	font-weight: 600 !important;
+	font-family: 'Poppins' !important;
+}
+
+.quarantine {
+	color: #0083ff !important ;
+	font-size: 0.9rem !important;
+	font-weight: 600 !important;
+	font-family: 'Poppins' !important;
+}
+
+
+@media screen and ((max-width: 768px)) {
+	.first_page {
+		border-bottom: 1px dashed #8f9da24a;
+		border-right: unset;
+	}
+	.modalBox {
+		margin: 0px !important;
+		position: absolute;
+		top: 10%;
+		left: 7%;
+		width: 86%;
+		height: 545px;
+		padding: 19px;
+		background: white;
+		overflow: auto;
+	}
+	.storeDataLabel {
+		font-size: 1.08rem !important;
+		font-weight: 600 !important;
+	
+	}
+	.modalHeader {
+		font-size: 1.2rem !important;
+		font-weight: 800 !important;
+	}
+	.partnerStatus {
+		display: block !important;
+	}
+}

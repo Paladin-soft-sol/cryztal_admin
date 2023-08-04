@@ -1,0 +1,214 @@
+.tables {
+  width: 100%;
+  border-collapse: collapse;
+  overflow-wrap: break-word;
+}
+
+.tables tbody tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
+.thead {
+  background-color: #ffd94f;
+  color: #fff;
+  border: none;
+  font-size: 13px;
+  font-family: 'Roboto' !important;
+  font-weight: none;
+  text-align: left;
+  position: sticky;
+  top: 0;
+  z-index: 9;
+}
+.iconStyles {
+  width: 20px;
+  filter: invert(72%) sepia(12%) saturate(258%) hue-rotate(189deg)
+    brightness(97%) contrast(86%);
+  cursor: pointer;
+}
+.thData {
+  padding: 10px;
+}
+
+.tdData {
+  /* padding: 10px 12px; */
+  padding: 10px 20px 10px 10px;
+  border-bottom: 1px solid #fff;
+  color: #395e7c;
+  font-size: 13px;
+  font-weight: 10px;
+  /* white-space: nowrap; */
+  /* overflow: hidden; */
+  font-family: 'Roboto' !important;
+  font-weight: 600;
+  /* text-overflow: ellipsis; */
+  text-transform: capitalize;
+}
+
+.pagination {
+  display: flex;
+  /* display: inline-block !important; */
+  justify-content: flex-end;
+  height: 60px;
+}
+
+.rowValue {
+  width: 100%;
+}
+
+/* div::-webkit-scrollbar {
+  width: 0.4em !important;
+  height: 5px !important;
+} */
+
+div::-webkit-scrollbar-thumb {
+  background-color: var(--pinkPrimary);
+  outline: 1px solid var(--pinkPrimary);
+}
+.tableTitle {
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  padding: 24px 0px 0px 0px !important;
+  color: #204768 !important;
+}
+.filter {
+  color: #acb0be !important;
+  padding: 27px 5px 0px 29px !important;
+}
+/* .filterIcon {
+  width: 20px;
+  align-content: center;
+  padding-left: 10px;
+} */
+.iconStyle {
+  filter: invert(38%) sepia(2%) saturate(29%) hue-rotate(323deg)
+    brightness(103%) contrast(92%) !important;
+}
+.tableDropdown {
+  border: none !important;
+  width: 150px !important;
+  /* border-radius: 10px !important; */
+  background: #f2f4f6;
+  margin: 0px 10px;
+}
+.iconStyle {
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  padding-left: 8px;
+  padding-top: 5px;
+  padding-right: 7px;
+  filter: invert(100%) sepia(80%) saturate(0%) hue-rotate(302deg)
+    brightness(290%) contrast(100%);
+}
+
+.viewIcon {
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  padding-left: 8px;
+  padding-top: 5px;
+  padding-right: 7px;
+  filter: invert(72%) sepia(12%) saturate(258%) hue-rotate(189deg)
+    brightness(97%) contrast(86%);
+  padding: 7px;
+  border-radius: 5px;
+}
+.tableDropdown .MuiOutlinedInput-root {
+  padding-right: 3px !important;
+  border-radius: 10px !important;
+}
+
+.tableDropdown .MuiOutlinedInput-input {
+  padding: 9.9px 14px !important;
+  border-radius: 10px !important;
+}
+
+.tableDropdown .MuiOutlinedInput-notchedOutline {
+  border-color: snow !important;
+}
+.optionalIcon {
+  padding-top: 5px;
+  padding-right: 5px;
+  display: flex;
+  cursor: pointer;
+  /* overflow: hidden; */
+}
+.tableTitle {
+  font-size: 20px !important;
+  white-space: nowrap;
+}
+tbody::-webkit-scrollbar {
+  width: 0.6em !important;
+  height: 1px !important;
+}
+
+tbody::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  background: #ffc518;
+  /* margin-top: 10px;
+  margin-bottom: 10px; */
+}
+tbody::-webkit-scrollbar-button {
+  height: 5px;
+}
+tbody::-webkit-scrollbar-thumb {
+  /* background-color: var(--pinkPrimary); */
+  border-radius: 20px;
+}
+div::-webkit-scrollbar {
+  width: 0.6em !important;
+  height: 5px !important;
+}
+
+div::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  background: #ffc518;
+}
+
+div::-webkit-scrollbar-thumb {
+  background-color: var(--pinkPrimary);
+  border-radius: 20px;
+}
+.emptyData {
+  width: 200px;
+  height: 190px;
+}
+.emptyDataDiv {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+tbody {
+  /* display: block;
+  height: 360px;
+  overflow: auto; */
+}
+thead,
+tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed; /* even columns width , fix width of table too*/
+}
+.tdDataNumber {
+  text-align: left !important;
+}
+/* .MuiFormControl-root.MuiFormLabel-root-MuiInputLabel-root {
+  padding: 11px 0px 3px 32px !important;
+} */
+/* .thData {
+  width: 150px;
+} */
+
+.button-position {
+  border: none;
+  background: white;
+  position: relative;
+  top: 22px;
+  cursor: pointer;
+}
+.csv-link{
+  position: relative;
+}

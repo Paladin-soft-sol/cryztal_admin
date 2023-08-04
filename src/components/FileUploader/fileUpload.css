@@ -1,0 +1,63 @@
+.root {
+  overflow: hidden;
+}
+
+.textView {
+  margin-left: 20px;
+  text-align: center;
+}
+
+.fileText {
+  font-size: 12px;
+}
+
+.fileUploader {
+  position: absolute;
+  height: 400px;
+  width: 400px;
+  left: -200px;
+  top: -200px;
+  background: transparent;
+}
+
+.uploadImageContainer {
+  padding: 21px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ffc518 !important;
+}
+.logo_image_size {
+  height: 159px;
+  padding-top: 20px;
+  width: 148px;
+  position: relative;
+  margin-top: 30px;
+}
+
+.logoImg {
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+}
+.none {
+  display: none !important;
+  border: none !important;
+}
+.imageUpload {
+  filter: invert(10%) sepia(32%) saturate(3396%) hue-rotate(341deg)
+    brightness(165%) contrast(92%);
+  padding-left: 10px;
+  width: 27px;
+}
+.deleteImage {
+  position: absolute;
+  font-size: 21px;
+  width: 30px;
+  height: 30px;
+  color: rgb(255, 0, 0);
+  top: 10px !important;
+  right: 0px;
+  cursor: pointer;
+}

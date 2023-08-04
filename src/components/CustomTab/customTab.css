@@ -1,0 +1,10 @@
+.tabValue {
+  font-weight: 600 !important;
+  /* font-size: 27px !important; */
+  text-transform: unset !important;
+}
+@media screen and ((max-width: 768px)) {
+  .tabValue {
+    font-size: 14px !important;
+  }
+}

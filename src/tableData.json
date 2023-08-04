@@ -1,0 +1,94 @@
+{
+	"tableData": [
+		{
+			"SNo": 1,
+			"StoreName": "Dell Exclusive Store",
+			"DealName": "Dell Exclusive Store",
+			"offer": 15,
+			"Discount": 10,
+			"frm": "15-07-2022",
+			"to": "15-07-2022"
+		},
+		{
+			"SNo": 2,
+			"StoreName": "Dell Exclusive Store",
+			"DealName": "Dell Exclusive Store",
+			"offer": 15,
+			"Discount": 10,
+			"frm": "15-07-2022",
+			"to": "15-07-2022"
+		},
+		{
+			"SNo": 3,
+			"StoreName": "Dell Exclusive Store",
+			"DealName": "Dell Exclusive Store",
+			"offer": 15,
+			"Discount": 10,
+			"frm": "15-07-2022",
+			"to": "15-07-2022"
+		},
+		{
+			"SNo": 4,
+			"StoreName": "Dell Exclusive Store",
+			"DealName": "Dell Exclusive Store",
+			"offer": 15,
+			"Discount": 10,
+			"frm": "15-07-2022",
+			"to": "15-07-2022"
+		},
+		{
+			"SNo": 5,
+			"StoreName": "Dell Exclusive Store",
+			"DealName": "Dell Exclusive Store",
+			"offer": 15,
+			"Discount": 10,
+			"frm": "15-07-2022",
+			"to": "15-07-2022"
+		},
+		{
+			"SNo": 6,
+			"StoreName": "Dell Exclusive Store",
+			"DealName": "Bpo Exclusive Store",
+			"offer": 15,
+			"Discount": 10,
+			"frm": "15-07-2022",
+			"to": "15-07-2022"
+		},
+		{
+			"SNo": 7,
+			"StoreName": "Dell Exclusive Store",
+			"DealName": "Dell Exclusive Store",
+			"offer": 15,
+			"Discount": 10,
+			"frm": "15-07-2022",
+			"to": "15-07-2022"
+		},
+		{
+			"SNo": 8,
+			"StoreName": "Dell Exclusive Store",
+			"DealName": "Dell Exclusive Store",
+			"offer": 15,
+			"Discount": 10,
+			"frm": "15-07-2022",
+			"to": "15-07-2022"
+		},
+		{
+			"SNo": 9,
+			"StoreName": "Hp Exclusive Store",
+			"DealName": "HP Exclusive Store",
+			"offer": 15,
+			"Discount": 10,
+			"frm": "15-07-2022",
+			"to": "15-07-2022"
+		},
+		{
+			"SNo": 10,
+			"StoreName": "Hcl Exclusive Store",
+			"DealName": "Dell Exclusive Store",
+			"offer": 15,
+			"Discount": 10,
+			"frm": "15-07-2022",
+			"to": "15-07-2022"
+		}
+	]
+}

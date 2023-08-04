@@ -1,0 +1,11 @@
+/* .foot_section_dashboard {
+  position: absolute;
+  left: 40%;
+  bottom: 11%;
+  color: #686868;
+}
+@media screen and ((max-width: 1008px)) {
+  .foot_section_dashboard {
+    bottom: 22% !important;
+  }
+} */

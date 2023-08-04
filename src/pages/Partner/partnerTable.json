@@ -1,0 +1,113 @@
+{
+	"partnerTable": [
+		{
+			"SNo": 1,
+			"StoreName": "Dell Exclusive Store", 
+			"Type of Store": "Electronics",
+			"Store Email": "dell@gmail.com",
+			"Contact Mobile": 8093020282,
+			"Create Date": "15/06/2022",
+			"ABN Number": 8093020282,
+			"Status": "Active"
+			
+		},
+		{
+			"SNo": 2,
+		    "StoreName": "LG",
+			"Type of Store": "Electronics",
+			"Store Email": "lg@gmail.com",
+			"Contact Mobile": 9846628289,
+			"Create Date": "05/05/2022",
+			"ABN Number": 9846628289,
+			"Status": "Inactive"
+			
+		},
+		{
+			"SNo": 3,
+			"StoreName": "Super Store",
+			"Type of Store": "Electronics,Food",
+			"Store Email": "superstore@gmail.com",
+			"Contact Mobile": 8963789283,
+			"Create Date": "08/05/2022",
+			"ABN Number": 8963789283,
+			"Status": "Active"
+			
+		},
+		{
+			"SNo": 4,
+			"StoreName": "Furniture",
+			"Type of Store": "Electronics",
+			"Store Email": "furniture@gmail.com",
+			"Contact Mobile": 8776420222,
+			"Create Date": "06/04/2022",
+			"ABN Number": 8776420222,
+			"Status": "Quarantine"
+			
+		},
+		{
+			"SNo": 5,
+			"StoreName": "Sony",
+			"Type of Store": "Electronics",
+			"Store Email": "sony@gmail.com",
+			"Contact Mobile": 9876327272,
+			"Create Date": "02/04/2022",
+			"ABN Number": 9876327272,
+			"Status": "Inactive"
+			
+		},
+		{
+			"SNo": 6,
+			"StoreName": "MI",
+			"Type of Store": "Electronics",
+			"Store Email": "mi@gmail.com",
+			"Contact Mobile": 9876327272,
+			"Create Date": "07/03/2022",
+			"ABN Number": 9876327272,
+			"Status": "Active"
+			
+		},
+		{
+			"SNo": 7,
+			"StoreName": "Vivo",
+			"Type of Store": "Electronics",
+			"Store Email": "vivo@gmail.com",
+			"Contact Mobile": 9876327272,
+			"Create Date": "06/03/2022",
+			"ABN Number":9876327272,
+			"Status": "Quarantine"
+			
+		},
+		{
+			"SNo": 8,
+			"StoreName": "Samsung",
+			"Type of Store": "Electronics",
+			"Store Email": "samsung@gmail.com",
+			"Contact Mobile": 9876327272,
+			"Create Date": "12/02/2022",
+			"ABN Number": 9876327272,
+			"Status": "Inactive"
+			
+		},
+		{
+			"SNo": 9,
+			"StoreName": "Honor",
+			"Type of Store": "Electronics",
+			"Store Email": "honor@gmail.com",
+			"Contact Mobile": 9876327272,
+			"Create Date": "10/02/2022",
+			"ABN Number": 9876327272,
+			"Status": "Quarantine"
+		},
+		{
+			"SNo": 10,
+			"StoreName": "Hp",
+			"Type of Store": "Electronics",
+			"Store Email": "hp@gmail.com",
+		"Contact Mobile": 9876327272,
+			"Create Date": "09/02/2022",
+			"ABN Number":9876327272,
+			"Status": "Active"
+			
+		}
+	]
+}

@@ -1,0 +1,21 @@
+.header {
+	position: absolute;
+	width: 220px;
+	padding-top: 10px;
+}
+
+/* .customDropdown .MuiOutlinedInput-input {
+	border: 1px solid #e5e2e2 !important;
+} */
+.tbody {
+	overflow: auto;
+}
+/* .css-la7pe3-MuiButtonBase-root-MuiPickersDay-root.Mui-selected{
+	background: #ffc518 !important;
+} */
+/* body .MuiPickersDay-root.Mui-selected{
+	background: #ffc518 !important;
+}
+.css-lkj8w2-MuiButtonBase-root-MuiPickersDay-root.Mui-selected{
+	background: #ffc518 !important;
+} */

@@ -1,0 +1,16 @@
+.formControlLabel .MuiTypography-root {
+  color: #1d2226 !important;
+  font-size: 1.25rem !important;
+}
+
+@media screen and ((max-width: 768px)) {
+  .formControlLabel .MuiTypography-root {
+    font-size: 1.08rem !important;
+  }
+  .radioButtonLabelStyles {
+    font-size: 1.08rem !important;
+  }
+  .radioData {
+    font-size: 1.08rem !important;
+  }
+}

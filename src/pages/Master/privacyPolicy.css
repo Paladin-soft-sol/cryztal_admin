@@ -1,0 +1,9 @@
+.closeIcon {
+	cursor: pointer;
+	display: flex;
+	/* justify-content: flex-end !important; */
+	padding: 0px 0px 10px 0px;
+}
+.para {
+	text-align: justify;
+}

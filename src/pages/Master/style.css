@@ -1,0 +1,58 @@
+.position-select {
+	/* background-color: inherit;
+	color: #fff;
+	width: 100%;
+	height: 40px;
+	font-size: 16px;
+	padding: 10px;
+	outline: 0;
+	/* padding-top: 85px; */
+	padding-left: 0px;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.TextInput {
+	padding-top: 22px;
+	padding-left: 33px;
+	padding-right: 20px;
+}
+.category-drop {
+	position: absolute;
+	right: 464px;
+}
+
+.textarea .MuiOutlinedInput-root {
+	background-color: none;
+}
+.textarea .MuiTypography-root {
+	color: #0f0f108c;
+}
+.RadioButton .MuiTypography-root {
+	color: #33337a8c;
+}
+
+.RadioButton .MuiRadio-root.Mui-checked {
+	color: #ffc518;
+}
+.customTab .MuiTab-root.Mui-selected {
+	color: #204768 !important;
+}
+
+.position-select .cancel_button:hover {
+	background-color: #ff748b38 !important ;
+	border: 1px solid #ff748b;
+}
+.tabValue {
+	font-family: Poppins !important;
+	padding: 12px 33px 0px 0px !important;
+}
+
+.false .MuiTypography-root {
+	color: #6f6f7696 !important;
+	font-size: 18px;
+	font-family: 'Poppins';
+}
+.capitalize .MuiOutlinedInput-input {
+	text-transform: capitalize !important;
+}

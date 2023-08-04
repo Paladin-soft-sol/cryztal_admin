@@ -1,0 +1,129 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: flex-end;
+  padding-right: 40px;
+}
+
+.padding {
+  padding: 10px;
+}
+
+.rows {
+  padding-right: 10px;
+  color: #687a81;
+  font-size: 12px;
+  font-family: 'Poppins' !important;
+}
+
+.pagination .go {
+  font-size: 13px !important;
+  font-family: Roboto_medium;
+  background: none;
+  border: none;
+  /* bottom: 25px; */
+}
+
+.pagination .normalBtn {
+  border: none;
+  background: #fff;
+  color: #687a81;
+  font-size: 13px;
+  font-family: Roboto_bold;
+  padding: 4px;
+  height: 20px !important;
+  width: 20px !important;
+  margin-left: 5px;
+  cursor: pointer;
+}
+.pagination .normalBtn:active {
+  border: none !important;
+}
+.pagination .goto_page {
+  font-size: 11px !important;
+  font-family: Roboto_medium;
+  width: 70px !important;
+}
+
+.arrow_right {
+  filter: invert(16%) sepia(53%) saturate(578%) hue-rotate(194deg)
+    brightness(90%) contrast(88%);
+  right: 12px;
+}
+
+.arrow {
+  border: 1px solid #687a81;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.arrow_go {
+  border: 1px solid #687a81;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+  /* cursor: unset !important; */
+}
+
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.page_box {
+  background-color: #fff;
+  height: 23px !important;
+  padding: 2px;
+  width: 41px !important;
+}
+
+.page_box input {
+  width: 100%;
+  padding: 2px;
+  border: 1px solid #ffc518;
+  border-radius: 4px;
+}
+
+.page_box input:focus-visible {
+  outline: none;
+}
+
+.paginationFocus {
+  /* background-color: #FF9062 !important;
+  color: #fff !important; */
+  display: inline-flex;
+  border-radius: 4px;
+  justify-content: center;
+  align-items: center;
+  width: 40px !important;
+  height: 40px !important;
+}
+
+.actives {
+  background-color: #ffc518 !important;
+  color: #fff !important;
+  display: inline-flex;
+  border-radius: 4px;
+  justify-content: center;
+  align-items: center;
+  width: 30px !important;
+  height: 30px !important;
+  border: none !important;
+}
+@media screen and ((max-width: 768px)) {
+  .rows {
+    white-space: nowrap !important;
+  }
+}
+
+.paginationcontrol {
+  width: 100%;
+  background: #fff;
+}

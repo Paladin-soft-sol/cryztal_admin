@@ -1,0 +1,82 @@
+.logo {
+  width: 125px;
+  padding: 9px 15px 9px 0px !important;
+}
+.appBar .MuiToolbar-root {
+  padding: 0px 16px 0px 7px !important;
+  min-height: 56px !important;
+}
+.menuIcon {
+  height: 28px;
+  padding: 14px 0px 0px 10px;
+  cursor: pointer;
+  filter: invert(38%) sepia(12%) saturate(295%) hue-rotate(317deg)
+    brightness(100%) contrast(82%);
+}
+.notification {
+  width: 20px !important;
+}
+.MuiBadge-root .MuiBadge-badge {
+  top: 2px !important;
+  right: 2px !important;
+  min-width: 14px !important;
+  width: 13px !important;
+  height: 14px !important;
+  border-radius: 10px !important;
+  font-size: 0.7rem !important;
+  background: #ffc500 !important;
+}
+.avatarList {
+  cursor: pointer !important;
+  font-weight: 500 !important;
+}
+.avatarList .MuiTypography-root {
+  font-size: 14px !important;
+  padding-left: 6px !important;
+  font-weight: 500 !important;
+}
+.userName1 {
+  color: #1976d2 !important;
+  font-size: 14px !important;
+  cursor: pointer !important;
+  padding-top: 2px !important;
+}
+.menuText .MuiTypography-root {
+  font-size: 14px !important;
+  color: #6d6e6f !important;
+}
+.profile {
+  background-color: #ffc51826 !important;
+  padding: 10px !important;
+}
+.menuList .MuiPaper-root {
+  left: 1300px !important;
+  top: 56px !important;
+}
+.menuList .MuiList-root {
+  width: 136px !important;
+  padding: 0px 0px 13px 0px;
+}
+.menuText .MuiMenuItem-root {
+  font-size: 12px !important;
+  color: rgb(68, 67, 67);
+}
+.MuiMenuItem-root:hover {
+  background: unset !important;
+}
+.mainMenu .MuiListItemIcon-root img {
+  width: 18px !important;
+}
+.logoutIcon {
+  /* padding: 5px 16px 5px 7px !important; */
+  /* height: 20px; */
+  filter: invert(21%) sepia(60%) saturate(593%) hue-rotate(164deg)
+    brightness(94%) contrast(89%);
+  cursor: pointer;
+  width: 22px !important;
+  padding: 6px 0px 0px 8px;
+}
+.mainMenu {
+  filter: invert(38%) sepia(12%) saturate(295%) hue-rotate(317deg)
+    brightness(100%) contrast(82%);
+}
