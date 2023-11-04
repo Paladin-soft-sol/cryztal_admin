@@ -559,7 +559,7 @@ function Register() {
 														getImage(val);
 													}}
 													// customClass="shop_img_align"
-												/>
+												/> 
 											</Grid>
 										)}
 

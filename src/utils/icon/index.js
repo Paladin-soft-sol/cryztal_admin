@@ -28,6 +28,7 @@ import Info from "../../assets/icons/infoIcon.svg";
 import Error from "../../assets/icons/cancel.svg";
 import Warning from "../../assets/icons/warningIcon.svg";
 import download from "../../assets/icons/Path 33754.svg";
+import AdMaster from "../../assets/icons/ad-line.svg";
 
 const CustomIcons = {
   Mail,
@@ -60,5 +61,6 @@ const CustomIcons = {
   Warning,
   crossIcon,
   download,
+  AdMaster
 };
 export default CustomIcons;

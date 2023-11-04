@@ -47,6 +47,12 @@ function ProtectedRoute({ redirectPath = "/", children }) {
       icon: CustomIcons.Report,
       nav: "/cryztal/Reports",
     },
+    {
+      id: 7,
+      name: "Ad Master",
+      icon: CustomIcons.AdMaster,
+      nav: "/cryztal/AdMaster",
+    },
   ];
 
   if (!token) {

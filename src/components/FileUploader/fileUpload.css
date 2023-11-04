@@ -29,11 +29,11 @@
   border: 1px solid #ffc518 !important;
 }
 .logo_image_size {
-  height: 159px;
-  padding-top: 20px;
+  height: 36px;
+  /* padding-top: 20px; */
   width: 148px;
-  position: relative;
-  margin-top: 30px;
+  /* position: relative; */
+  /* margin-top: 30px; */
 }
 
 .logoImg {

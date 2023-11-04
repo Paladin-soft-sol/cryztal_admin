@@ -7,6 +7,8 @@ import Login from "../pages/Login/Login";
 import Reports from "../pages/Reports";
 // import Master from '../pages/Master';
 import ReportView from "../pages/Reports/Report";
+import Ad from "../pages/AdMaster";
+import AdView from "../pages/AdMaster/adViewModal";
 import Customer from "../pages/customer";
 import CustomerView from "../pages/customer/userViewModal";
 import Partner from "../pages/Partner/Partner";
@@ -47,7 +49,12 @@ function Layout() {
         <Route path="approval" element={<Approval />} />
         <Route path="Reports" element={<Reports />} />
         {/*<Route path="/cryztal/Reports/ReportsView" element={<ReportView />} /> */}
-        <Route path="customer" element={<Customer />} />
+        <Route path="AdMaster" element={<Ad />} />
+        <Route
+          path="/cryztal/AdMaster/AdView"
+          element={<AdView />}
+        />
+         <Route path="customer" element={<Customer />} />
         <Route
           path="/cryztal/customer/CustomerView"
           element={<CustomerView />}
