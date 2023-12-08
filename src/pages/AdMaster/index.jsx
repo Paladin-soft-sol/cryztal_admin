@@ -4,12 +4,12 @@ import React, { useState, useEffect } from 'react';
 import { Grid } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { Controller, useForm } from 'react-hook-form';
-import { Table, CustomTypography,CustomButton,CustomDropdown,TextInput,CustomFileUploader, MultiImage} from '../../components/index';
+import { Table, CustomTypography,CustomButton,CustomDropdown,TextInput,CustomFileUploader,PincodeDropdown,ColorBanner, MultiImage, Tiles} from '../../components/index';
 import { useNavigate } from 'react-router-dom';
 import CustomIcons from '../../utils/icon/index';
 import actions from '../../actions';
 import AdView from './adViewModal';
-import { AdMasterEntries } from './AdMasterEntries';
+import { AdMasterEntries,DefaultAdMasterEntriesValues} from './AdMasterEntries';
 import './main.css';
 
 /**
@@ -17,6 +17,7 @@ import './main.css';
  * @returns
  */
 function AdScreen() {
+	const defaultValues = DefaultAdMasterEntriesValues;
 	const {
 		control,
 		handleSubmit,
@@ -24,14 +25,14 @@ function AdScreen() {
 		formState: { errors },
 		reset,
 	} = useForm({
-		// defaultValues: editAbleValues,
+		defaultValues,
 	});
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const formWatchFields = watch();
 
-	const customer = useSelector((state) => state?.customer);
-	console.log(customer, 'customer');
+	const admaster = useSelector((state) => state?.admaster);
+	console.log(admaster, 'admaster');
 	const [table, setTable] = useState([]);
 	const [multiImage, setMultiImage] = useState(null);
 	const [logoImage, setLogoImage] = useState(null);
@@ -55,29 +56,28 @@ function AdScreen() {
 
 	React.useEffect(() => {
 		const data = {
-			data: {
-				isSearch: false,
-			},
-			method: 'post',
-			apiName: 'getAllUsers',
+			data: {},
+			method: 'get',
+			apiName: 'getAdMaster',
 		};
-		dispatch(actions.CUSTOMER(data));
+		dispatch(actions.ADMASTER(data));
 	}, []);
 	useEffect(() => {
 		const tmpArr = [];
-		customer?.customer?.data?.map((values) =>
+		admaster?.admaster?.data?.map((values) =>
 			tmpArr.push({
-				id: values.id,
-				first_name: values.name,
-				contact_number: values.phone_number,
-				email: values.email,
-				joindate: values.created_on,
+				ad_id: values.ad_id,
+				ad_title: values.ad_title,
+				shop_ad: values.shop_ad,
+				ad_vis_location: values.ad_vis_location,
+				ad_from_date: values.ad_from_date,
+				ad_to_date: values.ad_to_date,
 				status: values.status === 0 ? 'InActive' : 'active',
 				
 			})
 		);
 		setTable(tmpArr);
-	}, [customer]);
+	}, [admaster]);
 
 	
 
@@ -95,9 +95,37 @@ function AdScreen() {
 	
 	
 	};
+	const [resetValue, setResetValue] = React.useState([]);
+	console.log(resetValue,"resetValue")
+	function onSubmit(data1) {
+		console.log(data1,"data1admaster")
+		const formData = new FormData();
+		formData.append("ad_title", data1.ad_title);
+		formData.append("shop_id", data1.shop_id);
+		formData.append("shop_ad", data1.shop_ad);
+		formData.append("tiles",[1]);
+		formData.append("palette_id", 1);
+		formData.append("ad_vis_id", 1);
+		formData.append("ad_vis_location", 600040);
+		formData.append("ad_from_date", 2023/11/24);
+		formData.append("ad_to_date", 2023/11/30);
+		formData.append("created_by", 1);
+		formData.append("updated_by", 1);
+		const data = {
+		  data: formData,
+		  method: "post",
+		  apiName: "createAdMaster",
+		};
+	
+		dispatch(actions.ADMASTER(data));
+		reset(defaultValues);
+		setResetValue(defaultValues);
+	  }
+
+
 	return (
 		<Grid p={2.5} item md={12}>
-			<Grid container md={12}>
+			<Grid container md={12}  className='adMaster_Title'>
 				<CustomTypography
 					type="header" 
 					text="Ad Master"
@@ -124,37 +152,65 @@ function AdScreen() {
 															label={keyValue.label}
 															onHandleChange={onChange}
 															value={value}
-															multiline={keyValue.multiline}
+							  								multiline={keyValue.multiline}
 															rows={keyValue.rows}
 															customClass="capitalize"
+															// resetValue={resetValue}
 														/>
 													</Grid>
 												)}
-												
+													{keyValue?.isChooseTiles && (
+													<Grid item md={12} sm={12}>
+														<Tiles
+															label={keyValue.label}
+															handleChange={onChange}
+															value={value || ''}
+															// data={dropdownList}
+															placeholder={keyValue.placeholder}
+															returnId={keyValue.returnId}
+															// resetValue={resetValue}
+														/>
+													</Grid>
+												)}
+													
+													{keyValue?.isColorBanner && (
+													<Grid item md={12} sm={12}>
+														<ColorBanner
+															label={keyValue.label}
+															handleChange={onChange}
+															value={value || ''}
+															// data={dropdownList}
+															placeholder={keyValue.placeholder}
+															returnId={keyValue.returnId}
+															
+														/>
+													</Grid>
+												)}
+													{keyValue?.isPincodeDropdown && (
+													<Grid item md={12} sm={12}>
+														<PincodeDropdown
+															label={keyValue.label}
+															handleChange={onChange}
+															value={value || ''}
+															// data={dropdownList}
+															placeholder={keyValue.placeholder}
+															returnId={keyValue.returnId}
+														/>
+													</Grid>
+												)}
 												{keyValue?.isDropdown && (
 													<Grid item md={12} sm={12}>
 														<CustomDropdown
 															label={keyValue.label}
 															handleChange={onChange}
 															value={value || ''}
-															// data={dropdownList}
+															data={keyValue.DropdownData}
 															placeholder={keyValue.placeholder}
 															returnId={keyValue.returnId}
 														/>
 													</Grid>
 												)}
-													{/* {keyValue?.isFileUploader && (
-													<Grid item md={12} sm={12}>
-														<CustomFileUploader
-															label={keyValue.label}
-															handleChange={onChange}
-															value={value || ''}
-															// data={dropdownList}
-															placeholder={keyValue.placeholder}
-															returnId={keyValue.returnId}
-														/>
-													</Grid>
-												)} */}
+													
 												{keyValue?.isMultiImageUpload && (
 											<Grid item md={12} sm={12} className="shop_img_align">
 												<div className="fex">
@@ -186,7 +242,7 @@ function AdScreen() {
 												</div>
 
 												<CustomFileUploader
-													Label="Shop Logo"
+													Label="Upload Ad"
 													upLoad={CustomIcons.UploadIcon}
 													getImage={(val) => {
 														onChange(val);
@@ -243,7 +299,7 @@ function AdScreen() {
 										padding: '5px 25px',
 										fontSize: '17px',
 									}}
-									// onClickHandle={handleSubmit(onSubmit)}
+									onClickHandle={handleSubmit(onSubmit)}
 								/>
 								<CustomButton
 									customClass="cancel_button"
@@ -270,7 +326,7 @@ function AdScreen() {
 				modalOpen={(id) => handleOpen(id)}
 				action
 				actionItem={{ view: true }}
-				tableSearch
+				// tableSearch
 				isDrop={false}
 			/>
 			{adView && <AdView viewId={viewId} />}

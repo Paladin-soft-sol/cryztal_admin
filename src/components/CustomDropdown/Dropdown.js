@@ -51,7 +51,6 @@ export const CustomDropdown = (props) => {
           data={data}
           className={`${customClass} ${disabled && "disable"} customDropdown`}
           onChange={(e) => handleChange(e)}
-          // dropDownChange={(e) => dropDownChange(e)}
           displayEmpty
           inputProps={{ "aria-label": "Without label" }}
         >

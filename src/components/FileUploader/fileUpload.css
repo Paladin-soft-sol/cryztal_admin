@@ -46,10 +46,8 @@
   border: none !important;
 }
 .imageUpload {
-  filter: invert(10%) sepia(32%) saturate(3396%) hue-rotate(341deg)
-    brightness(165%) contrast(92%);
-  padding-left: 10px;
-  width: 27px;
+padding-left: 10px;
+  width: 25px;
 }
 .deleteImage {
   position: absolute;

@@ -23,6 +23,7 @@ export const TextInput = (props) => {
     textInputIcon,
     isLogin,
     uniqueText,
+    
   } = props;
   return (
     <Grid>

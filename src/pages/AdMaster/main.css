@@ -12,3 +12,17 @@
     padding: 7px;
     border-radius: 5px;
   } */
+  .adMaster_Title{
+    padding-left: 17px !important;
+  }
+  .textLabel{
+    color: #c4c4c4 !important;
+  }
+
+  .labelTextDrop{
+    color: #c4c4c4 !important;
+  }
+  .uploadImageContainer h6{
+    color: #ffc518 !important;
+    font-size: 15px !important;
+  }

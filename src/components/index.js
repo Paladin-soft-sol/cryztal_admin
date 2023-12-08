@@ -15,3 +15,7 @@ export * from './CustomButton';
 export * from './PieChart';
 export * from './Footer';
 export * from './Dropdown';
+export * from './Tiles';
+export * from './ColorBanner';
+export * from './PincodeDropdown';
+

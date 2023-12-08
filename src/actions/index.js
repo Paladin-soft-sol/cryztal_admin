@@ -7,6 +7,7 @@ import { reportAction } from "../slices/Reports/Report";
 import { approvalAction } from "../slices/Approval/Approval";
 import { getCategoryAction } from "../slices/CategoryDropdown/Category";
 import { approvalpartnerAction } from "../slices/ApprovalPartner/ApprovalPartner";
+import { admasterAction } from "../slices/AdMaster/AdMaster";
 
 const actions = {
   ...loginAction,
@@ -18,6 +19,7 @@ const actions = {
   ...approvalAction,
   ...approvalpartnerAction,
   ...getCategoryAction,
+  ...admasterAction
 };
 
 export default actions;

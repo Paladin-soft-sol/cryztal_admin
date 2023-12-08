@@ -1,0 +1,21 @@
+/* .css-6hp17o-MuiList-root-MuiMenu-list{
+    display: flex !important;
+} */
+/* body:nth-child(2) .MuiPaper-root-MuiPopover-paper-MuiMenu-paper ul{
+    display: flex !important;
+}
+body:nth-child(2)>div .MuiButtonBase-root-MuiMenuItem-root{
+    display: block !important;
+} */
+
+#root ~ div:nth-child(3) ul .color_button:has(ul){
+    display: flex !important;
+}
+.colorBanner>div{
+    border: 3px solid #e5e2e285!important;
+    padding: 9.5px 14px!important;
+    border-radius: 6px!important;
+}
+.colorBanner>div input{
+    padding: 0 !important;
+}
