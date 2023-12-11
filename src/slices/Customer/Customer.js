@@ -16,6 +16,7 @@ const CUSTOMER = createAsyncThunk(
 		{ rejectWithValue }
 	) => {
 		try {
+			console.log(payload,"payloadpayload");
 			const data = await fetchData(
 				payload?.data,
 				payload?.method,

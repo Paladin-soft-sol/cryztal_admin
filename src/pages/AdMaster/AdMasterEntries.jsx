@@ -122,7 +122,7 @@ export const AdMasterEntries = [
         customClass: 'drop_align_edit',
       },
       {
-        isDropdown: true,
+        isDateDropdown: true,
         name: 'ad_from_date',
         label: 'Ad Duration',
         placeholder: 'Role',

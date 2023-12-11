@@ -4,13 +4,14 @@ import React, { useState, useEffect } from 'react';
 import { Grid } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { Controller, useForm } from 'react-hook-form';
-import { Table, CustomTypography,CustomButton,CustomDropdown,TextInput,CustomFileUploader,PincodeDropdown,ColorBanner, MultiImage, Tiles} from '../../components/index';
+import { Table, CustomTypography,CustomButton,CustomDropdown,DateDropdown,TextInput,CustomFileUploader,PincodeDropdown,ColorBanner, MultiImage, Tiles} from '../../components/index';
 import { useNavigate } from 'react-router-dom';
 import CustomIcons from '../../utils/icon/index';
 import actions from '../../actions';
 import AdView from './adViewModal';
 import { AdMasterEntries,DefaultAdMasterEntriesValues} from './AdMasterEntries';
 import './main.css';
+import  axios  from 'axios';
 
 /**
  *
@@ -38,6 +39,28 @@ function AdScreen() {
 	const [logoImage, setLogoImage] = useState(null);
 	const [adView, setAdView] = useState(false);
 	const [viewId, setViewId] = useState();
+	const [post, setPost] = useState(null);
+	console.log(post,"postpost");
+
+	useEffect(() => {
+		const data = {
+			data: {},
+			method: 'get',
+			apiName: 'getAdMaster',
+		};
+		console.log(data,"dataValue");
+		dispatch(actions.ADMASTER(data));
+	}, [dispatch]);
+
+	// useEffect(() => {
+	// 	axios.get(`http://3.26.217.22:3000/getAdMaster`).then((response)=>{
+	// 		console.log(response,"responseValue");
+	// 		setPost(response.data)
+	// 	})
+	// 	.catch((error) => {
+	// 		console.error('Error fetching data:', error);
+	// 	});
+	// },[])
 
 	const header = [
 		'S.No',
@@ -54,31 +77,42 @@ function AdScreen() {
 		setViewId(id);
 	};
 
-	React.useEffect(() => {
-		const data = {
-			data: {},
-			method: 'get',
-			apiName: 'getAdMaster',
-		};
-		dispatch(actions.ADMASTER(data));
-	}, []);
+	
+	// useEffect(() => {
+	// 	const tmpArr = [];
+	// 	admaster?.admaster?.data?.map((values) =>
+	// 		tmpArr.push({
+	// 			ad_id: values.ad_id,
+	// 			ad_title: values.ad_title,
+	// 			shop_ad: values.shop_ad,
+	// 			ad_vis_location: values.ad_vis_location,
+	// 			ad_from_date: values.ad_from_date,
+	// 			ad_to_date: values.ad_to_date,
+				
+				
+	// 		})
+	// 	);
+	// 	setTable(tmpArr);
+	// }, [admaster]);
+
 	useEffect(() => {
-		const tmpArr = [];
-		admaster?.admaster?.data?.map((values) =>
-			tmpArr.push({
+		// Check if admaster and admaster.admaster exist and are arrays
+		if (admaster?.admaster?.data && Array.isArray(admaster.admaster.data)) {
+			const tmpArr = admaster.admaster.data.map((values) => ({
 				ad_id: values.ad_id,
 				ad_title: values.ad_title,
 				shop_ad: values.shop_ad,
 				ad_vis_location: values.ad_vis_location,
 				ad_from_date: values.ad_from_date,
 				ad_to_date: values.ad_to_date,
-				status: values.status === 0 ? 'InActive' : 'active',
-				
-			})
-		);
-		setTable(tmpArr);
+			}));
+			setTable(tmpArr);
+		} else {
+			// Handle the case where data is not an array
+			// You can set an empty array or handle it based on your requirements
+			setTable([]);
+		}
 	}, [admaster]);
-
 	
 
 	const getImage = (value) => {
@@ -101,14 +135,25 @@ function AdScreen() {
 		console.log(data1,"data1admaster")
 		const formData = new FormData();
 		formData.append("ad_title", data1.ad_title);
-		formData.append("shop_id", data1.shop_id);
-		formData.append("shop_ad", data1.shop_ad);
-		formData.append("tiles",[1]);
+		formData.append("shop_id",1);
+		// formData.append("shop_ad", data1.shop_ad);
+		if (data1?.shop_ad.length > 0) {
+			if (!Array.isArray(data1?.shop_ad)) {
+				formData.append('shop_ad', data1?.shop_ad instanceof File ? '' : '');
+			} else {
+				data1?.shop_ad.forEach((item) => {
+					formData.append('shop_ad', item instanceof File ? item : '');
+				});
+			}
+		}
+
+		const tilesArray = [1];
+		formData.append("tiles", JSON.stringify(tilesArray));
 		formData.append("palette_id", 1);
 		formData.append("ad_vis_id", 1);
 		formData.append("ad_vis_location", 600040);
-		formData.append("ad_from_date", 2023/11/24);
-		formData.append("ad_to_date", 2023/11/30);
+		formData.append("ad_from_date", "2023/11/24");
+		formData.append("ad_to_date", "2023/11/30");
 		formData.append("created_by", 1);
 		formData.append("updated_by", 1);
 		const data = {
@@ -198,6 +243,18 @@ function AdScreen() {
 														/>
 													</Grid>
 												)}
+													{keyValue?.isDateDropdown && (
+													<Grid item md={12} sm={12}>
+														<DateDropdown
+															label={keyValue.label}
+															handleChange={onChange}
+															value={value || ''}
+															// data={dropdownList}
+															placeholder={keyValue.placeholder}
+															returnId={keyValue.returnId}
+														/>
+													</Grid>
+												)}
 												{keyValue?.isDropdown && (
 													<Grid item md={12} sm={12}>
 														<CustomDropdown
@@ -237,8 +294,8 @@ function AdScreen() {
 										)}
 												{keyValue?.isSingleImageUpload && (
 											<Grid item md={12} sm={12} className="shop_img_align">
-												<div className="shop_img">
-													<img src={formWatchFields.shop_logo} alt="" />
+												<div className="shop_img1">
+													<img src={formWatchFields.shop_ad} alt="" />
 												</div>
 
 												<CustomFileUploader

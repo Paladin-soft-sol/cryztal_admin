@@ -8,6 +8,9 @@ body:nth-child(2)>div .MuiButtonBase-root-MuiMenuItem-root{
     display: block !important;
 } */
 
+/* #root ~ div:nth-child(3) ul .color_button:has(ul){
+    display: flex !important;
+} */
 #root ~ div:nth-child(3) ul .color_button:has(ul){
     display: flex !important;
 }
@@ -19,3 +22,13 @@ body:nth-child(2)>div .MuiButtonBase-root-MuiMenuItem-root{
 .colorBanner>div input{
     padding: 0 !important;
 }
+
+.tiles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    padding: 10px;
+  }
+  
+  /* Add any additional styles as needed */
+  
