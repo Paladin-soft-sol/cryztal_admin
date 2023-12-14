@@ -6,15 +6,15 @@ import { FormControl } from "@mui/material";
 import "./Tiles.css";
 
 const options = [
-  { value: "url1", label: "Tile 1" },
-  { value: "url2", label: "Tile 2" },
-  { value: "url3", label: "Tile 3" },
-  { value: "url4", label: "Tile 4" },
-  { value: "url5", label: "Tile 5" },
-  { value: "url6", label: "Tile 6" },
-  { value: "url7", label: "Tile 7" },
-  { value: "url8", label: "Tile 8" },
-  { value: "url9", label: "Tile 9" },
+  { value: "url1", label: "" },
+  { value: "url2", label: "" },
+  { value: "url3", label: "" },
+  { value: "url4", label: "" },
+  { value: "url5", label: "" },
+  { value: "url6", label: "" },
+  { value: "url7", label: "" },
+  { value: "url8", label: "" },
+  { value: "url9", label: "" },
 ];
 
 
