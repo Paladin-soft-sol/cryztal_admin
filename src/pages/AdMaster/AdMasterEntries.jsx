@@ -16,18 +16,6 @@ export const AdMasterEntries = [
       breakpoint: 3,
       disabled: true,
       DropdownData: [
-        {
-          id: 1,
-          value: 'Saravana Stores',
-        },
-        {
-          id: 2,
-          value: 'Rathna Stores',
-        },
-        {
-          id: 3,
-          value: 'legend Stores',
-        },
       ],
       customClass: 'drop_align_edit',
     },

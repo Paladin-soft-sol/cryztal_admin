@@ -66,7 +66,7 @@ const reportSlice = createSlice({
 	name: 'reportSlice',
 	initialState: {
 		report: {
-			...defaultState.List,
+			...defaultState.List,  
 		},
 		user_details: {
 			...defaultState.List,

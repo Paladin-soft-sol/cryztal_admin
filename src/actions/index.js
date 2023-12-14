@@ -8,6 +8,8 @@ import { approvalAction } from "../slices/Approval/Approval";
 import { getCategoryAction } from "../slices/CategoryDropdown/Category";
 import { approvalpartnerAction } from "../slices/ApprovalPartner/ApprovalPartner";
 import { admasterAction } from "../slices/AdMaster/AdMaster";
+import { admasterdropdownAction } from "../slices/AdMaster/AdMasterDropdown";
+import { palettedropdownAction } from "../slices/AdMaster/PaletteDropdown";
 
 const actions = {
   ...loginAction,
@@ -19,7 +21,10 @@ const actions = {
   ...approvalAction,
   ...approvalpartnerAction,
   ...getCategoryAction,
-  ...admasterAction
+  ...admasterAction,
+  ...admasterdropdownAction,
+  ...palettedropdownAction,
+
 };
 
 export default actions;

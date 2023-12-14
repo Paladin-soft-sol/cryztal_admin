@@ -30,5 +30,8 @@ body:nth-child(2)>div .MuiButtonBase-root-MuiMenuItem-root{
     padding: 10px;
   }
   
+  .bye>div>div>div{
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
   /* Add any additional styles as needed */
   

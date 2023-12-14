@@ -128,9 +128,10 @@ export const PincodeDropdown = (props) => {
           onChange={handleChange}
           input={<OutlinedInput label="Tag" />}
           MenuProps={MenuProps}
+          className='hai'
         >
           {names.map((name) => (
-            <MenuItem key={name} value={name}>
+            <MenuItem key={name} value={name} >
               <Radio checked={personName === name} />
               <ListItemText primary={name} />
             </MenuItem>

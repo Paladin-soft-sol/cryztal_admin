@@ -54,7 +54,7 @@ export const Tiles = (props) => {
           requiredField={requiredField}
         />
 
-        <FormControl className="colorBanner" fullWidth size="small">
+        <FormControl className="colorBanner bye" fullWidth size="small">
           <Select
             value={value}
             options={options}
@@ -63,20 +63,7 @@ export const Tiles = (props) => {
           >
        
           </Select>
-          <button
-        onClick={handleTileClick}
-        style={{
-          width: '100%',
-          padding: '10px',
-          marginTop: '10px',
-          background: '#FFFFFF 0% 0% no-repeat padding-box',
-          border: '1px solid #707070',
-          borderRadius: '5px',
-          cursor: 'pointer',
-        }}
-      >
-        Submit
-      </button>
+     
         </FormControl>
       </div>
     </div>

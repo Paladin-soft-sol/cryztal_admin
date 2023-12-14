@@ -622,7 +622,7 @@ function MasterScreen() {
 							header={MASTER.getHeader(tabValue)}
 							rows={rowTableData}
 							newModule={tabValue}
-							tableSearch
+							tableSearch   
 							action
 							actionItem={
 								tabValue === 0

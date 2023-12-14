@@ -1,394 +1,418 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable no-unused-expressions */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react';
-import { Grid } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
-import { Controller, useForm } from 'react-hook-form';
-import { Table, CustomTypography,CustomButton,CustomDropdown,DateDropdown,TextInput,CustomFileUploader,PincodeDropdown,ColorBanner, MultiImage, Tiles} from '../../components/index';
-import { useNavigate } from 'react-router-dom';
-import CustomIcons from '../../utils/icon/index';
-import actions from '../../actions';
-import AdView from './adViewModal';
-import { AdMasterEntries,DefaultAdMasterEntriesValues} from './AdMasterEntries';
-import './main.css';
-import  axios  from 'axios';
+import React, { useState, useEffect } from "react";
+import { Grid } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { Controller, useForm } from "react-hook-form";
+import {
+  Table,
+  CustomTypography,
+  CustomButton,
+  CustomDropdown,
+  DateDropdown,
+  TextInput,
+  CustomFileUploader,
+  PincodeDropdown,
+  ColorBanner,
+  MultiImage,
+  Tiles,
+} from "../../components/index";
+import { useNavigate } from "react-router-dom";
+import CustomIcons from "../../utils/icon/index";
+import actions from "../../actions";
+import AdView from "./adViewModal";
+import {
+  AdMasterEntries,
+  DefaultAdMasterEntriesValues,
+} from "./AdMasterEntries";
+import "./main.css";
+import axios from "axios";
 
 /**
  *
  * @returns
  */
 function AdScreen() {
-	const defaultValues = DefaultAdMasterEntriesValues;
-	const {
-		control,
-		handleSubmit,
-		watch,
-		formState: { errors },
-		reset,
-	} = useForm({
-		defaultValues,
-	});
-	const dispatch = useDispatch();
-	const navigate = useNavigate();
-	const formWatchFields = watch();
+  const defaultValues = DefaultAdMasterEntriesValues;
+  const {
+    control,
+    handleSubmit,
+    watch,
+    formState: { errors },
+    reset,
+  } = useForm({
+    defaultValues,
+  });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const formWatchFields = watch();
+  const admasterdropdown = useSelector((state) => state?.admasterdropdown);
+  const palettedropdown = useSelector((state) => state?.palettedropdown);
+  console.log(palettedropdown, "palettedropdown");
+  console.log(admasterdropdown, "admasterdropdownadmasterdropdown");
+  const [dropdownList, setDropdownList] = useState([]);
+  const admaster = useSelector((state) => state?.admaster);
 
-	const admaster = useSelector((state) => state?.admaster);
-	console.log(admaster, 'admaster');
-	const [table, setTable] = useState([]);
-	const [multiImage, setMultiImage] = useState(null);
-	const [logoImage, setLogoImage] = useState(null);
-	const [adView, setAdView] = useState(false);
-	const [viewId, setViewId] = useState();
-	const [post, setPost] = useState(null);
-	console.log(post,"postpost");
+  const [table, setTable] = useState([]);
+  const [multiImage, setMultiImage] = useState(null);
+  const [logoImage, setLogoImage] = useState(null);
+  const [adView, setAdView] = useState(false);
+  const [viewId, setViewId] = useState();
+  const [post, setPost] = useState(null);
 
-	useEffect(() => {
-		const data = {
-			data: {},
-			method: 'get',
-			apiName: 'getAdMaster',
-		};
-		console.log(data,"dataValue");
-		dispatch(actions.ADMASTER(data));
-	}, [dispatch]);
-
-	// useEffect(() => {
-	// 	axios.get(`http://3.26.217.22:3000/getAdMaster`).then((response)=>{
-	// 		console.log(response,"responseValue");
-	// 		setPost(response.data)
-	// 	})
-	// 	.catch((error) => {
-	// 		console.error('Error fetching data:', error);
-	// 	});
-	// },[])
-
-	const header = [
-		'S.No',
-		'Title',
-		'URL',
-		'Locations',
-		'Start Date',
-		'End Date',
-		'Action',
-	];
-
-	const handleOpen = (id) => {
-		setAdView(!adView);
-		setViewId(id);
-	};
-
-	
-	// useEffect(() => {
-	// 	const tmpArr = [];
-	// 	admaster?.admaster?.data?.map((values) =>
-	// 		tmpArr.push({
-	// 			ad_id: values.ad_id,
-	// 			ad_title: values.ad_title,
-	// 			shop_ad: values.shop_ad,
-	// 			ad_vis_location: values.ad_vis_location,
-	// 			ad_from_date: values.ad_from_date,
-	// 			ad_to_date: values.ad_to_date,
-				
-				
-	// 		})
-	// 	);
-	// 	setTable(tmpArr);
-	// }, [admaster]);
-
-	useEffect(() => {
-		// Check if admaster and admaster.admaster exist and are arrays
-		if (admaster?.admaster?.data && Array.isArray(admaster.admaster.data)) {
-			const tmpArr = admaster.admaster.data.map((values) => ({
-				ad_id: values.ad_id,
-				ad_title: values.ad_title,
-				shop_ad: values.shop_ad,
-				ad_vis_location: values.ad_vis_location,
-				ad_from_date: values.ad_from_date,
-				ad_to_date: values.ad_to_date,
-			}));
-			setTable(tmpArr);
-		} else {
-			// Handle the case where data is not an array
-			// You can set an empty array or handle it based on your requirements
-			setTable([]);
-		}
-	}, [admaster]);
-	
-
-	const getImage = (value) => {
-		setLogoImage(value);
-	};
-	const getMultipleImage = (value) => {
-		setMultiImage(value[0]);
-	};
-	const handleCancel = () => {
-		reset({
-			ad_master: '',
-			
-		});
-	
-	
-	};
-	const [resetValue, setResetValue] = React.useState([]);
-	console.log(resetValue,"resetValue")
-	function onSubmit(data1) {
-		console.log(data1,"data1admaster")
-		const formData = new FormData();
-		formData.append("ad_title", data1.ad_title);
-		formData.append("shop_id",1);
-		// formData.append("shop_ad", data1.shop_ad);
-		if (data1?.shop_ad.length > 0) {
-			if (!Array.isArray(data1?.shop_ad)) {
-				formData.append('shop_ad', data1?.shop_ad instanceof File ? '' : '');
-			} else {
-				data1?.shop_ad.forEach((item) => {
-					formData.append('shop_ad', item instanceof File ? item : '');
-				});
-			}
-		}
-
-		const tilesArray = [1];
-		formData.append("tiles", JSON.stringify(tilesArray));
-		formData.append("palette_id", 1);
-		formData.append("ad_vis_id", 1);
-		formData.append("ad_vis_location", 600040);
-		formData.append("ad_from_date", "2023/11/24");
-		formData.append("ad_to_date", "2023/11/30");
-		formData.append("created_by", 1);
-		formData.append("updated_by", 1);
-		const data = {
-		  data: formData,
-		  method: "post",
-		  apiName: "createAdMaster",
-		};
-	
-		dispatch(actions.ADMASTER(data));
-		reset(defaultValues);
-		setResetValue(defaultValues);
-	  }
+  const shopValue = admasterdropdown?.admasterdropdown?.data?.map(
+    (data) => data?.store_name
+  );
+  console.log(shopValue, "shopValue");
 
 
-	return (
-		<Grid p={2.5} item md={12}>
-			<Grid container md={12}  className='adMaster_Title'>
-				<CustomTypography
-					type="header" 
-					text="Ad Master"
-					customClass="headText"
-				/>
-			</Grid>
-			<Grid container item p={2} md={12} display="flex">
-						<Grid container item md={12} sm={12} spacing={1} display="flex">
-							{AdMasterEntries?.map((keyValue) => (
-								<Grid item md={keyValue.breakpoint} pl={2} sm={6}>
-									<Controller
-										name={keyValue.name}
-										rules={{
-											required: keyValue?.validation?.required,
-											pattern: keyValue.pattern,
-										}}
-										control={control}
-										render={({ field: { onChange, value } }) => (
-											<>
-												{keyValue?.isTextInput && (
-													<Grid item md={12} sm={12}>
-														<TextInput
-															type="text"
-															label={keyValue.label}
-															onHandleChange={onChange}
-															value={value}
-							  								multiline={keyValue.multiline}
-															rows={keyValue.rows}
-															customClass="capitalize"
-															// resetValue={resetValue}
-														/>
-													</Grid>
-												)}
-													{keyValue?.isChooseTiles && (
-													<Grid item md={12} sm={12}>
-														<Tiles
-															label={keyValue.label}
-															handleChange={onChange}
-															value={value || ''}
-															// data={dropdownList}
-															placeholder={keyValue.placeholder}
-															returnId={keyValue.returnId}
-															// resetValue={resetValue}
-														/>
-													</Grid>
-												)}
-													
-													{keyValue?.isColorBanner && (
-													<Grid item md={12} sm={12}>
-														<ColorBanner
-															label={keyValue.label}
-															handleChange={onChange}
-															value={value || ''}
-															// data={dropdownList}
-															placeholder={keyValue.placeholder}
-															returnId={keyValue.returnId}
-															
-														/>
-													</Grid>
-												)}
-													{keyValue?.isPincodeDropdown && (
-													<Grid item md={12} sm={12}>
-														<PincodeDropdown
-															label={keyValue.label}
-															handleChange={onChange}
-															value={value || ''}
-															// data={dropdownList}
-															placeholder={keyValue.placeholder}
-															returnId={keyValue.returnId}
-														/>
-													</Grid>
-												)}
-													{keyValue?.isDateDropdown && (
-													<Grid item md={12} sm={12}>
-														<DateDropdown
-															label={keyValue.label}
-															handleChange={onChange}
-															value={value || ''}
-															// data={dropdownList}
-															placeholder={keyValue.placeholder}
-															returnId={keyValue.returnId}
-														/>
-													</Grid>
-												)}
-												{keyValue?.isDropdown && (
-													<Grid item md={12} sm={12}>
-														<CustomDropdown
-															label={keyValue.label}
-															handleChange={onChange}
-															value={value || ''}
-															data={keyValue.DropdownData}
-															placeholder={keyValue.placeholder}
-															returnId={keyValue.returnId}
-														/>
-													</Grid>
-												)}
-													
-												{keyValue?.isMultiImageUpload && (
-											<Grid item md={12} sm={12} className="shop_img_align">
-												<div className="fex">
-													{Array.isArray(formWatchFields?.shop_images) &&
-														formWatchFields?.shop_images.map(
-															(imageSrc, key) => (
-																<div className="shop_img" key={imageSrc}>
-																	<img src={imageSrc} alt="mm" />
-																</div>
-															)
-														)}
-												</div>
 
-												<MultiImage
-													label="Shop image"
-													upLoad={CustomIcons.UploadIcon}
-													getImage={(val) => {
-														onChange(val);
-														getMultipleImage(val);
-													}}
-													// customClass="shop_img_align"
-												/>
-											</Grid>
-										)}
-												{keyValue?.isSingleImageUpload && (
-											<Grid item md={12} sm={12} className="shop_img_align">
-												<div className="shop_img1">
-													<img src={formWatchFields.shop_ad} alt="" />
-												</div>
-
-												<CustomFileUploader
-													Label="Upload Ad"
-													upLoad={CustomIcons.UploadIcon}
-													getImage={(val) => {
-														onChange(val);
-														getImage(val);
-													}}
-													// customClass="shop_img_align"
-												/>
-											</Grid>
-										)}
-											
-											</>
-										)}
-									/>
-									{errors && errors[keyValue?.name]?.type === 'required' && (
-										<Grid>
-											<CustomTypography
-												text={`${keyValue?.label} is Required`}
-												type="error"
-											/>
-										</Grid>
-									)}
-									{errors && errors[keyValue?.name]?.type === 'pattern' && (
-										<Grid>
-											<CustomTypography
-												text={`${keyValue?.label} is Invalid`}
-												type="error"
-											/>
-										</Grid>
-									)}
-								</Grid>
-							))}
-						</Grid>
-						<Grid
-							item
-							columnGap={2}
-							display="flex"
-							md={12}
-							sm={12}
-							pt={2}
-							name="position"
-							className="position-select"
-						>
-							<>
-								<CustomButton
-									customClass="submit_button"
-									// btnTitle={btnTitle}
-									btnTitle="SUBMIT"
-									variant="contained"
-									color="primary"
-									btnStyles={{
-										color: '#fff',
-										background: '#F4A01C',
-										border: '1px solid #F4A01C',
-										padding: '5px 25px',
-										fontSize: '17px',
-									}}
-									onClickHandle={handleSubmit(onSubmit)}
-								/>
-								<CustomButton
-									customClass="cancel_button"
-									btnTitle="CANCEL"
-									variant="outlined"
-									color="primary"
-									btnStyles={{
-										color: '#FF748B',
-										background: '#FF748B38',
-										border: '1px solid #FF748B',
-										padding: '5px 25px',
-										fontSize: '17px',
-									}}
-									onClickHandle={() => handleCancel()}
-								/>
-							</>
-						</Grid>
-					</Grid>
-			<Table
-				header={header}
-				rows={table}
-				printer={CustomIcons.Printer1}
-				view={CustomIcons.View}
-				modalOpen={(id) => handleOpen(id)}
-				action
-				actionItem={{ view: true }}
-				// tableSearch
-				isDrop={false}
-			/>
-			{adView && <AdView viewId={viewId} />}
-		</Grid>
+useEffect(() => {
+	const tempArr = [];
+	admasterdropdown?.admasterdropdown?.data?.map((values, index) =>
+	  tempArr.push({
+		id: values?.id,
+		value: values?.store_name,
+	  })
 	);
+	console.log(tempArr,"tempArr");
+	setDropdownList(tempArr);
+  }, [admasterdropdown]);
+  
+  useEffect(() => {
+    const data = {
+      data: {},
+      method: "get",
+      apiName: "getAdMaster",
+    };
+
+    dispatch(actions.ADMASTER(data));
+  }, [dispatch]);
+
+  useEffect(() => {
+    const dropdownData = {
+      data: {},
+      method: "get",
+      apiName: "getShopList",
+    };
+    dispatch(actions.ADMASTERDROPDOWNS(dropdownData));
+  }, [dispatch]);
+
+  useEffect(() => {
+    const paletteData = {
+      data: {},
+      method: "get",
+      apiName: "getPaletteColor",
+    };
+    // dispatch(actions.PALETTEDROPDOWNS(paletteData));
+  }, [dispatch]);
+
+
+
+
+  const header = [
+    "S.No",
+    "Title",
+    "URL",
+    "Locations",
+    "Start Date",
+    "End Date",
+    "Action",
+  ];
+
+  const handleOpen = (id) => {
+    setAdView(!adView);
+    setViewId(id);
+  };
+
+  useEffect(() => {
+    if (admaster?.admaster?.data && Array.isArray(admaster.admaster.data)) {
+      const tmpArr = admaster.admaster.data.map((values) => ({
+        ad_id: values.ad_id,
+        ad_title: values.ad_title,
+        shop_ad: values.shop_ad,
+        ad_vis_location: values.ad_vis_location,
+        ad_from_date: values.ad_from_date,
+        ad_to_date: values.ad_to_date,
+      }));
+      setTable(tmpArr);
+    } else {
+      setTable([]);
+    }
+  }, [admaster]);
+
+  const getImage = (value) => {
+    setLogoImage(value);
+  };
+  const getMultipleImage = (value) => {
+    setMultiImage(value[0]);
+  };
+  const handleCancel = () => {
+    reset({
+      ad_master: "",
+    });
+  };
+  const [resetValue, setResetValue] = React.useState([]);
+  console.log(resetValue, "resetValue");
+  function onSubmit(data1) {
+    console.log(data1, "data1admaster");
+    const formData = new FormData();
+    formData.append("ad_title", data1.ad_title);
+    formData.append("shop_id", 1);
+    // formData.append("shop_ad", data1.shop_ad);
+    if (data1?.shop_ad.length > 0) {
+      if (!Array.isArray(data1?.shop_ad)) {
+        formData.append("shop_ad", data1?.shop_ad instanceof File ? "" : "");
+      } else {
+        data1?.shop_ad.forEach((item) => {
+          formData.append("shop_ad", item instanceof File ? item : "");
+        });
+      }
+    }
+
+    const tilesArray = [1];
+    formData.append("tiles", JSON.stringify(tilesArray));
+    formData.append("palette_id", 1);
+    formData.append("ad_vis_id", 1);
+    formData.append("ad_vis_location", 600040);
+    formData.append("ad_from_date", "2023/11/24");
+    formData.append("ad_to_date", "2023/11/30");
+    formData.append("created_by", 1);
+    formData.append("updated_by", 1);
+    const data = {
+      data: formData,
+      method: "post",
+      apiName: "createAdMaster",
+    };
+
+    dispatch(actions.ADMASTER(data));
+    reset(defaultValues);
+    setResetValue(defaultValues);
+  }
+
+  return (
+    <Grid p={2.5} item md={12}>
+      <Grid container md={12} className="adMaster_Title">
+        <CustomTypography
+          type="header"
+          text="Ad Master"
+          customClass="headText"
+        />
+      </Grid>
+      <Grid container item p={2} md={12} display="flex">
+        <Grid container item md={12} sm={12} spacing={1} display="flex">
+          {AdMasterEntries?.map((keyValue) => (
+            <Grid item md={keyValue.breakpoint} pl={2} sm={6}>
+              <Controller
+                name={keyValue.name}
+                rules={{
+                  required: keyValue?.validation?.required,
+                  pattern: keyValue.pattern,
+                }}
+                control={control}
+                render={({ field: { onChange, value } }) => (
+                  <>
+                    {keyValue?.isTextInput && (
+                      <Grid item md={12} sm={12}>
+                        <TextInput
+                          type="text"
+                          label={keyValue.label}
+                          onHandleChange={onChange}
+                          value={value}
+                          multiline={keyValue.multiline}
+                          rows={keyValue.rows}
+                          customClass="capitalize"
+                          // resetValue={resetValue}
+                        />
+                      </Grid>
+                    )}
+                    {keyValue?.isChooseTiles && (
+                      <Grid item md={12} sm={12}>
+                        <Tiles
+                          label={keyValue.label}
+                          handleChange={onChange}
+                          value={value || ""}
+                          // data={dropdownList}
+                          placeholder={keyValue.placeholder}
+                          returnId={keyValue.returnId}
+                          // resetValue={resetValue}
+                        />
+                      </Grid>
+                    )}
+
+                    {keyValue?.isColorBanner && (
+                      <Grid item md={12} sm={12}>
+                        <ColorBanner
+                          label={keyValue.label}
+                          handleChange={onChange}
+                          value={value || ""}
+                        //   data={dropdownList}
+                          placeholder={keyValue.placeholder}
+                          returnId={keyValue.returnId}
+                        />
+                      </Grid>
+                    )}
+                    {keyValue?.isPincodeDropdown && (
+                      <Grid item md={12} sm={12}>
+                        <PincodeDropdown
+                          label={keyValue.label}
+                          handleChange={onChange}
+                          value={value || ""}
+                          // data={dropdownList}
+                          placeholder={keyValue.placeholder}
+                          returnId={keyValue.returnId}
+                        />
+                      </Grid>
+                    )}
+                    {keyValue?.isDateDropdown && (
+                      <Grid item md={12} sm={12}>
+                        <DateDropdown
+                          label={keyValue.label}
+                          handleChange={onChange}
+                          value={value || ""}
+                          // data={dropdownList}
+                          placeholder={keyValue.placeholder}
+                          returnId={keyValue.returnId}
+                        />
+                      </Grid>
+                    )}
+                    {keyValue?.isDropdown && (
+                      <Grid item md={12} sm={12}>
+                        <CustomDropdown
+                          label={keyValue.label}
+                          handleChange={onChange}
+                          value={value || ""}
+                          data={dropdownList}
+                          placeholder={keyValue.placeholder}
+                          returnId={keyValue.returnId}
+                        />
+                      </Grid>
+                    )}
+
+                    {keyValue?.isMultiImageUpload && (
+                      <Grid item md={12} sm={12} className="shop_img_align">
+                        <div className="fex">
+                          {Array.isArray(formWatchFields?.shop_images) &&
+                            formWatchFields?.shop_images.map(
+                              (imageSrc, key) => (
+                                <div className="shop_img" key={imageSrc}>
+                                  <img src={imageSrc} alt="mm" />
+                                </div>
+                              )
+                            )}
+                        </div>
+
+                        <MultiImage
+                          label="Shop image"
+                          upLoad={CustomIcons.UploadIcon}
+                          getImage={(val) => {
+                            onChange(val);
+                            getMultipleImage(val);
+                          }}
+                          // customClass="shop_img_align"
+                        />
+                      </Grid>
+                    )}
+                    {keyValue?.isSingleImageUpload && (
+                      <Grid item md={12} sm={12} className="shop_img_align">
+                        <div className="shop_img1">
+                          <img src={formWatchFields.shop_ad} alt="" />
+                        </div>
+
+                        <CustomFileUploader
+                          Label="Upload Ad"
+                          upLoad={CustomIcons.UploadIcon}
+                          getImage={(val) => {
+                            onChange(val);
+                            getImage(val);
+                          }}
+                          // customClass="shop_img_align"
+                        />
+                      </Grid>
+                    )}
+                  </>
+                )}
+              />
+              {errors && errors[keyValue?.name]?.type === "required" && (
+                <Grid>
+                  <CustomTypography
+                    text={`${keyValue?.label} is Required`}
+                    type="error"
+                  />
+                </Grid>
+              )}
+              {errors && errors[keyValue?.name]?.type === "pattern" && (
+                <Grid>
+                  <CustomTypography
+                    text={`${keyValue?.label} is Invalid`}
+                    type="error"
+                  />
+                </Grid>
+              )}
+            </Grid>
+          ))}
+        </Grid>
+        <Grid
+          item
+          columnGap={2}
+          display="flex"
+          md={12}
+          sm={12}
+          pt={2}
+          name="position"
+          className="position-select"
+        >
+          <>
+            <CustomButton
+              customClass="submit_button"
+              // btnTitle={btnTitle}
+              btnTitle="SUBMIT"
+              variant="contained"
+              color="primary"
+              btnStyles={{
+                color: "#fff",
+                background: "#F4A01C",
+                border: "1px solid #F4A01C",
+                padding: "5px 25px",
+                fontSize: "17px",
+              }}
+              onClickHandle={handleSubmit(onSubmit)}
+            />
+            <CustomButton
+              customClass="cancel_button"
+              btnTitle="CANCEL"
+              variant="outlined"
+              color="primary"
+              btnStyles={{
+                color: "#FF748B",
+                background: "#FF748B38",
+                border: "1px solid #FF748B",
+                padding: "5px 25px",
+                fontSize: "17px",
+              }}
+              onClickHandle={() => handleCancel()}
+            />
+          </>
+        </Grid>
+      </Grid>
+      <Table
+        header={header}
+        rows={table}
+        printer={CustomIcons.Printer1}
+        view={CustomIcons.View}
+		edit={CustomIcons.EditIcon}
+		deleteIconSrc={CustomIcons.DeleteIcon}
+        modalOpen={(id) => handleOpen(id)}
+        action
+        actionItem={{ view: true ,deleteIcon: true, edit:true}}
+        // tableSearch
+        isDrop={false}
+      />
+      {adView && <AdView viewId={viewId} />}
+    </Grid>
+  );
 }
 
 export default AdScreen;

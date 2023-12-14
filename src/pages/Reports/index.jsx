@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { CSVLink } from "react-csv";
+
 import { Grid } from "@mui/material";
 import { CustomTab, CustomTypography, Table } from "../../components/index";
 import { useSelector, useDispatch } from "react-redux";
 import CustomIcons from "../../utils/icon/index";
 import actions from "../../actions";
-
 
 function Report() {
   const report = useSelector((state) => state?.report);
@@ -330,18 +329,9 @@ function Report() {
     } else if (val === "Category" && e.target.value === "ALL") {
       setCategoryFilter("");
     }
-    // else {
-    // 	setCategoryFilter("");
-    // 	setStateFilter("");
-    // 	setSuburbFilter('');
-    // 	setPostCodeFilter('');
-    // }
   };
   console.log(dropdownList, "asldkfjaskhrt");
   useEffect(() => {
-    // setPostCodeFilter('');
-    // setSuburbFilter('');
-    // setStateFilter('');
     if (value === 0) {
       setEntries([
         {
@@ -386,24 +376,6 @@ function Report() {
     }
   }, [value, dropdownList]);
 
-  // const data = table.slice(1);
-
-  // // Headers for the table
-  // const headers = [
-  // 	{ label: 'S.No', key: 'S.No' },
-  // 	{ label: 'Store Name', key: 'Store Name' },
-  // 	{ label: 'Category', key: 'Category' },
-  // 	{ label: 'Contact Mobile', key: 'Contact Mobile' },
-  // 	{ label: 'Email', key: 'Email' },
-  // 	{ label: 'Create Date', key: 'Create Date' },
-  // 	{ label: 'ABN Number', key: 'ABN Number' },
-  // 	{ label: 'State', key: 'State' },
-  // 	{ label: 'Location', key: 'Location' },
-  // 	{ label: 'Country', key: 'Country' },
-  // 	{ label: 'Suburb', key: 'Suburb' },
-  // 	{ label: 'Post Code', key: 'Post Code' },
-  // 	{ label: 'Reference Code', key: 'Reference Code' },
-  // ];
   const getCsvStyle = () => {
     const style = document.createElement("style");
     style.innerHTML = `
@@ -433,18 +405,7 @@ function Report() {
           value={value}
         />
       </Grid>
-      <Grid item p={2} md={12}> 
-        {/* <CSVLink
-          data={table}
-          filename="data.xls"
-          target="_blank"
-          onClick={handleDownloadClick}
-          className="csv-link"
-        >
-          <button type="button" className="button-position">
-            <img src={CustomIcons.download} alt="download" />
-          </button>
-        </CSVLink> */}
+      <Grid item p={2} md={12}>
         <Table
           header={header}
           rows={table}
@@ -455,11 +416,8 @@ function Report() {
           optional
           tableSearch
           dropPlaceholder="Location"
-          // view={CustomIcons.View}
           viewPath="reportsView"
-          // actionItem={{ view: true }}
           dropDownEntries={entries}
-          // action
           showSno
           dropdownHandleChange={dropdownHandleChange}
           newModule={value}

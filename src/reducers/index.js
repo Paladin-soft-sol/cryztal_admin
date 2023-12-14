@@ -10,6 +10,9 @@ import approvalSlice from '../slices/Approval/Approval';
 import getCategorySlice from '../slices/CategoryDropdown/Category';
 import approvalpartnerSlice from '../slices/ApprovalPartner/ApprovalPartner';
 import admasterSlice from '../slices/AdMaster/AdMaster';
+import admasterdropdownSlice from '../slices/AdMaster/AdMasterDropdown';
+import palettedropdownSlice from '../slices/AdMaster/PaletteDropdown';
+
 
 const reducer = combineReducers({
 	login: loginSlice,
@@ -18,6 +21,9 @@ const reducer = combineReducers({
 	customer: customerSlice,
 	partner: partnerSlice,
 	report: reportSlice,
+	admasterdropdown: admasterdropdownSlice,
+	palettedropdown: palettedropdownSlice,
+
 	approval: approvalSlice,
 	categoryDropdown: getCategorySlice,
 	approvalpartner: approvalpartnerSlice,

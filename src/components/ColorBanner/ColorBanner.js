@@ -4,6 +4,7 @@ import { CustomTypography } from "../Typography/Typography";
 import PropTypes from "prop-types";
 import { FormControl, Select, MenuItem } from "@mui/material";
 import { makeStyles } from '@material-ui/styles';
+import "./style.css";
   
 export const ColorBanner = (props) => {
     const {label,requiredField,handleChange}= props;
@@ -14,10 +15,10 @@ export const ColorBanner = (props) => {
     { id: 2, name: "RED", value: "#E70012" },
     { id: 3, name: "GREEN", value: "#1AC877" },
     { id: 4, name: "Yellow", value: "#FFC518" },
-    { id: 4, name: "PURPLE", value: "#E673EA" },
-    { id: 4, name: "SKYBLUE", value: "#1FBCD2" },
-    { id: 4, name: "VIOLET", value: "#9A2FAE" },
-    { id: 4, name: "PINK", value: "#FF0056" },
+    { id: 5, name: "PURPLE", value: "#E673EA" },
+    { id: 6, name: "SKYBLUE", value: "#1FBCD2" },
+    { id: 7, name: "VIOLET", value: "#9A2FAE" },
+    { id: 8, name: "PINK", value: "#FF0056" },
     // Add more colors as needed
   ];
 
@@ -54,7 +55,7 @@ export const ColorBanner = (props) => {
       >
         <Select
           size="small"
-         className="color-vertical"
+         className="color-vertical align_size"
           fullWidth
           labelId="demo-select-small"
           id="demo-select-small"
