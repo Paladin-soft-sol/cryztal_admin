@@ -4,7 +4,7 @@ import Layout from "./layouts";
 
 function RoutePage() {
   return (
-    <Router basename="/">
+    <Router basename="/crystal-webadmin">
       <Layout />
     </Router>
   );

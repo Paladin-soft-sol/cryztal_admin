@@ -53,6 +53,7 @@ function AdScreen() {
   console.log(palettedropdown, "palettedropdown");
   console.log(admasterdropdown, "admasterdropdownadmasterdropdown");
   const [dropdownList, setDropdownList] = useState([]);
+  const [paletteList, setPaletteList] = useState([]);
   const admaster = useSelector((state) => state?.admaster);
 
   const [table, setTable] = useState([]);
@@ -80,7 +81,19 @@ useEffect(() => {
 	console.log(tempArr,"tempArr");
 	setDropdownList(tempArr);
   }, [admasterdropdown]);
-  
+
+  useEffect(() => {
+    const tempArr = [];
+    palettedropdown?.palettedropdown?.data?.map((values, index) =>
+      tempArr.push({
+      id: values?.palette_id,
+      value: values?.palette_color,
+      })
+    );
+    console.log(tempArr,"tempArr");
+    setPaletteList(tempArr);
+    }, [palettedropdown]);
+
   useEffect(() => {
     const data = {
       data: {},
@@ -106,7 +119,7 @@ useEffect(() => {
       method: "get",
       apiName: "getPaletteColor",
     };
-    // dispatch(actions.PALETTEDROPDOWNS(paletteData));
+    dispatch(actions.PALETTEDROPDOWNS(paletteData));
   }, [dispatch]);
 
 
@@ -161,7 +174,6 @@ useEffect(() => {
     const formData = new FormData();
     formData.append("ad_title", data1.ad_title);
     formData.append("shop_id", 1);
-    // formData.append("shop_ad", data1.shop_ad);
     if (data1?.shop_ad.length > 0) {
       if (!Array.isArray(data1?.shop_ad)) {
         formData.append("shop_ad", data1?.shop_ad instanceof File ? "" : "");
@@ -224,7 +236,7 @@ useEffect(() => {
                           multiline={keyValue.multiline}
                           rows={keyValue.rows}
                           customClass="capitalize"
-                          // resetValue={resetValue}
+                          
                         />
                       </Grid>
                     )}
@@ -234,10 +246,9 @@ useEffect(() => {
                           label={keyValue.label}
                           handleChange={onChange}
                           value={value || ""}
-                          // data={dropdownList}
                           placeholder={keyValue.placeholder}
                           returnId={keyValue.returnId}
-                          // resetValue={resetValue}
+                          
                         />
                       </Grid>
                     )}
@@ -248,7 +259,7 @@ useEffect(() => {
                           label={keyValue.label}
                           handleChange={onChange}
                           value={value || ""}
-                        //   data={dropdownList}
+                          colors={paletteList}
                           placeholder={keyValue.placeholder}
                           returnId={keyValue.returnId}
                         />
@@ -260,7 +271,6 @@ useEffect(() => {
                           label={keyValue.label}
                           handleChange={onChange}
                           value={value || ""}
-                          // data={dropdownList}
                           placeholder={keyValue.placeholder}
                           returnId={keyValue.returnId}
                         />
@@ -272,7 +282,6 @@ useEffect(() => {
                           label={keyValue.label}
                           handleChange={onChange}
                           value={value || ""}
-                          // data={dropdownList}
                           placeholder={keyValue.placeholder}
                           returnId={keyValue.returnId}
                         />
@@ -311,7 +320,6 @@ useEffect(() => {
                             onChange(val);
                             getMultipleImage(val);
                           }}
-                          // customClass="shop_img_align"
                         />
                       </Grid>
                     )}
@@ -328,7 +336,7 @@ useEffect(() => {
                             onChange(val);
                             getImage(val);
                           }}
-                          // customClass="shop_img_align"
+                        
                         />
                       </Grid>
                     )}
@@ -367,7 +375,6 @@ useEffect(() => {
           <>
             <CustomButton
               customClass="submit_button"
-              // btnTitle={btnTitle}
               btnTitle="SUBMIT"
               variant="contained"
               color="primary"
@@ -402,12 +409,11 @@ useEffect(() => {
         rows={table}
         printer={CustomIcons.Printer1}
         view={CustomIcons.View}
-		edit={CustomIcons.EditIcon}
-		deleteIconSrc={CustomIcons.DeleteIcon}
+		    edit={CustomIcons.EditIcon}
+	    	deleteIconSrc={CustomIcons.DeleteIcon}
         modalOpen={(id) => handleOpen(id)}
         action
         actionItem={{ view: true ,deleteIcon: true, edit:true}}
-        // tableSearch
         isDrop={false}
       />
       {adView && <AdView viewId={viewId} />}

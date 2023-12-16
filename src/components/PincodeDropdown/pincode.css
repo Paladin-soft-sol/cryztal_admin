@@ -7,3 +7,19 @@
 .hai .MuiSelect-select>span{ 
     display:none !important;
 }
+.PincodeTextInput{
+    padding-top: 20px !important;
+}
+
+.PincodeTextInput label{
+    top: 25px !important;
+}
+
+.PincodeDropdown{
+    padding-top: 20px !important;
+}
+
+
+.PincodeDropdown svg{
+    top: unset !important;
+}

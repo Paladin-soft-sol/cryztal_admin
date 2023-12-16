@@ -1,87 +1,14 @@
-// import * as React from 'react';
-// import OutlinedInput from '@mui/material/OutlinedInput';
-// import InputLabel from '@mui/material/InputLabel';
-// import MenuItem from '@mui/material/MenuItem';
-// import FormControl from '@mui/material/FormControl';
-// import ListItemText from '@mui/material/ListItemText';
-// import Select from '@mui/material/Select';
-// import Checkbox from '@mui/material/Checkbox';
-
-// const ITEM_HEIGHT = 48;
-// const ITEM_PADDING_TOP = 8;
-// const MenuProps = {
-//   PaperProps: {
-//     style: {
-//       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-//       width: 250,
-//     },
-//   },
-// };
-
-// const names = [
-//   'Oliver Hansen',
-//   'Van Henry',
-//   'April Tucker',
-//   'Ralph Hubbard',
-//   'Omar Alexander',
-//   'Carlos Abbott',
-//   'Miriam Wagner',
-//   'Bradley Wilkerson',
-//   'Virginia Andrews',
-//   'Kelly Snyder',
-// ];
-
-// export const PincodeDropdown = (props) => {
-//   const [personName, setPersonName] = React.useState([]);
-
-//   const handleChange = (event) => {
-//     const {
-//       target: { value },
-//     } = event;
-//     setPersonName(
-//       // On autofill we get a stringified value.
-//       typeof value === 'string' ? value.split(',') : value,
-//     );
-//   };
-
-//   return (
-//     <div>
-//       <FormControl sx={{ m: 1, width: 300 }}>
-//         <InputLabel id="demo-multiple-checkbox-label">Tag</InputLabel>
-//         <Select
-//           labelId="demo-multiple-checkbox-label"
-//           id="demo-multiple-checkbox"
-//           multiple
-//           value={personName}
-//           onChange={handleChange}
-//           input={<OutlinedInput label="Tag" />}
-//           renderValue={(selected) => selected.join(', ')}
-//           MenuProps={MenuProps}
-//         >
-//           {names.map((name) => (
-//             <MenuItem key={name} value={name}>
-//               <Checkbox checked={personName.indexOf(name) > -1} />
-//               <ListItemText primary={name} />
-//             </MenuItem>
-//           ))}
-//         </Select>
-//       </FormControl>
-//     </div>
-//   );
-// }
-
-import * as React from 'react';
+import React, { useState } from 'react';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import ListItemText from '@mui/material/ListItemText';
 import Select from '@mui/material/Select';
-import Radio from '@mui/material/Radio';
 import TextField from '@mui/material/TextField';
+import { CustomTypography } from '../Typography/Typography';
+import { CustomDropdown } from '../CustomDropdown';
 import './pincode.css';
-// import { CustomTypography } from "../Typography/Typography";
-import {CustomTypography } from '../Typography/Typography';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -94,33 +21,34 @@ const MenuProps = {
   },
 };
 
-const names = [
-  'Single Pincode',
-  'Multiple Pincodes',
-  'City Wide',
-  'State Wide',
-  'Nation Wide'
-];
-console.log(names,"namesnames")
+const names = ['Pincode', 'City Wide', 'State Wide', 'Nation Wide'];
+
 export const PincodeDropdown = (props) => {
-  const {label,requiredField}=props;
-  const [personName, setPersonName] = React.useState('');
+  const { label, requiredField } = props;
+  const [personName, setPersonName] = useState('');
+  const [customInput, setCustomInput] = useState('');
 
   const handleChange = (event) => {
     setPersonName(event.target.value);
+
+    // Reset the customInput when a different option is selected
+    setCustomInput('');
+  };
+
+  const handleCustomInputChange = (event) => {
+    setCustomInput(event.target.value);
   };
 
   return (
     <div className="pincodeHeader">
       <CustomTypography
-          type="caption"
-          text={label}
-          customClass="labelTextDrop"
-          colorType="senary"
-          requiredField={requiredField}
-        />
-      <FormControl sx={{ m: 1, width: 300 }}>
-        {/* <InputLabel id="demo-radio-label">Tag</InputLabel> */}
+        type="caption"
+        text={label}
+        customClass="labelTextDrop"
+        colorType="senary"
+        requiredField={requiredField}
+      />
+      <FormControl className="formControl" fullWidth size="small">
         <Select
           labelId="demo-radio-label"
           id="demo-radio"
@@ -128,24 +56,60 @@ export const PincodeDropdown = (props) => {
           onChange={handleChange}
           input={<OutlinedInput label="Tag" />}
           MenuProps={MenuProps}
-          className='hai'
+          className="hai"
         >
           {names.map((name) => (
-            <MenuItem key={name} value={name} >
-              <Radio checked={personName === name} />
+            <MenuItem key={name} value={name}>
               <ListItemText primary={name} />
             </MenuItem>
           ))}
-             {names.length === 0 && (
+        </Select>
+
+        {personName === 'Pincode' && (
           <TextField
-            label="Enter Single Pincode"
+            label="Enter Pincode"
             variant="outlined"
             size="small"
             fullWidth
             margin="normal"
+            className= "PincodeTextInput"
+            value={customInput} 
+            onChange={handleCustomInputChange}
           />
+        )}  
+         {personName === 'City Wide' && (
+          <CustomDropdown
+          // label={keyValue.label}
+          // handleChange={onChange}
+          // value={value || ""}
+          // data={dropdownList}
+          placeholder="Select City"
+          customClass= "PincodeDropdown"
+          // returnId={keyValue.returnId}
+        />
         )}
-        </Select>
+         {personName === 'State Wide' && (
+          <CustomDropdown
+          // label={keyValue.label}
+          // handleChange={onChange}
+          // value={value || ""}
+          // data={dropdownList}
+          placeholder="Select State"
+          customClass= "PincodeDropdown"
+          // returnId={keyValue.returnId}
+        />
+        )}
+          {personName === 'Nation Wide' && (
+          <CustomDropdown
+          // label={keyValue.label}
+          // handleChange={onChange}
+          // value={value || ""}
+          // data={dropdownList}
+          placeholder="Select Nation"
+          customClass= "PincodeDropdown"
+          // returnId={keyValue.returnId}
+        />
+        )}
       </FormControl>
     </div>
   );

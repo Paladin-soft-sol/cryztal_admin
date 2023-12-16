@@ -6,7 +6,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { defaultReject, defaultState } from '../../constants';
 import { fetchData } from '../../helpers';
 
-const PALETTEDROPDOWNS = createAsyncThunk(
+const PALETTEDROPDOWNS = createAsyncThunk(  
 	'palettedropdown/palettedropdown',
 	// eslint-disable-next-line default-param-last
 	async (
