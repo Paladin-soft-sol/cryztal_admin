@@ -13,7 +13,7 @@ import { CustomTypography } from "../Typography/Typography";
 export const CustomDropdown = (props) => {
   const {
     data,
-    handleChange,
+    handleChange,  
     // dropDownChange,
     value,
     disabled,

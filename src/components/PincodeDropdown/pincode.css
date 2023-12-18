@@ -9,6 +9,7 @@
 }
 .PincodeTextInput{
     padding-top: 20px !important;
+    width: 250px;
 }
 
 .PincodeTextInput label{
@@ -22,4 +23,11 @@
 
 .PincodeDropdown svg{
     top: unset !important;
+}
+
+.addIconPincode{
+    padding: 20px 0 0 12px;
+}
+.pincodeBoxes{
+    display: inline-flex;
 }

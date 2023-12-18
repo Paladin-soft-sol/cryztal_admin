@@ -8,6 +8,8 @@ import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import { CustomTypography } from '../Typography/Typography';
 import { CustomDropdown } from '../CustomDropdown';
+import CustomIcons from "../../utils/icon/index";
+import {Grid} from '@mui/material';
 import './pincode.css';
 
 const ITEM_HEIGHT = 48;
@@ -66,16 +68,22 @@ export const PincodeDropdown = (props) => {
         </Select>
 
         {personName === 'Pincode' && (
+          <Grid className='pincodeBoxes'>
           <TextField
             label="Enter Pincode"
             variant="outlined"
-            size="small"
-            fullWidth
+            size="small"  
+            // fullWidth
             margin="normal"
             className= "PincodeTextInput"
             value={customInput} 
             onChange={handleCustomInputChange}
           />
+        
+          <Grid className="addIconPincode">
+                  <img src={CustomIcons.AddIcon} alt="" />
+                  </Grid>
+          </Grid>
         )}  
          {personName === 'City Wide' && (
           <CustomDropdown

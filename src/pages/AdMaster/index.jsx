@@ -11,7 +11,7 @@ import {
   CustomTypography,
   CustomButton,
   CustomDropdown,
-  DateDropdown,
+  DateRangePicker,
   TextInput,
   CustomFileUploader,
   PincodeDropdown,
@@ -278,7 +278,7 @@ useEffect(() => {
                     )}
                     {keyValue?.isDateDropdown && (
                       <Grid item md={12} sm={12}>
-                        <DateDropdown
+                        <DateRangePicker
                           label={keyValue.label}
                           handleChange={onChange}
                           value={value || ""}

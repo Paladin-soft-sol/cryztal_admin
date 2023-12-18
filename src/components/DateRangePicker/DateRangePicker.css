@@ -1,0 +1,23 @@
+.DateHeader .MuiFormControl-root{
+    margin: 0 !important;
+}
+.react-datepicker-wrapper{
+    margin-right: 15px;
+}
+/* .react-datepicker__input-container{
+    border: 3px solid #e5e2e285!important;
+    padding: 11.5px 14px!important;
+    border-radius: 6px!important;
+    
+} */
+.react-datepicker__input-container input{
+    border: 3px solid #e5e2e285!important;
+    padding: 13.5px 14px!important;
+    border-radius: 6px!important;
+    width: 100%;
+}
+.react-datepicker__input-container input:focus-visible{
+    border: 3px solid #e5e2e285 !important;
+    outline: none;
+}
+
