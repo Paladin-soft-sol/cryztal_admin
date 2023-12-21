@@ -17,7 +17,6 @@ const options = [
   { value: "url9", label: "" },
 ];
 
-
 export const Tiles = (props) => {
   const { label, requiredField } = props;
   const [value, setValue] = useState("");
@@ -26,23 +25,7 @@ export const Tiles = (props) => {
   const handleSelectChange = (selectedOption) => {
     setSelectedValue(selectedOption);
   };
-  const handleSubmit = () => {
-    if (selectedValue) {
-      console.log(`Selected Tile:`, selectedValue.value);
-      // Add your submission logic here
-    } else {
-      console.log("Please select a tile before submitting.");
-    }
-  };
-  const [selectedTile, setSelectedTile] = useState(null);
-
-  const handleTileClick = (tile) => {
-    setSelectedTile(tile);
-  };
-  const handleButtonClick = () => {
-    // Handle submit logic here
-    console.log('Selected Tile:', selectedTile);
-  };
+ 
   return (
     <div className="App">
       <div className="col-sm">
@@ -69,13 +52,14 @@ export const Tiles = (props) => {
     </div>
   );
 };
+
+
 Tiles.propTypes = {
   label: PropTypes.string,
-
   requiredField: PropTypes.bool,
 };
+
 Tiles.defaultProps = {
   label: "",
-
   requiredField: false,
 };
