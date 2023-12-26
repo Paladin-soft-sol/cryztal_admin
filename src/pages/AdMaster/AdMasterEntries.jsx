@@ -93,20 +93,7 @@ export const AdMasterEntries = [
         placeholder: 'Role',
         breakpoint: 3,
         disabled: true,
-        DropdownData: [
-          {
-            id: 1,
-            value: 'senior Admin',
-          },
-          {
-            id: 2,
-            value: 'senior support person',
-          },
-          {
-            id: 3,
-            value: 'junior support person',
-          },
-        ],
+        DropdownData: [],
         customClass: 'drop_align_edit',
       },
       {
