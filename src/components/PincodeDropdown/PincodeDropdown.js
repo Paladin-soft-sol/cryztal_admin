@@ -26,19 +26,22 @@ const MenuProps = {
 const names = ['Pincode', 'City Wide', 'State Wide', 'Nation Wide'];
 
 export const PincodeDropdown = (props) => {
-  const { label, requiredField } = props;
+  const { label, requiredField ,value,handleInputChange} = props;
   const [personName, setPersonName] = useState('');
   const [customInput, setCustomInput] = useState('');
+
 
   const handleChange = (event) => {
     setPersonName(event.target.value);
 
     // Reset the customInput when a different option is selected
     setCustomInput('');
+   
   };
 
   const handleCustomInputChange = (event) => {
     setCustomInput(event.target.value);
+    console.log(setCustomInput,"customInputcustomInput")
   };
 
   return (
@@ -76,8 +79,10 @@ export const PincodeDropdown = (props) => {
             // fullWidth
             margin="normal"
             className= "PincodeTextInput"
-            value={customInput} 
-            onChange={handleCustomInputChange}
+            // value={customInput} 
+            value={value}
+            // onChange={handleCustomInputChange}
+            onChange={handleInputChange}
           />
         
           <Grid className="addIconPincode">

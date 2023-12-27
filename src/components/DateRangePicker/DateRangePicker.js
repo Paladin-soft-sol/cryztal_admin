@@ -23,13 +23,23 @@ export const DateRangePicker = (props) => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
 
-  const handleStartDateChange = (date) => {
-    setStartDate(date);
-  };
+  // const handleStartDateChange = (date) => {
+  //   setStartDate(date);
+  // };
 
-  const handleEndDateChange = (date) => {
-    setEndDate(date);
-  };
+  // const handleEndDateChange = (date) => {
+  //   setEndDate(date);
+  // };
+
+    const handleStartDateChange = (date) => {
+      setStartDate(date);
+      handleChange({ startDate: date, endDate }); // Call handleChange with updated values
+    };
+
+    const handleEndDateChange = (date) => {
+      setEndDate(date);
+      handleChange({ startDate, endDate: date }); // Call handleChange with updated values
+    };
 
   return (
     <Grid container md={12} lg={12} sm={12} xs={12}>
@@ -47,9 +57,6 @@ export const DateRangePicker = (props) => {
         <DatePicker
           selected={startDate}
           onChange={handleStartDateChange}
-          selectsStart
-          startDate={startDate}
-          endDate={endDate}
           className="fromDate"
         />
       
@@ -68,9 +75,6 @@ export const DateRangePicker = (props) => {
         <DatePicker
           selected={endDate}
           onChange={handleEndDateChange}
-          selectsEnd
-          startDate={startDate}
-          endDate={endDate}
           minDate={startDate}
           className="toDate"
         />

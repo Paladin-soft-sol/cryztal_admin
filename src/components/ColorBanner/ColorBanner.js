@@ -63,8 +63,7 @@ export const ColorBanner = (props) => {
                 style={{
                   width: "20px",
                   height: "20px",
-                  backgroundColor: color.value,
-                 
+                  backgroundColor: color.value,   
                   cursor: "pointer",
                 }}
               />
@@ -72,21 +71,6 @@ export const ColorBanner = (props) => {
           ))}
         </Select>
       </FormControl>
-
-      {/* <div style={{ marginTop: "10px" }}>
-        {selectedColors.map((selectedColor) => (
-          <div key={selectedColor.id}>
-            <h3>Selected Color: {selectedColor.name}</h3>
-            <div
-              style={{
-                width: "20px",
-                height: "20px",
-                backgroundColor: selectedColor.value,
-              }}
-            />
-          </div>
-        ))}
-      </div> */}
     </div>
   );
 };

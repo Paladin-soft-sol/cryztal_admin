@@ -28,6 +28,7 @@ import {
   DefaultAdMasterEntriesValues,
 } from "./AdMasterEntries";
 import "./main.css";
+import { format } from 'date-fns'; 
 import axios from "axios";
 
 /**
@@ -68,31 +69,29 @@ function AdScreen() {
   );
   console.log(shopValue, "shopValue");
 
-
-
-useEffect(() => {
-	const tempArr = [];
-	admasterdropdown?.admasterdropdown?.data?.map((values, index) =>
-	  tempArr.push({
-		id: values?.id,
-		value: values?.store_name,
-	  })
-	);
-	console.log(tempArr,"tempArr");
-	setDropdownList(tempArr);
+  useEffect(() => {
+    const tempArr = [];
+    admasterdropdown?.admasterdropdown?.data?.map((values, index) =>
+      tempArr.push({
+        id: values?.id,
+        value: values?.store_name,
+      })
+    );
+    console.log(tempArr, "tempArr");
+    setDropdownList(tempArr);
   }, [admasterdropdown]);
 
   useEffect(() => {
     const tempArr = [];
     palettedropdown?.palettedropdown?.data?.map((values, index) =>
       tempArr.push({
-      id: values?.palette_id,
-      value: values?.palette_color,
+        id: values?.palette_id,
+        value: values?.palette_color,
       })
     );
-    console.log(tempArr,"tempArr");
+    console.log(tempArr, "tempArr");
     setPaletteList(tempArr);
-    }, [palettedropdown]);
+  }, [palettedropdown]);
 
   useEffect(() => {
     const data = {
@@ -121,9 +120,6 @@ useEffect(() => {
     };
     dispatch(actions.PALETTEDROPDOWNS(paletteData));
   }, [dispatch]);
-
-
-
 
   const header = [
     "S.No",
@@ -167,6 +163,21 @@ useEffect(() => {
       ad_master: "",
     });
   };
+
+  const [selectedDates, setSelectedDates] = useState({
+    startDate: null,
+    endDate: null,
+  });
+
+  // const startDate = selectedDates?.startDate.slice(3,9);
+  const startDate = selectedDates?.startDate ? format(selectedDates.startDate, 'yyyy/MM/dd') : null;
+  const endDate = selectedDates?.endDate ? format(selectedDates.endDate, 'yyyy/MM/dd') : null;
+  console.log(startDate, "selectedDates");
+
+  const handleDateChange = (dates) => {
+    setSelectedDates(dates);
+  };
+
   const [resetValue, setResetValue] = React.useState([]);
   console.log(resetValue, "resetValue");
   function onSubmit(data1) {
@@ -188,9 +199,9 @@ useEffect(() => {
     formData.append("tiles", JSON.stringify(tilesArray));
     formData.append("palette_id", 1);
     formData.append("ad_vis_id", 1);
-    formData.append("ad_vis_location", 600040);
-    formData.append("ad_from_date", "2023/11/24");
-    formData.append("ad_to_date", "2023/11/30");
+    formData.append("ad_vis_location", data1.ad_vis_location);
+    formData.append("ad_from_date", startDate || "");
+    formData.append("ad_to_date", endDate || "");
     formData.append("created_by", 1);
     formData.append("updated_by", 1);
     const data = {
@@ -236,7 +247,6 @@ useEffect(() => {
                           multiline={keyValue.multiline}
                           rows={keyValue.rows}
                           customClass="capitalize"
-                          
                         />
                       </Grid>
                     )}
@@ -270,7 +280,7 @@ useEffect(() => {
                       <Grid item md={12} sm={12}>
                         <PincodeDropdown
                           label={keyValue.label}
-                          handleChange={onChange}
+                          handleInputChange={onChange}
                           value={value || ""}
                           placeholder={keyValue.placeholder}
                           returnId={keyValue.returnId}
@@ -281,8 +291,9 @@ useEffect(() => {
                       <Grid item md={12} sm={12}>
                         <DateRangePicker
                           label={keyValue.label}
-                          handleChange={onChange}
-                          value={value || ""}
+                          // handleChange={onChange}
+                          handleChange={handleDateChange}
+                          date={value || ""}
                           placeholder={keyValue.placeholder}
                           returnId={keyValue.returnId}
                         />
@@ -337,7 +348,6 @@ useEffect(() => {
                             onChange(val);
                             getImage(val);
                           }}
-                        
                         />
                       </Grid>
                     )}
@@ -410,11 +420,11 @@ useEffect(() => {
         rows={table}
         printer={CustomIcons.Printer1}
         view={CustomIcons.View}
-		    edit={CustomIcons.EditIcon}
-	    	deleteIconSrc={CustomIcons.DeleteIcon}
+        edit={CustomIcons.EditIcon}
+        deleteIconSrc={CustomIcons.DeleteIcon}
         modalOpen={(id) => handleOpen(id)}
         action
-        actionItem={{ view: true ,deleteIcon: true, edit:true}}
+        actionItem={{ view: true, deleteIcon: true, edit: true }}
         isDrop={false}
       />
       {adView && <AdView viewId={viewId} />}
