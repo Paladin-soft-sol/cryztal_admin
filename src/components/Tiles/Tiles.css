@@ -1,32 +1,18 @@
 
-#root ~ div:nth-child(3) ul .color_button:has(ul){
-    display: flex !important;
-}
-.colorBanner>div{
-    border: 3px solid #e5e2e285!important;
-    padding: 9.5px 14px!important;
-    border-radius: 6px!important;
-}
-.colorBanner>div input{
-    padding: 0 !important;
-}
 
-.tiles-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 5px;
-    padding: 10px;
+   .checkbox-grid {
+    display: flex;
+    flex-wrap: wrap;
   }
   
-  .bye>div>div>div{
-    grid-template-columns: repeat(3, 1fr) !important;
-    overflow: hidden;
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px; /* Adjust the gap between grid items */
   }
-
-  .bye>div>div>div div{
-    padding:12px 0px 12px 0px !important;
-    border-radius: 6px;
+  
+  .grid-item {
+    flex: 1;
+    margin: 4px; /* Adjust the margin around each checkbox */
   }
-
-
   

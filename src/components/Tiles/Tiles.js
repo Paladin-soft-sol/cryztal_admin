@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Select } from "react-select-tile";
+import React, { useState, useEffect } from "react";
+import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { CustomTypography } from "../Typography/Typography";
 import PropTypes from "prop-types";
 import { FormControl } from "@mui/material";
@@ -17,15 +17,47 @@ const options = [
   { value: "url9", label: "" },
 ];
 
+const STORAGE_KEY = "selectedTiles";
+
 export const Tiles = (props) => {
   const { label, requiredField } = props;
-  const [value, setValue] = useState("");
-  const [selectedValue, setSelectedValue] = useState(null);
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [placeholder, setPlaceholder] = useState("");
+  const maxSelection = 3;
 
-  const handleSelectChange = (selectedOption) => {
-    setSelectedValue(selectedOption);
+  useEffect(() => {
+    const storedOptions = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    setSelectedOptions(storedOptions);
+  }, []);
+
+  useEffect(() => {
+    generatePlaceholder(selectedOptions);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(selectedOptions));
+  }, [selectedOptions]);
+
+  const handleCheckboxChange = (option) => {
+    const isOptionSelected = selectedOptions.some((selectedOption) => selectedOption.value === option.value);
+
+    if (isOptionSelected) {
+      setSelectedOptions((prevOptions) => prevOptions.filter((o) => o.value !== option.value));
+    } else {
+      if (selectedOptions.length < maxSelection) {
+        setSelectedOptions((prevOptions) => [...prevOptions, option]);
+      }
+    }
   };
- 
+
+  const generatePlaceholder = (selectedOptions) => {
+    if (selectedOptions.length === maxSelection) {
+      const sortedValues = selectedOptions.map((option) => parseInt(option.value.replace("url", ""), 10)).sort((a, b) => a - b);
+      setPlaceholder(sortedValues.join(", "));
+    } else {
+      setPlaceholder("");
+    }
+  };
+
+  const isOptionDisabled = (option) => selectedOptions.length === maxSelection && !selectedOptions.some((o) => o.value === option.value);
+
   return (
     <div className="App">
       <div className="col-sm">
@@ -38,21 +70,30 @@ export const Tiles = (props) => {
         />
 
         <FormControl className="colorBanner bye" fullWidth size="small">
-          <Select
-            value={value}
-            options={options}
-            className="colorBannerDrop"
-            onChange={handleSelectChange}
-          >
-       
-          </Select>
-     
+          <div className="placeholder-text">{placeholder}</div>
+          <FormGroup className="checkbox-grid">
+            <div className="grid-container">
+              {options.map((option) => (
+                <div key={option.value} className="grid-item">
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={selectedOptions.some((o) => o.value === option.value)}
+                        onChange={() => handleCheckboxChange(option)}
+                        disabled={isOptionDisabled(option)}
+                      />
+                    }
+                    label={option.label}
+                  />
+                </div>
+              ))}
+            </div>
+          </FormGroup>
         </FormControl>
       </div>
     </div>
   );
 };
-
 
 Tiles.propTypes = {
   label: PropTypes.string,
