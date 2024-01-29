@@ -16,3 +16,7 @@
     margin: 4px; /* Adjust the margin around each checkbox */
   }
   
+  .tiles-select>div{
+    border: none !important;
+    padding: 0px !important;
+  }

@@ -51,10 +51,15 @@ function AdScreen() {
   const formWatchFields = watch();
   const admasterdropdown = useSelector((state) => state?.admasterdropdown);
   const palettedropdown = useSelector((state) => state?.palettedropdown);
+
   console.log(palettedropdown, "palettedropdown");
-  console.log(admasterdropdown, "admasterdropdownadmasterdropdown");
+  console.log(admasterdropdown, "admasterdropdown");
+
   const [dropdownList, setDropdownList] = useState([]);
+
   const [paletteList, setPaletteList] = useState([]);
+  console.log(setPaletteList,"paletteList");
+  const paletteValue = paletteList?.map(data => data?.id);
   const admaster = useSelector((state) => state?.admaster);
 
   const [table, setTable] = useState([]);
@@ -80,6 +85,8 @@ function AdScreen() {
     console.log(tempArr, "tempArr");
     setDropdownList(tempArr);
   }, [admasterdropdown]);
+
+
 
   useEffect(() => {
     const tempArr = [];
@@ -112,6 +119,8 @@ function AdScreen() {
     dispatch(actions.ADMASTERDROPDOWNS(dropdownData));
   }, [dispatch]);
 
+ 
+
   useEffect(() => {
     const paletteData = {
       data: {},
@@ -120,6 +129,92 @@ function AdScreen() {
     };
     dispatch(actions.PALETTEDROPDOWNS(paletteData));
   }, [dispatch]);
+
+//statedropdown
+
+  const admasterstatedropdown = useSelector((state) => state?.admasterstatedropdown);
+  console.log(admasterstatedropdown, "admasterstatedropdown");
+
+  const [stateDropdownList, setStateDropdownList] = useState([]);
+  console.log(stateDropdownList,"stateDropdownList");
+  useEffect(() => {
+    const tempArr = [];
+    admasterstatedropdown?.admasterstatedropdown?.data?.map((values, index) =>
+      tempArr.push({
+        id: values?.state_id,
+        
+        value: values?.state,
+      })
+    );
+    console.log(tempArr, "statetempArr");
+    setStateDropdownList(tempArr);
+  }, [admasterstatedropdown]);
+
+  useEffect(() => {
+    const statedropdownData = {
+      data: {},
+      method: "get",
+      apiName: "getStateDropdown",
+    };
+    dispatch(actions.ADMASTERSTATEDROPDOWNS(statedropdownData));
+  }, [dispatch]);
+
+  //citydropdown
+
+  const admastercitydropdown = useSelector((state) => state?.admastercitydropdown);
+  console.log(admastercitydropdown, "admastercitydropdown");
+
+  const [cityDropdownList, setCityDropdownList] = useState([]);
+  console.log(cityDropdownList,"cityDropdownList");
+  useEffect(() => {
+    const tempArr = [];
+    admastercitydropdown?.admastercitydropdown?.data?.map((values, index) =>
+      tempArr.push({
+        id: values?.city_id,
+        value: values?.city,
+      })
+    );
+    console.log(tempArr, "citytempArr");
+    setCityDropdownList(tempArr);
+  }, [admastercitydropdown]);
+
+  useEffect(() => {
+    const citydropdownData = {
+      data: {},
+      method: "get",
+      apiName: "getCityDropdown",
+    };
+    dispatch(actions.ADMASTERCITYDROPDOWNS(citydropdownData));
+  }, [dispatch]);
+
+  //nationdropdown
+   
+  
+   const admasternationdropdown = useSelector((state) => state?.admasternationdropdown);
+   console.log(admasternationdropdown, "admasternationdropdown");
+ 
+   const [nationDropdownList, setNationDropdownList] = useState([]);
+   console.log(nationDropdownList,"nationDropdownList");
+   useEffect(() => {
+     const tempArr = [];
+     admasternationdropdown?.admasternationdropdown?.data?.map((values, index) =>
+       tempArr.push({
+         id: values?.country_id,
+         value: values?.country,
+       })
+     );
+     console.log(tempArr, "countrytempArr");
+     setNationDropdownList(tempArr);
+   }, [admasternationdropdown]);
+ 
+   useEffect(() => {
+     const nationdropdownData = {
+       data: {},
+       method: "get",
+       apiName: "getCountryDropdown",
+     };
+     dispatch(actions.ADMASTERNATIONDROPDOWNS(nationdropdownData));
+   }, [dispatch]);
 
   const header = [
     "S.No",
@@ -169,10 +264,12 @@ function AdScreen() {
     endDate: null,
   });
 
-  // const startDate = selectedDates?.startDate.slice(3,9);
+
   const startDate = selectedDates?.startDate ? format(selectedDates.startDate, 'yyyy/MM/dd') : null;
   const endDate = selectedDates?.endDate ? format(selectedDates.endDate, 'yyyy/MM/dd') : null;
   console.log(startDate, "selectedDates");
+
+  const [selectedPaletteColorId, setSelectedPaletteColorId] = useState(null);
 
   const handleDateChange = (dates) => {
     setSelectedDates(dates);
@@ -180,6 +277,8 @@ function AdScreen() {
 
   const [resetValue, setResetValue] = React.useState([]);
   console.log(resetValue, "resetValue");
+
+
   function onSubmit(data1) {
     console.log(data1, "data1admaster");
     const formData = new FormData();
@@ -195,9 +294,11 @@ function AdScreen() {
       }
     }
 
+    
+
     const tilesArray = [1];
     formData.append("tiles", JSON.stringify(tilesArray));
-    formData.append("palette_id", 1);
+    formData.append("palette_id", selectedPaletteColorId || "");
     formData.append("ad_vis_id", 1);
     formData.append("ad_vis_location", data1.ad_vis_location);
     formData.append("ad_from_date", startDate || "");
@@ -268,7 +369,8 @@ function AdScreen() {
                       <Grid item md={12} sm={12}>
                         <ColorBanner
                           label={keyValue.label}
-                          handleChange={onChange}
+                          // handleChange={onChange}
+                          handleChange={(selectedColorId) => setSelectedPaletteColorId(selectedColorId)}
                           value={value || ""}
                           colors={paletteList}
                           placeholder={keyValue.placeholder}
@@ -280,8 +382,15 @@ function AdScreen() {
                       <Grid item md={12} sm={12}>
                         <PincodeDropdown
                           label={keyValue.label}
-                          handleInputChange={onChange}
+                          onChange={onChange} 
+                          // handleInputChange={onChange}
+                          // handleStateChange={onChange}
+                          // handleCityChange={onChange}
+                          // handleNationChange={onChange}
                           value={value || ""}
+                          stateDropdownList={stateDropdownList}
+                          cityDropdownList={cityDropdownList}
+                          nationDropdownList={nationDropdownList}
                           placeholder={keyValue.placeholder}
                           returnId={keyValue.returnId}
                         />

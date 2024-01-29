@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
+import { Checkbox, FormControlLabel, FormGroup, Select, MenuItem } from "@mui/material";
 import { CustomTypography } from "../Typography/Typography";
 import PropTypes from "prop-types";
 import { FormControl } from "@mui/material";
@@ -47,6 +47,8 @@ export const Tiles = (props) => {
     }
   };
 
+
+
   const generatePlaceholder = (selectedOptions) => {
     if (selectedOptions.length === maxSelection) {
       const sortedValues = selectedOptions.map((option) => parseInt(option.value.replace("url", ""), 10)).sort((a, b) => a - b);
@@ -70,9 +72,17 @@ export const Tiles = (props) => {
         />
 
         <FormControl className="colorBanner bye" fullWidth size="small">
-          <div className="placeholder-text">{placeholder}</div>
+        <Select
+            value=""
+          
+            displayEmpty
+            inputProps={{ "aria-label": "Without label" }}
+            className="tiles-select"
+          >
+             <MenuItem value="" disabled>{placeholder}</MenuItem>
+        
           <FormGroup className="checkbox-grid">
-            <div className="grid-container">
+            <div className="grid-container">  
               {options.map((option) => (
                 <div key={option.value} className="grid-item">
                   <FormControlLabel
@@ -85,10 +95,13 @@ export const Tiles = (props) => {
                     }
                     label={option.label}
                   />
-                </div>
+                </div>  
               ))}
             </div>
           </FormGroup>
+
+       
+          </Select>
         </FormControl>
       </div>
     </div>

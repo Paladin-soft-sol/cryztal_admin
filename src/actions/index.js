@@ -9,6 +9,9 @@ import { getCategoryAction } from "../slices/CategoryDropdown/Category";
 import { approvalpartnerAction } from "../slices/ApprovalPartner/ApprovalPartner";
 import { admasterAction } from "../slices/AdMaster/AdMaster";
 import { admasterdropdownAction } from "../slices/AdMaster/AdMasterDropdown";
+import { admasterstatedropdownAction } from "../slices/AdMaster/AdMasterStateDropdown";
+import { admastercitydropdownAction } from "../slices/AdMaster/AdMasterCityDropdown";
+import { admasternationdropdownAction } from "../slices/AdMaster/AdMasterNationDropdown";
 import { palettedropdownAction } from "../slices/AdMaster/PaletteDropdown";
 
 const actions = {
@@ -24,6 +27,9 @@ const actions = {
   ...admasterAction,
   ...admasterdropdownAction,
   ...palettedropdownAction,
+  ...admasterstatedropdownAction,
+  ...admastercitydropdownAction,
+  ...admasternationdropdownAction
 
 };
 

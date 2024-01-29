@@ -47,7 +47,8 @@ export const ColorBanner = (props) => {
           fullWidth
           labelId="demo-select-small"
           id="demo-select-small"
-          onChange={(e) => handleChange(e)}
+          // onChange={(e) => handleChange(e)}
+          onChange={(event) => handleChange(event.target.value.id)}
           displayEmpty
           inputProps={{ "aria-label": "Without label" }}
           MenuProps={{ classes: { paper: classes.select } }}
