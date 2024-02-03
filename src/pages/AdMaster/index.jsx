@@ -74,6 +74,8 @@ function AdScreen() {
   );
   console.log(shopValue, "shopValue");
 
+  const [selectedAdVisId, setSelectedAdVisId] = useState(null);
+
   useEffect(() => {
     const tempArr = [];
     admasterdropdown?.admasterdropdown?.data?.map((values, index) =>
@@ -87,6 +89,8 @@ function AdScreen() {
   }, [admasterdropdown]);
 
 
+
+  const [selectedPaletteColorId, setSelectedPaletteColorId] = useState(null);
 
   useEffect(() => {
     const tempArr = [];
@@ -269,11 +273,18 @@ function AdScreen() {
   const endDate = selectedDates?.endDate ? format(selectedDates.endDate, 'yyyy/MM/dd') : null;
   console.log(startDate, "selectedDates");
 
-  const [selectedPaletteColorId, setSelectedPaletteColorId] = useState(null);
 
   const handleDateChange = (dates) => {
     setSelectedDates(dates);
   };
+
+  const [pincodeValue, setPincodeValue] = useState('');
+  const handlePincodeChange = (value) => {
+    // Handle pincode change
+    console.log('Pincode changed:', value);
+    setPincodeValue(value);
+  };
+
 
   const [resetValue, setResetValue] = React.useState([]);
   console.log(resetValue, "resetValue");
@@ -299,8 +310,8 @@ function AdScreen() {
     const tilesArray = [1];
     formData.append("tiles", JSON.stringify(tilesArray));
     formData.append("palette_id", selectedPaletteColorId || "");
-    formData.append("ad_vis_id", 1);
-    formData.append("ad_vis_location", data1.ad_vis_location);
+    formData.append("ad_vis_id", selectedAdVisId );
+    formData.append("ad_vis_location", pincodeValue || "");
     formData.append("ad_from_date", startDate || "");
     formData.append("ad_to_date", endDate || "");
     formData.append("created_by", 1);
@@ -315,6 +326,22 @@ function AdScreen() {
     reset(defaultValues);
     setResetValue(defaultValues);
   }
+
+  const handleCityChange = (cityValue) => {
+    // Handle city change logic here
+    console.log('City changed:', cityValue);
+    
+  };
+
+  const handleStateChange = (stateValue) => {
+    // Handle state change logic here
+    console.log('State changed:', stateValue);
+  };
+
+  const handleNationChange = (nationValue) => {
+    // Handle nation change logic here
+    console.log('Nation changed:', nationValue);
+  };
 
   return (
     <Grid p={2.5} item md={12}>
@@ -380,20 +407,21 @@ function AdScreen() {
                     )}
                     {keyValue?.isPincodeDropdown && (
                       <Grid item md={12} sm={12}>
+                        
                         <PincodeDropdown
-                          label={keyValue.label}
-                          onChange={onChange} 
-                          // handleInputChange={onChange}
-                          // handleStateChange={onChange}
-                          // handleCityChange={onChange}
-                          // handleNationChange={onChange}
-                          value={value || ""}
-                          stateDropdownList={stateDropdownList}
-                          cityDropdownList={cityDropdownList}
-                          nationDropdownList={nationDropdownList}
-                          placeholder={keyValue.placeholder}
-                          returnId={keyValue.returnId}
-                        />
+          label={keyValue.label}
+          onChange={handlePincodeChange}
+          onCityChange={handleCityChange}
+          onStateChange={handleStateChange}
+          onNationChange={handleNationChange}
+          
+          value={pincodeValue}
+          stateDropdownList={stateDropdownList}
+          cityDropdownList={cityDropdownList}
+          nationDropdownList={nationDropdownList}
+          placeholder={keyValue.placeholder}
+          returnId={keyValue.returnId}
+        />
                       </Grid>
                     )}
                     {keyValue?.isDateDropdown && (
@@ -410,14 +438,17 @@ function AdScreen() {
                     )}
                     {keyValue?.isDropdown && (
                       <Grid item md={12} sm={12}>
-                        <CustomDropdown
-                          label={keyValue.label}
-                          handleChange={onChange}
-                          value={value || ""}
-                          data={dropdownList}
-                          placeholder={keyValue.placeholder}
-                          returnId={keyValue.returnId}
-                        />
+                       <CustomDropdown
+  label={keyValue.label}
+  handleChange={(event) => {
+    setSelectedAdVisId(event.target.value);
+    onChange(event.target.value); // Ensure to update the form control value
+  }}
+  value={selectedAdVisId || ""}  // Updated value prop
+  data={dropdownList}
+  placeholder={keyValue.placeholder}
+  returnId={keyValue.returnId}
+/>
                       </Grid>
                     )}
 

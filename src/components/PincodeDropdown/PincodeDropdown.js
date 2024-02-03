@@ -1,18 +1,18 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import actions from "../../actions";
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import ListItemText from '@mui/material/ListItemText';
-import Select from '@mui/material/Select';
-import TextField from '@mui/material/TextField';
-import { CustomTypography } from '../Typography/Typography';
-import { CustomDropdown } from '../CustomDropdown';
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import ListItemText from "@mui/material/ListItemText";
+import Select from "@mui/material/Select";
+import TextField from "@mui/material/TextField";
+import { CustomTypography } from "../Typography/Typography";
+import { CustomDropdown } from "../CustomDropdown";
 import CustomIcons from "../../utils/icon/index";
-import {Grid} from '@mui/material';
-import './pincode.css';
+import { Grid } from "@mui/material";
+import "./pincode.css";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -25,88 +25,85 @@ const MenuProps = {
   },
 };
 
-const names = ['Pincode', 'City Wide', 'State Wide', 'Nation Wide'];
+const names = ["Pincode", "City Wide", "State Wide", "Nation Wide"];
 
 export const PincodeDropdown = (props) => {
   const dispatch = useDispatch();
-  const { label, requiredField ,value,handleInputChange,stateDropdownList,cityDropdownList,nationDropdownList,onChange} = props;
-  const [personName, setPersonName] = useState('');
-  const [customInput, setCustomInput] = useState('');
 
+  const {
+    label,
+    requiredField,
+    value,
+    stateDropdownList,
+    cityDropdownList,
+    nationDropdownList,
+    onChange,
+    onPincodeChange,
+    onCityChange,
+    onStateChange,
+    onNationChange,
+  } = props;
+  const [personName, setPersonName] = useState("");
+  const [customInput, setCustomInput] = useState("");
 
-
-
-
-  // const handleChange = (event) => {
-  //   setPersonName(event.target.value);
-  //   setCustomInput('');
-   
-  // };
-  
-
-  // const handleCustomInputChange = (event) => {
-  //   setCustomInput(event.target.value);
-  //   console.log(setCustomInput,"customInput")
-  // };
   const handleChange = (event) => {
     setPersonName(event.target.value);
-    setCustomInput('');
-    onChange(event.target.value); // Call the onChange prop with the selected value
+    setCustomInput("");
+    props.onChange(event.target.value);
   };
-
-  // ... existing code
+  const handlePincodeInputChange = (event) => {
+    onChange(event.target.value);
+  };
 
   const handleCustomInputChange = (event) => {
     setCustomInput(event.target.value);
     console.log(setCustomInput, "customInput");
-    onChange(event.target.value); // Call the onChange prop with the custom input value
+    onChange(event.target.value);
   };
   //state
-  const [stateInput, setStateInput] = useState('');
-  const [stateName, setStateName] = useState('');
-
-  const handleStateChange = (event) => {
-    setStateName(event.target.value);
-    setStateInput('');
-   
-  };
-  
+  const [stateInput, setStateInput] = useState("");
+  const [stateName, setStateName] = useState("");
 
   const handleStateInputChange = (event) => {
     setStateInput(event.target.value);
-    console.log(setStateInput,"stateInput")
+    console.log(setStateInput, "stateInput");
   };
-//city
-  const [cityInput, setCityInput] = useState('');
-  const [cityName, setCityName] = useState('');
-
-  const handleCityChange = (event) => {
-    setCityName(event.target.value);
-    setCityInput('');
-   
-  };
-  
+  //city
+  const [cityInput, setCityInput] = useState("");
+  const [cityName, setCityName] = useState("");
 
   const handleCityInputChange = (event) => {
     setCityInput(event.target.value);
-    console.log(setCityInput,"cityInput")
+    console.log(setCityInput, "cityInput");
   };
-//Nation
+  //Nation
 
-const [nationInput, setNationInput] = useState('');
-const [nationName, setNationName] = useState('');
+  const [nationInput, setNationInput] = useState("");
+  const [nationName, setNationName] = useState("");
 
-const handleNationChange = (event) => {
-  setNationName(event.target.value);
-  setNationName('');
- 
-};
+  const handleNationInputChange = (event) => {
+    setNationInput(event.target.value);
+    console.log(setNationInput, "nationInput");
+  };
 
+  const handleCityChange = (event) => {
+    setCityName(event.target.value);
+    setCityInput("");
+    onCityChange(event.target.value);
+  };
 
-const handleNationInputChange = (event) => {
-  setNationInput(event.target.value);
-  console.log(setNationInput,"nationInput")
-};
+  const handleStateChange = (event) => {
+    setStateName(event.target.value);
+    setStateInput("");
+    onStateChange(event.target.value);
+  };
+
+  const handleNationChange = (event) => {
+    setNationName(event.target.value);
+    setNationInput("");
+    onNationChange(event.target.value);
+  };
+
   return (
     <div className="pincodeHeader">
       <CustomTypography
@@ -121,7 +118,7 @@ const handleNationInputChange = (event) => {
           labelId="demo-radio-label"
           id="demo-radio"
           value={personName}
-          onChange={handleChange}
+          onChange={(event) => handleChange(event)}
           input={<OutlinedInput label="Tag" />}
           MenuProps={MenuProps}
           className="hai"
@@ -133,50 +130,58 @@ const handleNationInputChange = (event) => {
           ))}
         </Select>
 
-        {personName === 'Pincode' && (
-          <Grid className='pincodeBoxes'>
-          <TextField
-            label="Enter Pincode"
-            variant="outlined"
-            size="small"  
-           
-            margin="normal"
-            className= "PincodeTextInput"
-           
-            value={value}
-          
-            onChange={handleInputChange}
-          />
-        
-          <Grid className="addIconPincode">
-                  <img src={CustomIcons.AddIcon} alt="" />
-                  </Grid>
+        {personName === "Pincode" && (
+          <Grid className="pincodeBoxes">
+            <TextField
+              label="Enter Pincode"
+              variant="outlined"
+              size="small"
+              margin="normal"
+              className="PincodeTextInput"
+              value={value}
+              onChange={handlePincodeInputChange}
+            />
+
+            <Grid className="addIconPincode">
+              <img src={CustomIcons.AddIcon} alt="" />
+            </Grid>
           </Grid>
-        )}  
-         {personName === 'City Wide' && (
-          <CustomDropdown
-          data={cityDropdownList}
-          placeholder="Select City"
-          customClass= "PincodeDropdown"
-          onChange={handleCityChange}
-        />
         )}
-         {personName === 'State Wide' && (  
+        {personName === "City Wide" && (
           <CustomDropdown
-         
-          data={stateDropdownList}
-          placeholder="Select State"
-          customClass= "PincodeDropdown"
-          onChange={handleStateChange}
-        />
+            data={cityDropdownList}
+            placeholder="Select City"
+            customClass="PincodeDropdown"
+            onChange={(event) => {
+              onChange(event.target.value);
+              handleCityChange(event);
+            }}
+            handleChange={handleChange}
+          />
         )}
-          {personName === 'Nation Wide' && (
+        {personName === "State Wide" && (
           <CustomDropdown
-          data={nationDropdownList}
-          placeholder="Select Nation"
-          customClass= "PincodeDropdown"
-          onChange={handleNationChange}
-        />
+            data={stateDropdownList}
+            placeholder="Select State"
+            customClass="PincodeDropdown"
+            onChange={(event) => {
+              onChange(event.target.value);
+              handleStateChange(event);
+            }}
+            handleChange={handleChange}
+          />
+        )}
+        {personName === "Nation Wide" && (
+          <CustomDropdown
+            data={nationDropdownList}
+            placeholder="Select Nation"
+            customClass="PincodeDropdown"
+            onChange={(event) => {
+              onChange(event.target.value);
+              handleNationChange(event);
+            }}
+            handleChange={handleChange}
+          />
         )}
       </FormControl>
     </div>

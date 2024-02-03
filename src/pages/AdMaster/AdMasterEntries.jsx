@@ -17,6 +17,7 @@ export const AdMasterEntries = [
       disabled: true,
       DropdownData: [],
       customClass: 'drop_align_edit',
+      returnId:true,
     },
     {
         isSingleImageUpload: true,
