@@ -18,6 +18,7 @@ import actions from "../../actions";
 
 function Partner() {
   const [value, setValue] = React.useState(0);
+  console.log(value,"vaalueee")
   const [table, setTable] = useState([]);
   const [partnerView, setPartnerView] = useState(false);
   const [viewId, setViewId] = useState(0);

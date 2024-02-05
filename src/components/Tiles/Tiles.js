@@ -82,16 +82,15 @@ export const Tiles = (props) => {
              <MenuItem value="" disabled>{placeholder}</MenuItem>
         
           <FormGroup className="checkbox-grid">
-            <div className="grid-container">  
+            <div className="grid-container Grid_alignment">  
               {options.map((option) => (
                 <div key={option.value} className="grid-item">
                   <FormControlLabel
                     control={
-                      <Checkbox
+                      <><Checkbox
                         checked={selectedOptions.some((o) => o.value === option.value)}
                         onChange={() => handleCheckboxChange(option)}
-                        disabled={isOptionDisabled(option)}
-                      />
+                        disabled={isOptionDisabled(option)} /><span className="disabled"></span></>
                     }
                     label={option.label}
                   />

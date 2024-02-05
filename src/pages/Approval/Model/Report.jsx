@@ -89,53 +89,7 @@ function ApprovalView() {
 				</Grid>
 				<Grid className="lineInnerEdit" item md={12} sm={12}>
 					<h2>Discount Image</h2>
-					{/* <Grid className="btnEdit">
-						{(result === 0 || result !==1 ) && (
-							<CustomButton
-								btnTitle="APPROVE"
-								color="primary"
-								variant="contained"
-								btnStyles={{
-									width: '150px',
-									color: 'white',
-									margin: '10px',
-									backgroundColor: '#01BF38',
-								}}
-								onClickHandle={() => statusHandle(1)}
-							/>
-						)}
-						{(result === 0 || result !==2 )&& (
-							<CustomButton
-								className="btn"
-								btnTitle="REJECT"
-								color="primary"
-								variant="contained"
-								btnStyles={{
-									width: '150px',
-									color: 'white',
-									margin: '10px',
-									backgroundColor: '#FF6060',
-								}}
-								onClickHandle={() => statusHandle(2)}
-							/>
-						)}
-						{(result === 0 || result !==3) && (
-							<CustomButton
-								className="btn"
-								btnTitle='QUARANTINE'
-								color="primary"
-								variant="contained"
-								btnStyles={{
-									width: '150px',
-									color: 'white',
-									margin: '10px',
-									backgroundColor: '#0093FF',
-								}}
-								onClickHandle={() => statusHandle(3)}
-							/>
-						)}
 				
-					</Grid> */}
 				</Grid>
 			</Grid>
 			<div className="second_div">

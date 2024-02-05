@@ -133,7 +133,7 @@ export const PincodeDropdown = (props) => {
         {personName === "Pincode" && (
           <Grid className="pincodeBoxes">
             <TextField
-              label="Enter Pincode"
+              // label="Enter Pincode"
               variant="outlined"
               size="small"
               margin="normal"

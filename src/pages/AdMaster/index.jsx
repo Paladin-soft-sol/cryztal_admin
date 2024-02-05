@@ -67,6 +67,7 @@ function AdScreen() {
   const [logoImage, setLogoImage] = useState(null);
   const [adView, setAdView] = useState(false);
   const [viewId, setViewId] = useState();
+  console.log(viewId,"viewIdValue");
   const [post, setPost] = useState(null);
 
   const shopValue = admasterdropdown?.admasterdropdown?.data?.map(
