@@ -180,6 +180,7 @@ function AdScreen() {
       })
     );
     console.log(tempArr, "citytempArr");
+    // alert('tempArr')
     setCityDropdownList(tempArr);
   }, [admastercitydropdown]);
 
@@ -281,7 +282,8 @@ function AdScreen() {
 
   const [pincodeValue, setPincodeValue] = useState('');
   const handlePincodeChange = (value) => {
-    // Handle pincode change
+
+    // alert('hello')
     console.log('Pincode changed:', value);
     setPincodeValue(value);
   };
@@ -329,18 +331,22 @@ function AdScreen() {
   }
 
   const handleCityChange = (cityValue) => {
-    // Handle city change logic here
+    
+    // alert("gggg")
+    setPincodeValue(cityValue);
     console.log('City changed:', cityValue);
     
   };
 
   const handleStateChange = (stateValue) => {
-    // Handle state change logic here
+  
+    setPincodeValue(stateValue);
     console.log('State changed:', stateValue);
   };
 
   const handleNationChange = (nationValue) => {
-    // Handle nation change logic here
+    
+    setPincodeValue(nationValue);
     console.log('Nation changed:', nationValue);
   };
 

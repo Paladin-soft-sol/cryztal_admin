@@ -44,63 +44,33 @@ export const PincodeDropdown = (props) => {
     onNationChange,
   } = props;
   const [personName, setPersonName] = useState("");
-  const [customInput, setCustomInput] = useState("");
+
 
   const handleChange = (event) => {
     setPersonName(event.target.value);
-    setCustomInput("");
+   
     props.onChange(event.target.value);
   };
   const handlePincodeInputChange = (event) => {
     onChange(event.target.value);
   };
 
-  const handleCustomInputChange = (event) => {
-    setCustomInput(event.target.value);
-    console.log(setCustomInput, "customInput");
-    onChange(event.target.value);
-  };
-  //state
-  const [stateInput, setStateInput] = useState("");
-  const [stateName, setStateName] = useState("");
 
-  const handleStateInputChange = (event) => {
-    setStateInput(event.target.value);
-    console.log(setStateInput, "stateInput");
-  };
-  //city
-  const [cityInput, setCityInput] = useState("");
-  const [cityName, setCityName] = useState("");
 
-  const handleCityInputChange = (event) => {
-    setCityInput(event.target.value);
-    console.log(setCityInput, "cityInput");
-  };
-  //Nation
 
-  const [nationInput, setNationInput] = useState("");
-  const [nationName, setNationName] = useState("");
-
-  const handleNationInputChange = (event) => {
-    setNationInput(event.target.value);
-    console.log(setNationInput, "nationInput");
-  };
 
   const handleCityChange = (event) => {
-    setCityName(event.target.value);
-    setCityInput("");
+ 
     onCityChange(event.target.value);
   };
 
   const handleStateChange = (event) => {
-    setStateName(event.target.value);
-    setStateInput("");
+   
     onStateChange(event.target.value);
   };
 
   const handleNationChange = (event) => {
-    setNationName(event.target.value);
-    setNationInput("");
+   
     onNationChange(event.target.value);
   };
 
@@ -152,11 +122,12 @@ export const PincodeDropdown = (props) => {
             data={cityDropdownList}
             placeholder="Select City"
             customClass="PincodeDropdown"
-            onChange={(event) => {
+            // handleChange={()=>alert("iuyiy")}
+            handleChange={(event) => {
               onChange(event.target.value);
               handleCityChange(event);
             }}
-            handleChange={handleChange}
+            // handleChange={handleChange}
           />
         )}
         {personName === "State Wide" && (
@@ -164,11 +135,11 @@ export const PincodeDropdown = (props) => {
             data={stateDropdownList}
             placeholder="Select State"
             customClass="PincodeDropdown"
-            onChange={(event) => {
+            handleChange={(event) => {
               onChange(event.target.value);
               handleStateChange(event);
             }}
-            handleChange={handleChange}
+            // handleChange={handleChange}
           />
         )}
         {personName === "Nation Wide" && (
@@ -176,11 +147,11 @@ export const PincodeDropdown = (props) => {
             data={nationDropdownList}
             placeholder="Select Nation"
             customClass="PincodeDropdown"
-            onChange={(event) => {
+            handleChange={(event) => {
               onChange(event.target.value);
               handleNationChange(event);
             }}
-            handleChange={handleChange}
+            // handleChange={handleChange}
           />
         )}
       </FormControl>

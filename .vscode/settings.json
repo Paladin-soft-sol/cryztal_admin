@@ -7,8 +7,10 @@
         "admasterstatedropdown",
         "citydropdown",
         "citytemp",
+        "countrytemp",
         "nationdropdown",
         "payloadstate",
-        "reduxjs"
+        "reduxjs",
+        "statetemp"
     ]
 }
