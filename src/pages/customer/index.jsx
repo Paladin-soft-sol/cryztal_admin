@@ -14,7 +14,7 @@ import './main.css';
 /**
  *
  * @returns
- */
+ */  
 function CustomerScreen() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -24,6 +24,7 @@ function CustomerScreen() {
 	const [table, setTable] = useState([]);
 	const [customerView, setCustomerView] = useState(false);
 	const [viewId, setViewId] = useState();
+	console.log(viewId,"viewIdviewIdviewId");
 
 	const header = [
 		'S.No',
@@ -36,6 +37,7 @@ function CustomerScreen() {
 	];
 
 	const handleOpen = (id) => {
+		console.log(id,"setCustomerView");
 		setCustomerView(!customerView);
 		setViewId(id);
 	};
@@ -78,8 +80,7 @@ function CustomerScreen() {
 				/>
 			</Grid>
 			<Table
-				// tableTitle="Customer"
-				// viewPath="customerView"
+				
 				header={header}
 				rows={table}
 				printer={CustomIcons.Printer1}

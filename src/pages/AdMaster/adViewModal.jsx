@@ -1,48 +1,52 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable camelcase */
-import React, { useEffect, useState } from "react";
-import { Backdrop, Box, Modal, Fade, Grid } from "@mui/material";
-import PropTypes from "prop-types";
-import { CustomTypography, CustomButton } from "../../components/index";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import CustomIcons from "../../utils/icon/index";
-import actions from "../../actions";
-import "./adView.css";
+
+import React, { useState,useEffect } from 'react';
+import { Backdrop, Box, Modal, Fade, Grid } from '@mui/material';
+import PropTypes from 'prop-types';
+import {CustomTypography} from '../../components/index';
+import CustomIcons from '../../utils/icon/index';
+import { useDispatch, useSelector } from 'react-redux';
+import actions from '../../actions';
+
 /**
  *
  * @returns
  */
+  
+
 function AdView(props) {
-  const { viewId } = props;
-  console.log(viewId,"viewId");
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const Name = "Title";
-  const label1 = "URL";
-  const label2 = "Locations";
-  const label3 = "Start Date";
-  const label4 = "End Date";
 
-  const { admaster_details } = useSelector((state) => state?.admaster);
-
-  const data = admaster_details?.data;
-  console.log(admaster_details?.data,"admaster_details?.data")
-
-  const [open, setOpen] = useState(true);
-  const handleClose = () => {
-    setOpen(false);
+ 
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translateX(-50%) translateY(-50%)',
+    width: 700,
+    height: 550,
+    backgroundColor: '#fff',
+    boxShadow: 24,
   };
 
-  useEffect(() => {
-    const actionData = {
-      data: {},
-      method: "get",
-      apiName: `getAdMasterById/${viewId}`,
-    };
+  const { viewId } = props;
 
-    dispatch(actions.ADMASTER_DETAILS(actionData));
-  }, []);
+	const dispatch = useDispatch();
+
+	const admasterGet  = useSelector((state) => state?.admaster);
+
+	const [open, setOpen] = useState(true);
+	const handleClose = () => {
+		setOpen(false);
+	};
+
+	useEffect(() => {
+		const actionData = {
+			data: {},
+			method: 'get',
+			apiName: `getAdMasterById/${viewId}`,
+		};
+    console.log(actionData,"actionData");
+		dispatch(actions.ADMASTER_GET(actionData));
+	}, [dispatch]);
 
   return (
     <Modal
@@ -56,67 +60,56 @@ function AdView(props) {
       }}
     >
       <Fade in={open}>
-        <Box className="modalBox">
-          <Grid className="firstDiv">
-            <Grid className="profileEdit" container item md={12} sm={12}>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  paddingLeft: 20,
-                }}
-              ></div>
-              <Grid className="close" onClick={handleClose}>
-                <img src={CustomIcons.ModalClose} alt="close" />
-              </Grid>
+        <Box sx={style} className="modalBox">
+          <Grid container md={12} lg={12} sm={12} xs={12} className="modalHeader">
+            <Grid item md={12} lg={12} sm={12} xs={12} className="close" onClick={handleClose}>
+              <img src={CustomIcons.ModalClose} alt="close" />
             </Grid>
-            <Grid className="sec_div" container item md={12} sm={12}>
-              <Grid item md={3} sm={6}>
-                <Grid className="titleEdit">
-                  <CustomTypography type="header" text={label1} />
-                </Grid>
-                <Grid className="text">
-                  <CustomTypography type="subHeading" text={data?.ad_title} />
-                </Grid>
-              </Grid>
-              <Grid item md={3} sm={6}>
-                <Grid className="titleEdit">
-                  <CustomTypography type="header" text={label2} />
-                </Grid>
-                <Grid className="text">
-                  <CustomTypography type="subHeading" text={data?.shop_ad} />
-                </Grid>
-              </Grid>
-              <Grid className="textEdit" item md={3} sm={6}>
-                <Grid className="titleEdit">
-                  <CustomTypography type="header" text={label3} />
-                </Grid>
-                <Grid className="text">
-                  <CustomTypography type="subHeading" text={data?.palette_id} />
-                </Grid>
-              </Grid>
-              <Grid className="textEdit" item md={3} sm={6}>
-                <Grid className="titleEdit">
-                  <CustomTypography type="header" text={label4} />
-                </Grid>
-                <Grid className="text">
-                  <CustomTypography
-                    type="subHeading"
-                    text={data?.ad_vis_location}
-                  />
-                </Grid>
-              </Grid>
-              <Grid className="textEdit" item md={3} sm={6}>
-                <Grid className="titleEdit">
-                  <CustomTypography type="header" text="Join Date" />
-                </Grid>
-                <Grid className="text">
-                  <CustomTypography type="subHeading" text={data?.created_on} />
-                </Grid>
-              </Grid>
+            {/* <Grid className="modalTitle" item md={12} sm={12} lg={12} xs={12}>
+              <CustomTypography type="heading" text="Patient Registration Record" customClass="NameEdit" />
+            </Grid> */}
+          </Grid>
+          <Grid container md={12} lg={12} pl={2} className="scrollType">
+            {/* <Grid item md={12} sm={12} lg={12} xs={12} pt={2}>
+              <CustomTypography type="view_title" text="Patient Details" />
+            </Grid> */}
+            {/* <Grid item md={6} lg={6} sm={12} xs={12} pt={2}>
+              <CustomTypography type="sub_heading" text="ID" customClass="NameEdit" />
             </Grid>
-
-            <Grid className="edit" container item md={12} sm={12}></Grid>
+            <Grid item md={6} lg={6} sm={12} xs={12} pt={2}>
+              <CustomTypography type="sub_heading" colon=": &nbsp;" text={Id} customClass="NameEdit" />
+            </Grid> */}
+            <Grid item md={6} lg={6} sm={12} xs={12} pt={2}>
+              <CustomTypography type="sub_heading" text="Ad Id" customClass="NameEdit" />
+            </Grid>
+            <Grid item md={6} lg={6} sm={12} xs={12} pt={2}>
+              <CustomTypography type="caption" colon=": &nbsp;" text={admasterGet?.admasterGet?.data?.[0]?.ad_id} customClass="" />
+            </Grid>
+            <Grid item md={6} lg={6} sm={12} xs={12} pt={2}>
+              <CustomTypography type="sub_heading" text="Ad Title" customClass="NameEdit" />
+            </Grid>
+            <Grid item md={6} lg={6} sm={12} xs={12} pt={2}>
+              <CustomTypography type="caption" colon=": &nbsp;" text={admasterGet?.admasterGet?.data?.[0]?.ad_title} customClass="" />
+            </Grid>
+            <Grid item md={6} lg={6} sm={12} xs={12} pt={2}>
+              <CustomTypography type="sub_heading" text="Ad Location" customClass="NameEdit" />
+            </Grid>
+            <Grid item md={6} lg={6} sm={12} xs={12} pt={2}>
+              <CustomTypography type="sub_heading" colon=": &nbsp;" text={admasterGet?.admasterGet?.data?.[0]?.ad_vis_location} customClass="" />
+            </Grid>
+            <Grid item md={6} lg={6} sm={12} xs={12} pt={2}>
+              <CustomTypography type="sub_heading" text="Ad From Date" customClass="NameEdit" />
+            </Grid>
+            <Grid item md={6} lg={6} sm={12} xs={12} pt={2}>
+              <CustomTypography type="sub_heading" colon=": &nbsp;" text={admasterGet?.admasterGet?.data?.[0]?.ad_from_date} customClass="" />
+            </Grid>
+           
+            <Grid item md={6} lg={6} sm={12} xs={12} pt={2}>
+              <CustomTypography type="sub_heading" text="Ad To Date" customClass="NameEdit" />
+            </Grid>
+            <Grid item md={6} lg={6} sm={12} xs={12} pt={2}>
+              <CustomTypography type="sub_heading" colon=": &nbsp;" text={admasterGet?.admasterGet?.data?.[0]?.ad_to_date} customClass="" />
+            </Grid>
           </Grid>
         </Box>
       </Fade>
@@ -126,7 +119,20 @@ function AdView(props) {
 export default AdView;
 AdView.propTypes = {
   viewId: PropTypes.number,
+  Id: PropTypes.string,
+  AdId: PropTypes.string,
+  AdTitle: PropTypes.string,
+  AdLocation: PropTypes.string,
+  AdFromDate: PropTypes.string,
+  AdToDate: PropTypes.string,
 };
+
 AdView.defaultProps = {
-  viewId: "",
-};
+  viewId: 0,
+  Id: '',
+  AdId: '',
+  AdTitle: '',
+  AdLocation: '',
+  AdFromDate: '',
+  AdToDate: '',
+}

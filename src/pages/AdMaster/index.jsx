@@ -19,16 +19,28 @@ import {
   MultiImage,
   Tiles,
 } from "../../components/index";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Stack from "@mui/material/Stack";
 import { useNavigate } from "react-router-dom";
 import CustomIcons from "../../utils/icon/index";
 import actions from "../../actions";
 import AdView from "./adViewModal";
+import Toast from "../../utils/Notification/Toast";
 import {
   AdMasterEntries,
   DefaultAdMasterEntriesValues,
+  updateAdMasterPayload,
+  createAdMasterPayload,
+  getAdMasterPayload,
+  deleteAdMasterPayload,
 } from "./AdMasterEntries";
 import "./main.css";
-import { format } from 'date-fns'; 
+import { format } from "date-fns";
 import axios from "axios";
 
 /**
@@ -37,6 +49,7 @@ import axios from "axios";
  */
 function AdScreen() {
   const defaultValues = DefaultAdMasterEntriesValues;
+  const [editAbleValues, setEditAbleValues] = useState({});
   const {
     control,
     handleSubmit,
@@ -44,30 +57,42 @@ function AdScreen() {
     formState: { errors },
     reset,
   } = useForm({
-    defaultValues,
+    defaultValues: editAbleValues,
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const formWatchFields = watch();
   const admasterdropdown = useSelector((state) => state?.admasterdropdown);
   const palettedropdown = useSelector((state) => state?.palettedropdown);
-
+  const [showToast, setShowToast] = useState();
+  const [list, setList] = useState();
   console.log(palettedropdown, "palettedropdown");
   console.log(admasterdropdown, "admasterdropdown");
 
+  const [btnTitle, setBtnTitle] = useState("SUBMIT");
   const [dropdownList, setDropdownList] = useState([]);
-
+  const [open, setOpen] = React.useState(false);
+  const [deleteApi, setDeleteApi] = useState(false);
+  const [deleteId, setDeleteId] = useState();
+  console.log(deleteId, "deleteApi");
+  const [editId, setEditId] = useState();
+  console.log(editId, "editIdfgdfg");
   const [paletteList, setPaletteList] = useState([]);
-  console.log(setPaletteList,"paletteList");
-  const paletteValue = paletteList?.map(data => data?.id);
+  console.log(setPaletteList, "paletteList");
+  const paletteValue = paletteList?.map((data) => data?.id);
   const admaster = useSelector((state) => state?.admaster);
-
+  const admasterGet = useSelector((state) => state?.admaster);
+  console.log(admasterGet, "admasterGet");
+  const admasterEdit = useSelector((state) => state?.admaster);
+  const admasterCreate = useSelector((state) => state?.admaster);
   const [table, setTable] = useState([]);
   const [multiImage, setMultiImage] = useState(null);
   const [logoImage, setLogoImage] = useState(null);
   const [adView, setAdView] = useState(false);
+
   const [viewId, setViewId] = useState();
-  console.log(viewId,"viewIdValue");
+  console.log(viewId, "viewIdValue");
+
   const [post, setPost] = useState(null);
 
   const shopValue = admasterdropdown?.admasterdropdown?.data?.map(
@@ -88,8 +113,6 @@ function AdScreen() {
     console.log(tempArr, "tempArr");
     setDropdownList(tempArr);
   }, [admasterdropdown]);
-
-
 
   const [selectedPaletteColorId, setSelectedPaletteColorId] = useState(null);
 
@@ -124,8 +147,6 @@ function AdScreen() {
     dispatch(actions.ADMASTERDROPDOWNS(dropdownData));
   }, [dispatch]);
 
- 
-
   useEffect(() => {
     const paletteData = {
       data: {},
@@ -135,19 +156,21 @@ function AdScreen() {
     dispatch(actions.PALETTEDROPDOWNS(paletteData));
   }, [dispatch]);
 
-//statedropdown
+  //statedropdown
 
-  const admasterstatedropdown = useSelector((state) => state?.admasterstatedropdown);
+  const admasterstatedropdown = useSelector(
+    (state) => state?.admasterstatedropdown
+  );
   console.log(admasterstatedropdown, "admasterstatedropdown");
 
   const [stateDropdownList, setStateDropdownList] = useState([]);
-  console.log(stateDropdownList,"stateDropdownList");
+  console.log(stateDropdownList, "stateDropdownList");
   useEffect(() => {
     const tempArr = [];
     admasterstatedropdown?.admasterstatedropdown?.data?.map((values, index) =>
       tempArr.push({
         id: values?.state_id,
-        
+
         value: values?.state,
       })
     );
@@ -166,11 +189,13 @@ function AdScreen() {
 
   //citydropdown
 
-  const admastercitydropdown = useSelector((state) => state?.admastercitydropdown);
+  const admastercitydropdown = useSelector(
+    (state) => state?.admastercitydropdown
+  );
   console.log(admastercitydropdown, "admastercitydropdown");
 
   const [cityDropdownList, setCityDropdownList] = useState([]);
-  console.log(cityDropdownList,"cityDropdownList");
+  console.log(cityDropdownList, "cityDropdownList");
   useEffect(() => {
     const tempArr = [];
     admastercitydropdown?.admastercitydropdown?.data?.map((values, index) =>
@@ -194,33 +219,34 @@ function AdScreen() {
   }, [dispatch]);
 
   //nationdropdown
-   
-  
-   const admasternationdropdown = useSelector((state) => state?.admasternationdropdown);
-   console.log(admasternationdropdown, "admasternationdropdown");
- 
-   const [nationDropdownList, setNationDropdownList] = useState([]);
-   console.log(nationDropdownList,"nationDropdownList");
-   useEffect(() => {
-     const tempArr = [];
-     admasternationdropdown?.admasternationdropdown?.data?.map((values, index) =>
-       tempArr.push({
-         id: values?.country_id,
-         value: values?.country,
-       })
-     );
-     console.log(tempArr, "countrytempArr");
-     setNationDropdownList(tempArr);
-   }, [admasternationdropdown]);
- 
-   useEffect(() => {
-     const nationdropdownData = {
-       data: {},
-       method: "get",
-       apiName: "getCountryDropdown",
-     };
-     dispatch(actions.ADMASTERNATIONDROPDOWNS(nationdropdownData));
-   }, [dispatch]);
+
+  const admasternationdropdown = useSelector(
+    (state) => state?.admasternationdropdown
+  );
+  console.log(admasternationdropdown, "admasternationdropdown");
+
+  const [nationDropdownList, setNationDropdownList] = useState([]);
+  console.log(nationDropdownList, "nationDropdownList");
+  useEffect(() => {
+    const tempArr = [];
+    admasternationdropdown?.admasternationdropdown?.data?.map((values, index) =>
+      tempArr.push({
+        id: values?.country_id,
+        value: values?.country,
+      })
+    );
+    console.log(tempArr, "countrytempArr");
+    setNationDropdownList(tempArr);
+  }, [admasternationdropdown]);
+
+  useEffect(() => {
+    const nationdropdownData = {
+      data: {},
+      method: "get",
+      apiName: "getCountryDropdown",
+    };
+    dispatch(actions.ADMASTERNATIONDROPDOWNS(nationdropdownData));
+  }, [dispatch]);
 
   const header = [
     "S.No",
@@ -232,15 +258,10 @@ function AdScreen() {
     "Action",
   ];
 
-  const handleOpen = (id) => {
-    setAdView(!adView);
-    setViewId(id);
-  };
-
   useEffect(() => {
     if (admaster?.admaster?.data && Array.isArray(admaster.admaster.data)) {
       const tmpArr = admaster.admaster.data.map((values) => ({
-        ad_id: values.ad_id,
+        id: values.ad_id,
         ad_title: values.ad_title,
         shop_ad: values.shop_ad,
         ad_vis_location: values.ad_vis_location,
@@ -261,7 +282,12 @@ function AdScreen() {
   };
   const handleCancel = () => {
     reset({
+      ad_title: "",
+      shop_ad: "",
       ad_master: "",
+      ad_vis_location: "",
+      ad_from_date: "",
+      ad_to_date: "",
     });
   };
 
@@ -270,32 +296,32 @@ function AdScreen() {
     endDate: null,
   });
 
-
-  const startDate = selectedDates?.startDate ? format(selectedDates.startDate, 'yyyy/MM/dd') : null;
-  const endDate = selectedDates?.endDate ? format(selectedDates.endDate, 'yyyy/MM/dd') : null;
+  const startDate = selectedDates?.startDate
+    ? format(selectedDates.startDate, "yyyy/MM/dd")
+    : null;
+  const endDate = selectedDates?.endDate
+    ? format(selectedDates.endDate, "yyyy/MM/dd")
+    : null;
   console.log(startDate, "selectedDates");
-
 
   const handleDateChange = (dates) => {
     setSelectedDates(dates);
   };
 
-  const [pincodeValue, setPincodeValue] = useState('');
+  const [pincodeValue, setPincodeValue] = useState("");
   const handlePincodeChange = (value) => {
-
     // alert('hello')
-    console.log('Pincode changed:', value);
+    console.log("Pincode changed:", value);
     setPincodeValue(value);
   };
-
 
   const [resetValue, setResetValue] = React.useState([]);
   console.log(resetValue, "resetValue");
 
-
   function onSubmit(data1) {
     console.log(data1, "data1admaster");
     const formData = new FormData();
+    console.log(formData, "formData");
     formData.append("ad_title", data1.ad_title);
     formData.append("shop_id", 1);
     if (data1?.shop_ad.length > 0) {
@@ -308,12 +334,10 @@ function AdScreen() {
       }
     }
 
-    
-
     const tilesArray = [1];
     formData.append("tiles", JSON.stringify(tilesArray));
     formData.append("palette_id", selectedPaletteColorId || "");
-    formData.append("ad_vis_id", selectedAdVisId );
+    formData.append("ad_vis_id", selectedAdVisId);
     formData.append("ad_vis_location", pincodeValue || "");
     formData.append("ad_from_date", startDate || "");
     formData.append("ad_to_date", endDate || "");
@@ -328,30 +352,139 @@ function AdScreen() {
     dispatch(actions.ADMASTER(data));
     reset(defaultValues);
     setResetValue(defaultValues);
+    callOnSubmit(formData);
+    setBtnTitle("SUBMIT");
+    setEditId("");
   }
+ 
 
+  const callOnSubmit = (formData) => {
+    console.log(formData,"formDatadgdgfd")
+    alert("fhgyhg");
+    if (editId) {
+      console.log(editId, "editIdeditId");
+
+      updateAdMasterPayload.data = { ...formData };
+      updateAdMasterPayload.id = editId;
+      console.log(updateAdMasterPayload, "updateAdMasterPayload");
+      dispatch(actions.ADMASTER_EDIT(updateAdMasterPayload));
+    } else {
+      createAdMasterPayload.data = { ...formData };
+      dispatch(actions.ADMASTER_CREATE(createAdMasterPayload));
+    }
+
+    setEditId("");
+  };
   const handleCityChange = (cityValue) => {
-    
     // alert("gggg")
     setPincodeValue(cityValue);
-    console.log('City changed:', cityValue);
-    
+    console.log("City changed:", cityValue);
   };
 
   const handleStateChange = (stateValue) => {
-  
     setPincodeValue(stateValue);
-    console.log('State changed:', stateValue);
+    console.log("State changed:", stateValue);
   };
 
   const handleNationChange = (nationValue) => {
-    
     setPincodeValue(nationValue);
-    console.log('Nation changed:', nationValue);
+    console.log("Nation changed:", nationValue);
+  };
+  // const [adView, setAdView] = useState(false);
+  const [action, setAction] = React.useState("");
+
+  const handleOpen = (id) => {
+    console.log(id, "setAdView");
+    setAdView(!adView);
+    setViewId(id);
   };
 
+  // Delete Function
+  const handleDelete = (id) => {
+    console.log(id, "handleDeletehandleDelete");
+    setDeleteApi(true);
+    setTimeout(() => setDeleteApi(false), 1000);
+    setOpen(false);
+    const deleteData = {
+      data: {},
+      method: "delete",
+      apiName: `deleteAdMaster/${id}`,
+    };
+    console.log(deleteData, "deleteData");
+    dispatch(actions.ADMASTER_DELETE(deleteData));
+    setList([
+      {
+        id: 1,
+        // title: getToastTitle(),
+        description: "Data Removed successfully",
+        backgroundColor: "check",
+        icon: "check",
+      },
+    ]);
+    setShowToast(true);
+  };
+  useEffect(() => {
+    if (editId) {
+      setBtnTitle("UPDATE");
+      reset(editAbleValues);
+    }
+  }, [editAbleValues]);
+
+  useEffect(() => {
+    if (editId) {
+      console.log(editId, "setEditAbleValues");
+      setEditAbleValues({
+        ad_title: admasterGet?.admasterGet?.data?.[0]?.ad_title,
+        ad_vis_location: admasterGet?.admasterGet?.data?.[0]?.ad_vis_location,
+        // ad_vis_location: admasterGet?.data?.ad_vis_location
+      });
+    }
+  }, [admasterGet, editId]);
+
+  const callTableValue = () => {
+    setBtnTitle("SUBMIT");
+    setEditId("");
+    reset({});
+   
+  };
+
+  useEffect(() => {
+    callTableValue();
+  }, [admasterEdit, admasterCreate]);
   return (
     <Grid p={2.5} item md={12}>
+      {showToast && (
+        <>
+          <Stack sx={{ width: "100%", color: "grey.500" }} spacing={2}></Stack>
+          <Toast
+            toastList={list}
+            position="top-right"
+            autoDelete
+            autoDeleteTime={3000}
+          />
+        </>
+      )}
+      <Dialog
+        open={open}
+        onClose={() => setOpen(false)}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          Are you absolutely sure?
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Data deleted cannot be recovered?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpen(false)}>Cancel,Keep Details</Button>
+          <Button onClick={(id) => handleDelete(id)} autoFocus>
+            Yes,Delete Details
+          </Button>
+        </DialogActions>
+      </Dialog>
       <Grid container md={12} className="adMaster_Title">
         <CustomTypography
           type="header"
@@ -393,8 +526,6 @@ function AdScreen() {
                           value={value || ""}
                           placeholder={keyValue.placeholder}
                           returnId={keyValue.returnId}
-                          // layout="topMiddleTwo"
-                          // requiredField
                         />
                       </Grid>
                     )}
@@ -403,8 +534,9 @@ function AdScreen() {
                       <Grid item md={12} sm={12}>
                         <ColorBanner
                           label={keyValue.label}
-                          // handleChange={onChange}
-                          handleChange={(selectedColorId) => setSelectedPaletteColorId(selectedColorId)}
+                          handleChange={(selectedColorId) =>
+                            setSelectedPaletteColorId(selectedColorId)
+                          }
                           value={value || ""}
                           colors={paletteList}
                           placeholder={keyValue.placeholder}
@@ -414,28 +546,25 @@ function AdScreen() {
                     )}
                     {keyValue?.isPincodeDropdown && (
                       <Grid item md={12} sm={12}>
-                        
                         <PincodeDropdown
-          label={keyValue.label}
-          onChange={handlePincodeChange}
-          onCityChange={handleCityChange}
-          onStateChange={handleStateChange}
-          onNationChange={handleNationChange}
-          
-          value={pincodeValue}
-          stateDropdownList={stateDropdownList}
-          cityDropdownList={cityDropdownList}
-          nationDropdownList={nationDropdownList}
-          placeholder={keyValue.placeholder}
-          returnId={keyValue.returnId}
-        />
+                          label={keyValue.label}
+                          onChange={handlePincodeChange}
+                          onCityChange={handleCityChange}
+                          onStateChange={handleStateChange}
+                          onNationChange={handleNationChange}
+                          value={pincodeValue}
+                          stateDropdownList={stateDropdownList}
+                          cityDropdownList={cityDropdownList}
+                          nationDropdownList={nationDropdownList}
+                          placeholder={keyValue.placeholder}
+                          returnId={keyValue.returnId}
+                        />
                       </Grid>
                     )}
                     {keyValue?.isDateDropdown && (
                       <Grid item md={12} sm={12}>
                         <DateRangePicker
                           label={keyValue.label}
-                          // handleChange={onChange}
                           handleChange={handleDateChange}
                           date={value || ""}
                           placeholder={keyValue.placeholder}
@@ -445,17 +574,17 @@ function AdScreen() {
                     )}
                     {keyValue?.isDropdown && (
                       <Grid item md={12} sm={12}>
-                       <CustomDropdown
-  label={keyValue.label}
-  handleChange={(event) => {
-    setSelectedAdVisId(event.target.value);
-    onChange(event.target.value); // Ensure to update the form control value
-  }}
-  value={selectedAdVisId || ""}  // Updated value prop
-  data={dropdownList}
-  placeholder={keyValue.placeholder}
-  returnId={keyValue.returnId}
-/>
+                        <CustomDropdown
+                          label={keyValue.label}
+                          handleChange={(event) => {
+                            setSelectedAdVisId(event.target.value);
+                            onChange(event.target.value);
+                          }}
+                          value={selectedAdVisId || ""}
+                          data={dropdownList}
+                          placeholder={keyValue.placeholder}
+                          returnId={keyValue.returnId}
+                        />
                       </Grid>
                     )}
 
@@ -568,11 +697,13 @@ function AdScreen() {
         printer={CustomIcons.Printer1}
         view={CustomIcons.View}
         edit={CustomIcons.EditIcon}
+        editOpen={(id) => setEditId(id)}
         deleteIconSrc={CustomIcons.DeleteIcon}
         modalOpen={(id) => handleOpen(id)}
         action
         actionItem={{ view: true, deleteIcon: true, edit: true }}
         isDrop={false}
+        deleteData={(id) => handleDelete(id)}
       />
       {adView && <AdView viewId={viewId} />}
     </Grid>

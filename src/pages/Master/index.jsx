@@ -69,7 +69,7 @@ function MasterScreen() {
 	const { getCategoryDropdown } = useSelector(
 		(state) => state?.categoryDropdown
 	);
-	console.log(masterCreate, 'testasta');
+	console.log(masterGet, 'testasta');
 	const {
 		control,
 		handleSubmit,
@@ -307,8 +307,10 @@ function MasterScreen() {
 	}, [deleteId, deleteApi]);
 
 	const callOnSubmit = (submitData) => {
+		alert('fghfghf')
 		if (tabValue === 0) {
 			if (editId) {
+			
 				MASTER.categoryEditPayload.data = { ...submitData };
 				MASTER.categoryEditPayload.id = editId;
 				dispatch(actions.MASTER_EDIT(MASTER.categoryEditPayload));
@@ -353,7 +355,6 @@ function MasterScreen() {
 	const onSubmit = (data) => {
 		const submitData = { ...data };
 		submitData.status = submitData?.status === 'Active';
-		// submitData.category_id = submitData.category_id.toString();
 		submitData.created_by = 1;
 		submitData.user_type = submitData?.user_type === 'User' ? 1 : 2;
 		submitData.type = submitData?.type === 'User' ? 1 : 2;

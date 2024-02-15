@@ -103,7 +103,6 @@ export const PincodeDropdown = (props) => {
         {personName === "Pincode" && (
           <Grid className="pincodeBoxes">
             <TextField
-              // label="Enter Pincode"
               variant="outlined"
               size="small"
               margin="normal"
@@ -122,12 +121,11 @@ export const PincodeDropdown = (props) => {
             data={cityDropdownList}
             placeholder="Select City"
             customClass="PincodeDropdown"
-            // handleChange={()=>alert("iuyiy")}
             handleChange={(event) => {
               onChange(event.target.value);
               handleCityChange(event);
             }}
-            // handleChange={handleChange}
+
           />
         )}
         {personName === "State Wide" && (
@@ -139,7 +137,7 @@ export const PincodeDropdown = (props) => {
               onChange(event.target.value);
               handleStateChange(event);
             }}
-            // handleChange={handleChange}
+
           />
         )}
         {personName === "Nation Wide" && (
@@ -151,7 +149,7 @@ export const PincodeDropdown = (props) => {
               onChange(event.target.value);
               handleNationChange(event);
             }}
-            // handleChange={handleChange}
+
           />
         )}
       </FormControl>

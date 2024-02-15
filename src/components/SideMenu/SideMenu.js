@@ -24,7 +24,8 @@ export const Navbar = (props) => {
       `${nav}/Register/` === Location.pathname ||
       `${nav}/approvalView/` === Location.pathname ||
       `${nav}/reportsView/` === Location.pathname ||
-      `${nav}/customerView/` === Location.pathname
+      `${nav}/customerView/` === Location.pathname ||
+      `${nav}/AdView/` === Location.pathname
     ) {
       return 'static';
     }

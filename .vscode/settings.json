@@ -3,14 +3,22 @@
         "admaster",
         "admastercitydropdown",
         "ADMASTERCITYDROPDOWNS",
+        "ADMASTERDELETE",
+        "ADMASTEREDIT",
         "ADMASTERNATIONDROPDOWNS",
         "admasterstatedropdown",
+        "asdfsd",
         "citydropdown",
         "citytemp",
         "countrytemp",
+        "Dateselected",
+        "deletepayload",
+        "modalid",
         "nationdropdown",
         "payloadstate",
         "reduxjs",
-        "statetemp"
+        "statetemp",
+        "tabvalue",
+        "vaalueee"
     ]
 }

@@ -108,6 +108,7 @@ export const AdMasterEntries = [
         ],
         customClass: 'drop_align_edit',
       },
+      
   
   ];
   export const DefaultAdMasterEntriesValues = {
@@ -118,5 +119,49 @@ export const AdMasterEntries = [
     palette_id: "",
     ad_vis_location: "",
     ad_from_date: "",
+    ad_to_date: ""
   };
+  
+
+  
+  // Read All Function Payload
+  export const getAdMasterPayload = {
+    data: {},
+    method: 'get',
+    apiName: 'getAdMaster',
+  };
+  
+
+  
+  // Read By Id
+  export const getAdMasterByIdPayload = {
+    data: {},
+    method: 'GET',
+    apiName: `getAdMasterById/`,
+  };
+
+  // Update Function Payload
+  
+  export const updateAdMasterPayload = {
+    method: 'PUT',
+    apiName: `updateAdMaster/`,
+  };
+  
+  
+  // Create Function Payload
+  
+  export const createAdMasterPayload = {
+    method: 'POST',
+    apiName: `createAdMaster`,
+  };
+  
+
+  
+  // Delete Function Payload
+  
+  export const deleteAdMasterPayload = {
+    method: 'DELETE',
+    apiName: `deleteAdMaster`,
+  };
+
   

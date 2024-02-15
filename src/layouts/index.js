@@ -8,9 +8,10 @@ import Reports from "../pages/Reports";
 // import Master from '../pages/Master';
 import ReportView from "../pages/Reports/Report";
 import Ad from "../pages/AdMaster";
-import AdView from "../pages/AdMaster/adViewModal";
+// import AdView from "../pages/AdMaster/adViewModal";
 import Customer from "../pages/customer";
 import CustomerView from "../pages/customer/userViewModal";
+import AdView from "../pages/AdMaster/adViewModal";
 import Partner from "../pages/Partner/Partner";
 import Registration from "../pages/Partner/RegisterForm";
 import ApprovalView from "../pages/Approval/Model/Model";
@@ -59,6 +60,7 @@ function Layout() {
           path="/cryztal/customer/CustomerView"
           element={<CustomerView />}
         />
+        
         {/* <Route path="/Partner" element={<HomeLayout />}> */}
         <Route path="Partner" element={<Partner />} />
         <Route path="/cryztal/Partner/Register" element={<Registration />} />

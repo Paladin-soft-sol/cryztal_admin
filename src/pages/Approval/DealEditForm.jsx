@@ -138,58 +138,7 @@ function DealEditForm() {
 		reset(newObj);
 	}, [approvaldetails]);
 
-	// useEffect(() => {
-	// 	console.log('Mounted');
-
-	// 	return () => {
-	// 		// dispatch(actions.PARTNER_RESET());
-	// 	};
-	// }, []);
-
-	// useEffect(() => {
-	// 	setList([
-	// 		{
-	// 			id: 1,
-	// 			title: 'REGISTRATION',
-	// 			description: `${partnerCreate?.message}`,
-	// 			backgroundColor: 'warning',
-	// 			icon: 'warning',
-	// 		},
-	// 	]);
-	// 	setAbleToGetLogoUrl(true);
-	// 	setTimeout(() => {
-	// 		setAbleToGetLogoUrl(false);
-	// 	});
-	// }, [partnerCreate]);
-
-	// useEffect(() => {
-	// 	const dropdownData = {
-	// 		data: {},
-	// 		method: 'get',
-	// 		apiName: 'getCategoryDropdown',
-	// 	};
-	// 	dispatch(actions.GET_CATEGORY(dropdownData));
-	// }, []);
-
-	// useEffect(() => {
-	// 	const tempArr = [];
-	// 	getCategoryDropdown?.data?.map((value) =>
-	// 		tempArr.push({
-	// 			id: value?.category_id,
-	// 			value: value?.category_master,
-	// 		})
-	// 	);
-	// 	setDropdownList(tempArr);
-	// }, [getCategoryDropdown]);
-	// useEffect(() => {
-	// 	const subid = dropdownList.category_id;
-	// 	const dropdownData = {
-	// 		data: {},
-	// 		method: 'get',
-	// 		apiName: `getSubCategoryDropdown/${subid}`,
-	// 	};
-	// 	 dispatch(actions.GET_SUB_CATEGORY(dropdownData));
-	// }, []);
+	
 
 	useEffect(() => {
 		if (logoImage === null) return;
@@ -273,67 +222,7 @@ function DealEditForm() {
 		});
 	};
 
-	// const handleSelect = (event) => {
-	// 	const id =
-	// 		getCategoryDropdown?.data?.find(
-	// 			(item) => item.category_master === event.target.value
-	// 		)?.category_id || 0;
-	// 	const dropdownData = {
-	// 		data: { category_id: id },
-	// 		method: 'post',
-	// 		apiName: `getUserSubCategoryDropdown`,
-	// 	};
-	// 	dispatch(actions.GET_SUB_CATEGORY(dropdownData));
-	// };
-	// useEffect(() => {
-	// 	if (getSubCategoryDropdown?.data.length !== 0) {
-	// 		const tempArr = [];
-	// 		getSubCategoryDropdown?.data?.map((value) =>
-	// 			tempArr.push({
-	// 				value: value?.sub_category,
-	// 			})
-	// 		);
-	// 		console.log(tempArr, 'getSubCategoryDropdown1');
-	// 		setDropdownList2(tempArr);
-	// 	}
-
-	// 	console.log(getSubCategoryDropdown, 'getSubCategoryDropdown');
-	// }, [getSubCategoryDropdown]);
-	// const addDropdownData = (json) => {
-	// 	const tmpArr = [];
-	// 	const tmpBreedArr = [];
-
-	// 	getCategoryDropdown?.data?.map((value) => {
-	// 		tmpArr.push({
-	// 			id: value?.category_id,
-	// 			value: value?.category_master,
-	// 		});
-	// 	});
-
-	// 	// getSubCategoryDropdown.data?.map((item) => {
-	// 	// 	tmpBreedArr.push({
-	// 	// 		value: item.sub_category,
-	// 	// 	});
-	// 	// });
-	// 	console.log(tmpArr, 'tmpArr1');
-	// 	return json.map((i) => {
-	// 		if (i.name === 'category') {
-	// 			return {
-	// 				...i,
-	// 				DropdownData: tmpArr,
-	// 			};
-	// 		}
-	// 		// if (i.name === 'sub_category') {
-	// 		// 	return {
-	// 		// 		...i,
-	// 		// 		DropdownData: tmpBreedArr,
-	// 		// 	};
-	// 		// }
-	// 		return i;
-	// 	});
-	// };
-	console.log(dropdownList.length, 'dropdownList');
-	// console.log(getSubCategoryDropdown, 'dropdownListid');
+	
 	console.log(isEdit, 'adasdasdasdasd');
 	const onSubmit = async (data) => {
 		console.log(data, 'sjdkfjasrur');
@@ -454,56 +343,7 @@ function DealEditForm() {
 												/>
 											</Grid>
 										)}
-										{/* {keyValue?.isDropdown && (
-											<Grid item md={12} sm={12}>
-												<CustomDropdown
-													label={keyValue.label}
-													handleChange={(e) => {
-														onChange(e);
-														handleSelect(e, keyValue.name);
-													}}
-													value={value}
-													data={
-														dropdownList.length !== 0
-															? dropdownList
-															: keyValue.DropdownData
-													}
-													// data={keyValue.DropdownData} // data={
-													// 	keyValue.name === 'category' &&
-													// 	dropdownList.length !== 0
-													// 		? dropdownList
-													// 		: keyValue.DropdownData
-													// }
-													disabled={keyValue.disabled}
-													placeholder={keyValue.placeholder}
-												/>
-											</Grid>
-										)} */}
-										{/* {keyValue?.isDropdown1 && (
-											<Grid item md={12} sm={12}>
-												<CustomDropdown
-													label={keyValue.label}
-													handleChange={(e) => {
-														onChange(e);
-														handleSelect(e, keyValue.name);
-													}}
-													value={value || ''}
-													data={
-														dropdownList2.length !== 0
-															? dropdownList2
-															: keyValue.DropdownData
-													}
-													// data={
-													// 	keyValue.name === 'category' &&
-													// 	dropdownList.length !== 0
-													// 		? dropdownList
-													// 		: keyValue.DropdownData
-													// }
-													disabled={keyValue.disabled}
-													placeholder={keyValue.placeholder}
-												/>
-											</Grid>
-										)} */}
+										
 										{keyValue?.isDropdown2 && (
 											<Grid item md={12} sm={12}>
 												<CustomDropdown
@@ -520,7 +360,7 @@ function DealEditForm() {
 										{keyValue?.isMultipleSelectChip && (
 											<Grid item md={12} sm={12}>
 												<MultipleSelectChip
-													// onSelectValue={(data) => onSelectValue(data)}
+												
 													onSelectValue={(e) => {
 														onChange(e);
 														onSelectValue(e);
@@ -547,7 +387,7 @@ function DealEditForm() {
 														onChange(val);
 														getImage(val);
 													}}
-													// customClass="shop_img_align"
+												
 												/>
 											</Grid>
 										)}
@@ -571,30 +411,14 @@ function DealEditForm() {
 														onChange(val);
 														getMultipleImage(val);
 													}}
-													// customClass="shop_img_align"
+													
 												/>
 											</Grid>
 										)}
 										{keyValue?.isEmptySpace && (
 											<Grid md={keyValue?.breakpoint} />
 										)}
-										{/* {keyValue?.isDatePicker && (
-                  <Grid item md={12} my={2} mx={2} sm={12} xs={12} className="dateEditChange">
-                    <CustomDatePicker
-                      labelText={keyValue.label}
-                      onHandleChange={onChange}
-                      value={keyValue.value}
-                      dateStyle="dateIconEdit"
-                      date={value}
-                      requiredField={keyValue.requiredField}
-                      placeholder={keyValue.placeholder}
-                      defaultValue={keyValue.defaultValue}
-                    //   resetValue={resetValue}
-                      maxDate={keyValue.maxDate}
-					//   minDate={}
-                    />
-                  </Grid>
-                )} */}
+										
 
 										{keyValue?.isDatePicker && (
 											<Grid item md={12} sm={12}>
@@ -610,8 +434,7 @@ function DealEditForm() {
 										)}
 										{keyValue?.isTypography && (
 											<Grid item md={12} sm={12}>
-												{/* <CustomTypography text={keyValue.name} type="header" /> */}
-												{/* <CustomTypography text={keyValue.value} type="header" /> */}
+												
 												<CustomTypography
 													text={keyValue.label}
 													type="header3"
@@ -691,7 +514,7 @@ function DealEditForm() {
 					</Grid>
 				</Grid>
 			</Grid>
-			{/* </Grid> */}
+			
 		</Grid>
 	);
 }
