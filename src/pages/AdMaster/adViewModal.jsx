@@ -27,7 +27,7 @@ function AdView(props) {
     boxShadow: 24,
   };
 
-  const { viewId } = props;
+  const { viewId ,editId } = props;
 
 	const dispatch = useDispatch();
 
@@ -119,6 +119,7 @@ function AdView(props) {
 export default AdView;
 AdView.propTypes = {
   viewId: PropTypes.number,
+    viewId: PropTypes.number,
   Id: PropTypes.string,
   AdId: PropTypes.string,
   AdTitle: PropTypes.string,
@@ -129,6 +130,7 @@ AdView.propTypes = {
 
 AdView.defaultProps = {
   viewId: 0,
+  
   Id: '',
   AdId: '',
   AdTitle: '',

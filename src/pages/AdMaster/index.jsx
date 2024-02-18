@@ -50,6 +50,7 @@ import axios from "axios";
 function AdScreen() {
   const defaultValues = DefaultAdMasterEntriesValues;
   const [editAbleValues, setEditAbleValues] = useState({});
+  console.log(editAbleValues,"editAbleValues")
   const {
     control,
     handleSubmit,
@@ -289,6 +290,8 @@ function AdScreen() {
       ad_from_date: "",
       ad_to_date: "",
     });
+    setBtnTitle("SUBMIT");
+    setEditId("");
   };
 
   const [selectedDates, setSelectedDates] = useState({
@@ -354,26 +357,27 @@ function AdScreen() {
     setResetValue(defaultValues);
     callOnSubmit(formData);
     setBtnTitle("SUBMIT");
-    setEditId("");
+    setEditId();
   }
  
 
   const callOnSubmit = (formData) => {
-    console.log(formData,"formDatadgdgfd")
-    alert("fhgyhg");
+    // console.log(formData,"formDatadgdgfd")
+    // alert("fhgyhg");
     if (editId) {
       console.log(editId, "editIdeditId");
-
+alert("editalert")
       updateAdMasterPayload.data = { ...formData };
       updateAdMasterPayload.id = editId;
       console.log(updateAdMasterPayload, "updateAdMasterPayload");
       dispatch(actions.ADMASTER_EDIT(updateAdMasterPayload));
     } else {
+      alert("addalert")
       createAdMasterPayload.data = { ...formData };
       dispatch(actions.ADMASTER_CREATE(createAdMasterPayload));
     }
 
-    setEditId("");
+    setEditId();
   };
   const handleCityChange = (cityValue) => {
     // alert("gggg")
@@ -423,15 +427,37 @@ function AdScreen() {
     ]);
     setShowToast(true);
   };
+
+
+
+
+  const callTableValue = () => {
+    setBtnTitle("SUBMIT");
+    setEditId();
+    reset({});
+   
+  };
+  //get edit values
+  useEffect(() => {
+    if(editId){
+		const actionData = {
+			data: {},
+			method: 'get',
+			apiName: `getAdMasterById/${editId}`,
+		};
+    console.log(actionData,"actionData");
+      dispatch(actions.ADMASTER_GET(actionData));
+      
+  }
+	}, [editId]);
   useEffect(() => {
     if (editId) {
       setBtnTitle("UPDATE");
       reset(editAbleValues);
     }
   }, [editAbleValues]);
-
   useEffect(() => {
-    if (editId) {
+    if (editAbleValues) {
       console.log(editId, "setEditAbleValues");
       setEditAbleValues({
         ad_title: admasterGet?.admasterGet?.data?.[0]?.ad_title,
@@ -439,18 +465,11 @@ function AdScreen() {
         // ad_vis_location: admasterGet?.data?.ad_vis_location
       });
     }
-  }, [admasterGet, editId]);
+  }, [ admasterGet]);
 
-  const callTableValue = () => {
-    setBtnTitle("SUBMIT");
-    setEditId("");
-    reset({});
-   
-  };
-
-  useEffect(() => {
-    callTableValue();
-  }, [admasterEdit, admasterCreate]);
+  // useEffect(() => {
+  //   callTableValue();
+  // }, [admasterEdit, admasterCreate]);
   return (
     <Grid p={2.5} item md={12}>
       {showToast && (
@@ -662,7 +681,7 @@ function AdScreen() {
           <>
             <CustomButton
               customClass="submit_button"
-              btnTitle="SUBMIT"
+              btnTitle={btnTitle}
               variant="contained"
               color="primary"
               btnStyles={{
