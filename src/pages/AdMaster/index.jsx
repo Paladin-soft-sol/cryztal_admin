@@ -36,21 +36,19 @@ import {
   DefaultAdMasterEntriesValues,
   updateAdMasterPayload,
   createAdMasterPayload,
-  getAdMasterPayload,
-  deleteAdMasterPayload,
 } from "./AdMasterEntries";
 import "./main.css";
 import { format } from "date-fns";
-import axios from "axios";
+
 
 /**
  *
  * @returns
  */
+
 function AdScreen() {
   const defaultValues = DefaultAdMasterEntriesValues;
   const [editAbleValues, setEditAbleValues] = useState({});
-  console.log(editAbleValues,"editAbleValues")
   const {
     control,
     handleSubmit,
@@ -65,43 +63,40 @@ function AdScreen() {
   const formWatchFields = watch();
   const admasterdropdown = useSelector((state) => state?.admasterdropdown);
   const palettedropdown = useSelector((state) => state?.palettedropdown);
+  const admaster = useSelector((state) => state?.admaster);
+  const admasterGet = useSelector((state) => state?.admaster);
+  const admasterEdit = useSelector((state) => state?.admaster);
+  const admasterCreate = useSelector((state) => state?.admaster);
   const [showToast, setShowToast] = useState();
   const [list, setList] = useState();
-  console.log(palettedropdown, "palettedropdown");
-  console.log(admasterdropdown, "admasterdropdown");
-
+  const [action, setAction] = React.useState("");
   const [btnTitle, setBtnTitle] = useState("SUBMIT");
   const [dropdownList, setDropdownList] = useState([]);
   const [open, setOpen] = React.useState(false);
   const [deleteApi, setDeleteApi] = useState(false);
   const [deleteId, setDeleteId] = useState();
-  console.log(deleteId, "deleteApi");
   const [editId, setEditId] = useState();
-  console.log(editId, "editIdfgdfg");
   const [paletteList, setPaletteList] = useState([]);
-  console.log(setPaletteList, "paletteList");
   const paletteValue = paletteList?.map((data) => data?.id);
-  const admaster = useSelector((state) => state?.admaster);
-  const admasterGet = useSelector((state) => state?.admaster);
-  console.log(admasterGet, "admasterGet");
-  const admasterEdit = useSelector((state) => state?.admaster);
-  const admasterCreate = useSelector((state) => state?.admaster);
+  const [cityDropdownList, setCityDropdownList] = useState([]);
+  const [resetValue, setResetValue] = React.useState([]);
   const [table, setTable] = useState([]);
   const [multiImage, setMultiImage] = useState(null);
   const [logoImage, setLogoImage] = useState(null);
   const [adView, setAdView] = useState(false);
-
+  const [nationDropdownList, setNationDropdownList] = useState([]);
   const [viewId, setViewId] = useState();
-  console.log(viewId, "viewIdValue");
-
+  const [stateDropdownList, setStateDropdownList] = useState([]);
   const [post, setPost] = useState(null);
-
+  const [selectedPaletteColorId, setSelectedPaletteColorId] = useState(null);
+  const [selectedAdVisId, setSelectedAdVisId] = useState(null);
+  const [pincodeValue, setPincodeValue] = useState("");
   const shopValue = admasterdropdown?.admasterdropdown?.data?.map(
     (data) => data?.store_name
   );
-  console.log(shopValue, "shopValue");
 
-  const [selectedAdVisId, setSelectedAdVisId] = useState(null);
+
+
 
   useEffect(() => {
     const tempArr = [];
@@ -111,11 +106,8 @@ function AdScreen() {
         value: values?.store_name,
       })
     );
-    console.log(tempArr, "tempArr");
     setDropdownList(tempArr);
   }, [admasterdropdown]);
-
-  const [selectedPaletteColorId, setSelectedPaletteColorId] = useState(null);
 
   useEffect(() => {
     const tempArr = [];
@@ -125,7 +117,6 @@ function AdScreen() {
         value: values?.palette_color,
       })
     );
-    console.log(tempArr, "tempArr");
     setPaletteList(tempArr);
   }, [palettedropdown]);
 
@@ -135,7 +126,6 @@ function AdScreen() {
       method: "get",
       apiName: "getAdMaster",
     };
-
     dispatch(actions.ADMASTER(data));
   }, [dispatch]);
 
@@ -162,10 +152,6 @@ function AdScreen() {
   const admasterstatedropdown = useSelector(
     (state) => state?.admasterstatedropdown
   );
-  console.log(admasterstatedropdown, "admasterstatedropdown");
-
-  const [stateDropdownList, setStateDropdownList] = useState([]);
-  console.log(stateDropdownList, "stateDropdownList");
   useEffect(() => {
     const tempArr = [];
     admasterstatedropdown?.admasterstatedropdown?.data?.map((values, index) =>
@@ -175,10 +161,9 @@ function AdScreen() {
         value: values?.state,
       })
     );
-    console.log(tempArr, "statetempArr");
+    // console.log(tempArr, "statetempArr");
     setStateDropdownList(tempArr);
   }, [admasterstatedropdown]);
-
   useEffect(() => {
     const statedropdownData = {
       data: {},
@@ -193,10 +178,6 @@ function AdScreen() {
   const admastercitydropdown = useSelector(
     (state) => state?.admastercitydropdown
   );
-  console.log(admastercitydropdown, "admastercitydropdown");
-
-  const [cityDropdownList, setCityDropdownList] = useState([]);
-  console.log(cityDropdownList, "cityDropdownList");
   useEffect(() => {
     const tempArr = [];
     admastercitydropdown?.admastercitydropdown?.data?.map((values, index) =>
@@ -209,7 +190,6 @@ function AdScreen() {
     // alert('tempArr')
     setCityDropdownList(tempArr);
   }, [admastercitydropdown]);
-
   useEffect(() => {
     const citydropdownData = {
       data: {},
@@ -220,14 +200,9 @@ function AdScreen() {
   }, [dispatch]);
 
   //nationdropdown
-
   const admasternationdropdown = useSelector(
     (state) => state?.admasternationdropdown
   );
-  console.log(admasternationdropdown, "admasternationdropdown");
-
-  const [nationDropdownList, setNationDropdownList] = useState([]);
-  console.log(nationDropdownList, "nationDropdownList");
   useEffect(() => {
     const tempArr = [];
     admasternationdropdown?.admasternationdropdown?.data?.map((values, index) =>
@@ -236,7 +211,7 @@ function AdScreen() {
         value: values?.country,
       })
     );
-    console.log(tempArr, "countrytempArr");
+    // console.log(tempArr, "countrytempArr");
     setNationDropdownList(tempArr);
   }, [admasternationdropdown]);
 
@@ -305,26 +280,20 @@ function AdScreen() {
   const endDate = selectedDates?.endDate
     ? format(selectedDates.endDate, "yyyy/MM/dd")
     : null;
-  console.log(startDate, "selectedDates");
 
   const handleDateChange = (dates) => {
     setSelectedDates(dates);
   };
 
-  const [pincodeValue, setPincodeValue] = useState("");
+
   const handlePincodeChange = (value) => {
-    // alert('hello')
-    console.log("Pincode changed:", value);
-    setPincodeValue(value);
+  setPincodeValue(value);
   };
 
-  const [resetValue, setResetValue] = React.useState([]);
-  console.log(resetValue, "resetValue");
-
   function onSubmit(data1) {
-    console.log(data1, "data1admaster");
+    // console.log(data1, "data1admaster");
     const formData = new FormData();
-    console.log(formData, "formData");
+    // console.log(formData, "formData");
     formData.append("ad_title", data1.ad_title);
     formData.append("shop_id", 1);
     if (data1?.shop_ad.length > 0) {
@@ -341,18 +310,12 @@ function AdScreen() {
     formData.append("tiles", JSON.stringify(tilesArray));
     formData.append("palette_id", selectedPaletteColorId || "");
     formData.append("ad_vis_id", selectedAdVisId);
-    formData.append("ad_vis_location", pincodeValue || "");
+    // formData.append("ad_vis_location", pincodeValue || "");
+    formData.append("ad_vis_location", JSON.stringify(tilesArray) );
     formData.append("ad_from_date", startDate || "");
     formData.append("ad_to_date", endDate || "");
     formData.append("created_by", 1);
     formData.append("updated_by", 1);
-    const data = {
-      data: formData,
-      method: "post",
-      apiName: "createAdMaster",
-    };
-
-    dispatch(actions.ADMASTER(data));
     reset(defaultValues);
     setResetValue(defaultValues);
     callOnSubmit(formData);
@@ -362,25 +325,32 @@ function AdScreen() {
  
 
   const callOnSubmit = (formData) => {
-    // console.log(formData,"formDatadgdgfd")
-    // alert("fhgyhg");
     if (editId) {
-      console.log(editId, "editIdeditId");
-alert("editalert")
       updateAdMasterPayload.data = { ...formData };
       updateAdMasterPayload.id = editId;
-      console.log(updateAdMasterPayload, "updateAdMasterPayload");
-      dispatch(actions.ADMASTER_EDIT(updateAdMasterPayload));
-    } else {
-      alert("addalert")
+      const data = {
+        data: formData,
+        method: "put",
+        apiName: "updateAdMaster",
+        id : editId
+      };
+      dispatch(actions.ADMASTER_EDIT(data));
+      // console.log(updateAdMasterPayload, "updateAdMasterPayload");
+      // dispatch(actions.ADMASTER_EDIT(updateAdMasterPayload));
+    } else { 
       createAdMasterPayload.data = { ...formData };
-      dispatch(actions.ADMASTER_CREATE(createAdMasterPayload));
+      const data = {
+        data: formData,
+        method: "post",
+        apiName: "createAdMaster",
+      };
+      dispatch(actions.ADMASTER(data));
+      // dispatch(actions.ADMASTER_CREATE(createAdMasterPayload));
     }
-
     setEditId();
   };
   const handleCityChange = (cityValue) => {
-    // alert("gggg")
+ 
     setPincodeValue(cityValue);
     console.log("City changed:", cityValue);
   };
@@ -394,9 +364,8 @@ alert("editalert")
     setPincodeValue(nationValue);
     console.log("Nation changed:", nationValue);
   };
-  // const [adView, setAdView] = useState(false);
-  const [action, setAction] = React.useState("");
 
+  // Get Function
   const handleOpen = (id) => {
     console.log(id, "setAdView");
     setAdView(!adView);
@@ -405,7 +374,7 @@ alert("editalert")
 
   // Delete Function
   const handleDelete = (id) => {
-    console.log(id, "handleDeletehandleDelete");
+    // console.log(id, "handleDeletehandleDelete");
     setDeleteApi(true);
     setTimeout(() => setDeleteApi(false), 1000);
     setOpen(false);
@@ -414,7 +383,7 @@ alert("editalert")
       method: "delete",
       apiName: `deleteAdMaster/${id}`,
     };
-    console.log(deleteData, "deleteData");
+    // console.log(deleteData, "deleteData");
     dispatch(actions.ADMASTER_DELETE(deleteData));
     setList([
       {
@@ -429,14 +398,6 @@ alert("editalert")
   };
 
 
-
-
-  const callTableValue = () => {
-    setBtnTitle("SUBMIT");
-    setEditId();
-    reset({});
-   
-  };
   //get edit values
   useEffect(() => {
     if(editId){
@@ -449,27 +410,27 @@ alert("editalert")
       dispatch(actions.ADMASTER_GET(actionData));
       
   }
-	}, [editId]);
+  }, [editId]);
+  
   useEffect(() => {
     if (editId) {
       setBtnTitle("UPDATE");
       reset(editAbleValues);
     }
   }, [editAbleValues]);
+
   useEffect(() => {
     if (editAbleValues) {
       console.log(editId, "setEditAbleValues");
       setEditAbleValues({
         ad_title: admasterGet?.admasterGet?.data?.[0]?.ad_title,
         ad_vis_location: admasterGet?.admasterGet?.data?.[0]?.ad_vis_location,
-        // ad_vis_location: admasterGet?.data?.ad_vis_location
+     
       });
     }
   }, [ admasterGet]);
 
-  // useEffect(() => {
-  //   callTableValue();
-  // }, [admasterEdit, admasterCreate]);
+
   return (
     <Grid p={2.5} item md={12}>
       {showToast && (

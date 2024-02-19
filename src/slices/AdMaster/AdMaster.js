@@ -75,7 +75,7 @@ const ADMASTER_EDIT = createAsyncThunk(
       const data = await fetchData(
         payload?.data,
         payload?.method,
-        `${payload?.apiName}${payload?.id}`
+        `${payload?.apiName}/${payload?.id}`
       );
       return {
         ...defaultState.List,
