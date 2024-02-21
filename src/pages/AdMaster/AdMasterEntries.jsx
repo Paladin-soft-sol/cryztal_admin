@@ -113,7 +113,8 @@ export const AdMasterEntries = [
   ];
   export const DefaultAdMasterEntriesValues = {
     ad_title: "",
-    shop_id: "",
+    ad_vis_id:"",
+ 
     shop_ad: "",
     tiles: "",
     palette_id: "",
@@ -121,7 +122,7 @@ export const AdMasterEntries = [
     ad_from_date: "",
     ad_to_date: ""
   };
-  
+    
 
   
   // Read All Function Payload

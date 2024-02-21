@@ -529,6 +529,7 @@ function Register() {
 											</Grid>
 										)}
 										{keyValue?.isMultipleSelectChip && (
+											
 											<Grid item md={12} sm={12}>
 												<MultipleSelectChip
 													// onSelectValue={(data) => onSelectValue(data)}
@@ -537,6 +538,7 @@ function Register() {
 														onSelectValue(e);
 													}}
 													selectValue={values}
+													
 													onChipClose={(e, val) => handleDelete(e, val)}
 													label={keyValue.label}
 													dropDownList={dropdownList}

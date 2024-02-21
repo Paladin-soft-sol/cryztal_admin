@@ -48,6 +48,7 @@ import { format } from "date-fns";
 
 function AdScreen() {
   const defaultValues = DefaultAdMasterEntriesValues;
+  // console.log(defaultValues, "defaultValuesdefaultValues");
   const [editAbleValues, setEditAbleValues] = useState({});
   const {
     control,
@@ -55,9 +56,11 @@ function AdScreen() {
     watch,
     formState: { errors },
     reset,
+    getValues,
   } = useForm({
     defaultValues: editAbleValues,
   });
+  console.log('getValues', getValues());
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const formWatchFields = watch();
@@ -65,6 +68,7 @@ function AdScreen() {
   const palettedropdown = useSelector((state) => state?.palettedropdown);
   const admaster = useSelector((state) => state?.admaster);
   const admasterGet = useSelector((state) => state?.admaster);
+  console.log("🚀 ~ AdScreen ~ admasterGet:", admasterGet)
   const admasterEdit = useSelector((state) => state?.admaster);
   const admasterCreate = useSelector((state) => state?.admaster);
   const [showToast, setShowToast] = useState();
@@ -310,8 +314,8 @@ function AdScreen() {
     formData.append("tiles", JSON.stringify(tilesArray));
     formData.append("palette_id", selectedPaletteColorId || "");
     formData.append("ad_vis_id", selectedAdVisId);
-    // formData.append("ad_vis_location", pincodeValue || "");
-    formData.append("ad_vis_location", JSON.stringify(tilesArray) );
+    formData.append("ad_vis_location", pincodeValue || "");
+    // formData.append("ad_vis_location", JSON.stringify(tilesArray) );
     formData.append("ad_from_date", startDate || "");
     formData.append("ad_to_date", endDate || "");
     formData.append("created_by", 1);
@@ -399,38 +403,60 @@ function AdScreen() {
 
 
   //get edit values
+  // useEffect(() => {
+  //   if(editId){
+	// 	const actionData = {
+	// 		data: {},
+	// 		method: 'get',
+	// 		apiName: `getAdMasterById/${editId}`,
+	// 	};
+  //   console.log(actionData,"actionData");
+  //     dispatch(actions.ADMASTER_GET(actionData));
+      
+  // }
+
+  
   useEffect(() => {
-    if(editId){
-		const actionData = {
+    // if (editId) {
+      setBtnTitle("UPDATE");
+      reset(editAbleValues);
+    // }
+  }, [editAbleValues]);
+
+ 
+
+  // }, [editId]);
+  const getEditData = (editId) => {
+    const actionData = {
 			data: {},
 			method: 'get',
 			apiName: `getAdMasterById/${editId}`,
 		};
     console.log(actionData,"actionData");
-      dispatch(actions.ADMASTER_GET(actionData));
-      
-  }
-  }, [editId]);
-  
-  useEffect(() => {
-    if (editId) {
-      setBtnTitle("UPDATE");
-      reset(editAbleValues);
-    }
-  }, [editAbleValues]);
+    dispatch(actions.ADMASTER_GET(actionData));  
+};
 
-  useEffect(() => {
+useEffect(() => {
     if (editAbleValues) {
-      console.log(editId, "setEditAbleValues");
-      setEditAbleValues({
+      console.log(editAbleValues, "setEditAbleValues"); 
+      let editObj = {
         ad_title: admasterGet?.admasterGet?.data?.[0]?.ad_title,
         ad_vis_location: admasterGet?.admasterGet?.data?.[0]?.ad_vis_location,
-     
-      });
+        palette_id: admasterGet?.admasterGet?.data?.[0]?.palette_id,
+        ad_vis_id: admasterGet?.admasterGet?.data?.[0]?.ad_vis_id,
+        ad_from_date: admasterGet?.admasterGet?.data?.[0]?.ad_from_date,
+        ad_to_date: admasterGet?.admasterGet?.data?.[0]?.ad_to_date,
+      } 
+      setEditAbleValues(editObj);
+      setSelectedAdVisId(editObj.ad_vis_id);
+      // Call the onchange function and pass the ad_vis_location value
+      handleChange(admasterGet?.admasterGet?.data?.[0]?.ad_vis_id);
     }
-  }, [ admasterGet]);
-
-
+  }, [admasterGet]);
+const handleChange = (newValue) => {
+  // Do whatever you want with the new value of ad_vis_location
+  console.log("ad_vis_location changed to: ", newValue);
+};
   return (
     <Grid p={2.5} item md={12}>
       {showToast && (
@@ -514,8 +540,10 @@ function AdScreen() {
                       <Grid item md={12} sm={12}>
                         <ColorBanner
                           label={keyValue.label}
-                          handleChange={(selectedColorId) =>
+                          handleChange={(selectedColorId) => {
+                            onChange(selectedColorId);
                             setSelectedPaletteColorId(selectedColorId)
+                          }
                           }
                           value={value || ""}
                           colors={paletteList}
@@ -561,7 +589,9 @@ function AdScreen() {
                             onChange(event.target.value);
                           }}
                           value={selectedAdVisId || ""}
+                          // value="jhkjhjhh"
                           data={dropdownList}
+                          // data="manoj"
                           placeholder={keyValue.placeholder}
                           returnId={keyValue.returnId}
                         />
@@ -677,7 +707,7 @@ function AdScreen() {
         printer={CustomIcons.Printer1}
         view={CustomIcons.View}
         edit={CustomIcons.EditIcon}
-        editOpen={(id) => setEditId(id)}
+        editOpen={(id) => getEditData(id)}
         deleteIconSrc={CustomIcons.DeleteIcon}
         modalOpen={(id) => handleOpen(id)}
         action

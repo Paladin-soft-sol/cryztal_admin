@@ -74,7 +74,6 @@ export const Tiles = (props) => {
         <FormControl className="colorBanner bye" fullWidth size="small">
         <Select
             value=""
-          
             displayEmpty
             inputProps={{ "aria-label": "Without label" }}
             className="tiles-select"

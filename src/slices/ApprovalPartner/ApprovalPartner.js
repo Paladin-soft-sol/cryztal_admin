@@ -40,7 +40,7 @@ const APPROVALPARTNER_DETAILS = createAsyncThunk(
 	// eslint-disable-next-line default-param-last
 	async (
 		// eslint-disable-next-line default-param-last
-		payload = {},
+		payload = {},  
 		{ rejectWithValue }
 	) => {
 		try {

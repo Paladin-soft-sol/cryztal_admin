@@ -71,13 +71,16 @@ export const MultipleSelectChip = (props) => {
       <FormControl className="formControl" fullWidth disabled={disabled}>
         <Select
           size="large"
+          aria-selected="true"
+          aria-hidden="true"
           fullWidth
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
           multiple
           value={selectValue}
           onChange={handleChange}
-          input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+          input={<OutlinedInput id="select-multiple-chip" label="Chip"  aria-selected="true"
+                    />}
           renderValue={(selected) => (
             <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
               {selected.map((value) => (
@@ -87,6 +90,8 @@ export const MultipleSelectChip = (props) => {
                     label={value}
                     className="chip"
                     clickable
+                    
+                    id="select-multiple-chip"
                     deleteIcon={
                       <img
                         src={CustomIcons.ModalClose}
@@ -106,7 +111,7 @@ export const MultipleSelectChip = (props) => {
             <em>Placeholder</em>
           </MenuItem> */}
           {dropDownList.map((name) => (
-            <MenuItem key={name?.id} value={name?.value} className="listText">
+            <MenuItem  aria-checked="true" key={name?.id} value={name?.value} className="listText">
               {name?.value}
             </MenuItem>
           ))}

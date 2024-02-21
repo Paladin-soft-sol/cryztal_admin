@@ -8,6 +8,7 @@ import FormControl from "@mui/material/FormControl";
 import ListItemText from "@mui/material/ListItemText";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
+import { TextInput } from "../TextInput/TextInput";
 import { CustomTypography } from "../Typography/Typography";
 import { CustomDropdown } from "../CustomDropdown";
 import CustomIcons from "../../utils/icon/index";
@@ -102,18 +103,15 @@ export const PincodeDropdown = (props) => {
 
         {personName === "Pincode" && (
           <Grid className="pincodeBoxes">
-            <TextField
+            <TextInput
               variant="outlined"
               size="small"
               margin="normal"
-              className="PincodeTextInput"
+              // className="PincodeTextInput"
               value={value}
-              onChange={handlePincodeInputChange}
+              customClass="capitalize"
+              onHandleChange={handlePincodeInputChange}
             />
-
-            <Grid className="addIconPincode">
-              <img src={CustomIcons.AddIcon} alt="" />
-            </Grid>
           </Grid>
         )}
         {personName === "City Wide" && (

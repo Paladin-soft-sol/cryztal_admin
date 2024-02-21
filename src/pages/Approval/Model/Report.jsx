@@ -9,7 +9,7 @@ import actions from '../../../actions';
 
 import './Model.css';
 import CustomIcons from '../../../utils/icon';
-
+  
 function ApprovalView() {
 	const { approval_details } = useSelector((state) => state?.approval);
 	const [isLoader, setIsLoader] = useState(true);
@@ -192,7 +192,7 @@ function ApprovalView() {
 			<div className="Footer">
 				<Grid container item md={12} sm={12}>
 					<CustomTypography type="title" text={Footer} />
-					<Grid item md={12} sm={12} display="flex" pt={1}>
+					{/* <Grid item md={12} sm={12} display="flex" pt={1}>
 						{img?.map((item) => (
 							<Grid item md={3}>
 								<div className="store_Image">
@@ -200,7 +200,7 @@ function ApprovalView() {
 								</div>
 							</Grid>
 						))}
-					</Grid>
+					</Grid> */}
 				</Grid>
 			</div>
 			<Grid sx={{ display: 'flex', justifyContent: 'end' }}>

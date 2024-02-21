@@ -127,3 +127,7 @@
   width: 100%;
   background: #fff;
 }
+
+.pagination .dropdown{
+  margin-right: 5px !important;
+}

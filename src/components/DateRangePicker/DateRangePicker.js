@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './DateRangePicker.css';
@@ -10,7 +10,7 @@ export const DateRangePicker = (props) => {
   const {
     data,
     handleChange,  
-    // dropDownChange,
+  
     value,
     disabled,
     name,
@@ -23,6 +23,14 @@ export const DateRangePicker = (props) => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
 
+  useEffect(() => {
+    console.log('datae', value);
+    if (value) {
+      console.log('datae', value)
+      handleStartDateChange(new Date(value));
+    }
+  }, [value])
+
   // const handleStartDateChange = (date) => {
   //   setStartDate(date);
   // };
@@ -31,7 +39,8 @@ export const DateRangePicker = (props) => {
   //   setEndDate(date);
   // };
 
-    const handleStartDateChange = (date) => {
+  const handleStartDateChange = (date) => {
+      console.log(date,"datedate");
       setStartDate(date);
       handleChange({ startDate: date, endDate }); // Call handleChange with updated values
     };
@@ -88,7 +97,6 @@ export default DateRangePicker;
 DateRangePicker.propTypes = {
   data: PropTypes.arrayOf(PropTypes.objectOf).isRequired,
   handleChange: PropTypes.func.isRequired,
-  // dropDownChange: PropTypes.func.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   disabled: PropTypes.bool,
   name: PropTypes.string.isRequired,

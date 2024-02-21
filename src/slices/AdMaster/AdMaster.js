@@ -120,6 +120,60 @@ const ADMASTER_DELETE = createAsyncThunk(
   }
 );
 
+const ADMASTER_DETAILS = createAsyncThunk(
+	'admaster/admaster_details',
+	// eslint-disable-next-line default-param-last
+	async (
+		// eslint-disable-next-line default-param-last
+		payload = {},
+		{ rejectWithValue }
+	) => {
+		try {
+			const data = await fetchData(
+				payload?.data,
+				payload?.method,
+				payload?.apiName
+			);
+			return {
+				...defaultState.List,
+				message: data?.data.Message,
+				data: data?.data?.data,
+			};
+		} catch (error) {
+			return rejectWithValue({
+				...defaultReject.List,
+				message: error.message,
+			});
+		}
+	}
+);
+const ADMASTER_STATUS = createAsyncThunk(
+	'admaster/admaster_status',
+	// eslint-disable-next-line default-param-last
+	async (
+		// eslint-disable-next-line default-param-last
+		payload = {},
+		{ rejectWithValue }
+	) => {
+		try {
+			const data = await fetchData(
+				payload?.data,
+				payload?.method,
+				payload?.apiName
+			);
+			return {
+				...defaultState.List,
+				message: data?.data.Message,
+				data: data?.data?.data,
+			};
+		} catch (error) {
+			return rejectWithValue({
+				...defaultReject.List,
+				message: error.message,
+			});
+		}
+	}
+);
 const ADMASTER_GET = createAsyncThunk(
   "admaster/admasterGet",
   // eslint-disable-next-line default-param-last
@@ -166,6 +220,12 @@ const admasterSlice = createSlice({
     admasterGet: {
       ...defaultState.List,
     },
+    	admaster_details: {
+			...defaultState.List,
+		},
+		admaster_status: {
+			...defaultState.List,
+		},
   },
   extraReducers: {
     [ADMASTER.fulfilled]: (state, action) => {
@@ -243,6 +303,37 @@ const admasterSlice = createSlice({
         (state.admasterGet.error = true),
         (state.admasterGet = action.payload);
     },
+    	[ADMASTER_DETAILS.fulfilled]: (state, action) => {
+			(state.admaster_details.loading = false),
+				(state.admaster_details.error = false),
+				(state.admaster_details = action.payload);
+		},
+		[ADMASTER_DETAILS.pending]: (state, action) => {
+			(state.admaster_details.loading = true),
+				(state.admaster_details.error = false),
+				(state.admaster_details.loading = true);
+		},
+		[ADMASTER_DETAILS.rejected]: (state, action) => {
+			(state.admaster_details.loading = false),
+				(state.admaster_details.error = true),
+				(state.admaster_details = action.payload);
+		},
+
+		[ADMASTER_STATUS.fulfilled]: (state, action) => {
+			(state.admaster_details.loading = false),
+				(state.admaster_details.error = false),
+				(state.admaster_details = action.payload);
+		},
+		[ADMASTER_STATUS.pending]: (state, action) => {
+			(state.admaster_details.loading = true),
+				(state.admaster_details.error = false),
+				(state.admaster_details.loading = true);
+		},
+		[ADMASTER_STATUS.rejected]: (state, action) => {
+			(state.admaster_details.loading = false),
+				(state.admaster_details.error = true),
+				(state.admaster_details = action.payload);
+		},
   },
 });
 
@@ -252,6 +343,8 @@ const admasterAction = {
   ADMASTER_EDIT,
   ADMASTER_DELETE,
   ADMASTER_GET,
+  ADMASTER_DETAILS,
+	ADMASTER_STATUS,
 };
 export { admasterAction };
 export default admasterSlice.reducer;

@@ -1,21 +1,25 @@
 .frst_div {
 	width: 100%;
 }
+
 .profile1 {
 	height: 90px;
 	width: 90px;
 	/* border: 1px solid #3a3838;  */
 }
+
 .edit {
 	width: 100%;
 	/* display:flex ; */
 	padding-left: 15px;
 }
+
 .profileEdit {
 	display: flex;
 	justify-content: space-between;
 	padding-bottom: 10px;
 }
+
 .NameEdit {
 	font-size: 1.5rem !important;
 	padding-left: 12px;
@@ -23,10 +27,12 @@
 	font-weight: 600 !important;
 	font-family: sans-serif !important;
 }
+
 .sec_div {
 	text-align: left;
 	padding-left: 20px;
 }
+
 .sec_div::after {
 	content: '';
 	border: 1px dashed rgb(190, 186, 186);
@@ -34,27 +40,33 @@
 	margin: 20px 0;
 	display: flex;
 }
+
 .BoxImage {
 	width: 100%;
 	display: flex !important;
 	text-align: center;
 }
+
 .Colum {
 	box-shadow: 3px 2px 2px 1px #e9e7e796;
 	/* background-color: #fff; */
 }
+
 .Colum img {
 	width: 100% !important;
 	height: 100% !important;
 }
+
 img .MuiGrid-root {
 	width: 100%;
 	height: 100%;
 }
+
 .profile1 img {
 	width: 100%;
 	height: 100%;
 }
+
 .lab {
 	color: #3a3838 !important;
 }
@@ -65,32 +77,42 @@ img .MuiGrid-root {
 	font-family: Poppins !important;
 	font-weight: 600 !important;
 }
+
 .text .MuiTypography-root {
 	color: #2c3051 !important;
 	font-family: Poppins !important;
 	font-size: 19px !important;
 	font-weight: 600 !important;
 }
+
 .wishlist {
 	color: #2c3051 !important;
 	font-family: Poppins !important;
 	font-size: 17px !important;
 	font-weight: 600 !important;
 }
+
 .InnerEdit {
 	display: flex;
 	justify-content: space-between;
 	/* padding: 4px 9px 6px 6px; */
 }
+
 @media screen and ((max-width: 768px)) {
 	.text {
 		padding-bottom: 10px !important;
 	}
 }
+
 .unblock {
 	background-color: red;
 	margin-right: 12px;
 }
+
 .tbody {
 	overflow: auto;
+}
+
+.modalHeader .close {
+	text-align: right !important;
 }
