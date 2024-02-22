@@ -58,7 +58,7 @@ export const ColorBanner = (props) => {
           fullWidth
           labelId="demo-select-small"
           id="demo-select-small"
-          // onChange={(e) => handleChange(e)}
+      
           onChange={(event) => handleChange(event.target.value.id)}
           displayEmpty 
           renderValue={(data) => <div style={{background: selectedColors?.[0]?.value, width: 20, height: 20}}></div>}

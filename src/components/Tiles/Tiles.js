@@ -20,9 +20,10 @@ const options = [
 const STORAGE_KEY = "selectedTiles";
 
 export const Tiles = (props) => {
-  const { label, requiredField } = props;
+  const { label, requiredField ,onChangePlaceholder} = props;
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [placeholder, setPlaceholder] = useState("");
+  const [placeholder, setPlaceholder] = useState();
+    console.log(placeholder,"placeholder");
   const maxSelection = 3;
 
   useEffect(() => {
@@ -33,7 +34,8 @@ export const Tiles = (props) => {
   useEffect(() => {
     generatePlaceholder(selectedOptions);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(selectedOptions));
-  }, [selectedOptions]);
+      onChangePlaceholder(placeholder);
+  }, [selectedOptions,placeholder,onChangePlaceholder]);
 
   const handleCheckboxChange = (option) => {
     const isOptionSelected = selectedOptions.some((selectedOption) => selectedOption.value === option.value);
@@ -78,7 +80,8 @@ export const Tiles = (props) => {
             inputProps={{ "aria-label": "Without label" }}
             className="tiles-select"
           >
-             <MenuItem value="" disabled>{placeholder}</MenuItem>
+            <MenuItem value="" disabled>{placeholder}</MenuItem>
+          
         
           <FormGroup className="checkbox-grid">
             <div className="grid-container Grid_alignment">  

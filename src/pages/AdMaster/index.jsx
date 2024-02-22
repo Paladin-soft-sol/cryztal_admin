@@ -295,9 +295,9 @@ function AdScreen() {
   };
 
   function onSubmit(data1) {
-    // console.log(data1, "data1admaster");
+   
     const formData = new FormData();
-    // console.log(formData, "formData");
+   
     formData.append("ad_title", data1.ad_title);
     formData.append("shop_id", 1);
     if (data1?.shop_ad.length > 0) {
@@ -308,10 +308,15 @@ function AdScreen() {
           formData.append("shop_ad", item instanceof File ? item : "");
         });
       }
-    }
+    } 
 
-    const tilesArray = [1];
-    formData.append("tiles", JSON.stringify(tilesArray));
+
+
+    // const tilesArray = [placeholderValue];
+    const splitArray = placeholderValue.split(',');
+
+    // const arr = placeholderValue.split(',');
+    formData.append("tiles", JSON.stringify(splitArray));
     formData.append("palette_id", selectedPaletteColorId || "");
     formData.append("ad_vis_id", selectedAdVisId);
     formData.append("ad_vis_location", pincodeValue || "");
@@ -339,8 +344,8 @@ function AdScreen() {
         id : editId
       };
       dispatch(actions.ADMASTER_EDIT(data));
-      // console.log(updateAdMasterPayload, "updateAdMasterPayload");
-      // dispatch(actions.ADMASTER_EDIT(updateAdMasterPayload));
+      
+    
     } else { 
       createAdMasterPayload.data = { ...formData };
       const data = {
@@ -349,9 +354,10 @@ function AdScreen() {
         apiName: "createAdMaster",
       };
       dispatch(actions.ADMASTER(data));
-      // dispatch(actions.ADMASTER_CREATE(createAdMasterPayload));
+     
     }
     setEditId();
+    setBtnTitle("UPDATE");
   };
   const handleCityChange = (cityValue) => {
  
@@ -378,7 +384,7 @@ function AdScreen() {
 
   // Delete Function
   const handleDelete = (id) => {
-    // console.log(id, "handleDeletehandleDelete");
+   
     setDeleteApi(true);
     setTimeout(() => setDeleteApi(false), 1000);
     setOpen(false);
@@ -387,12 +393,12 @@ function AdScreen() {
       method: "delete",
       apiName: `deleteAdMaster/${id}`,
     };
-    // console.log(deleteData, "deleteData");
+   
     dispatch(actions.ADMASTER_DELETE(deleteData));
     setList([
       {
         id: 1,
-        // title: getToastTitle(),
+    
         description: "Data Removed successfully",
         backgroundColor: "check",
         icon: "check",
@@ -402,30 +408,18 @@ function AdScreen() {
   };
 
 
-  //get edit values
-  // useEffect(() => {
-  //   if(editId){
-	// 	const actionData = {
-	// 		data: {},
-	// 		method: 'get',
-	// 		apiName: `getAdMasterById/${editId}`,
-	// 	};
-  //   console.log(actionData,"actionData");
-  //     dispatch(actions.ADMASTER_GET(actionData));
-      
-  // }
 
   
   useEffect(() => {
-    // if (editId) {
-      setBtnTitle("UPDATE");
+    
+      setBtnTitle("SUBMIT");
       reset(editAbleValues);
-    // }
+ 
   }, [editAbleValues]);
 
  
 
-  // }, [editId]);
+
   const getEditData = (editId) => {
     const actionData = {
 			data: {},
@@ -434,6 +428,7 @@ function AdScreen() {
 		};
     console.log(actionData,"actionData");
     dispatch(actions.ADMASTER_GET(actionData));  
+    // setBtnTitle("UPDATE");
 };
 
 useEffect(() => {
@@ -457,6 +452,13 @@ const handleChange = (newValue) => {
   // Do whatever you want with the new value of ad_vis_location
   console.log("ad_vis_location changed to: ", newValue);
 };
+  
+    const [placeholderValue, setPlaceholderValue] = useState(""); // State to store placeholder value
+
+  // Handler function to handle placeholder change
+  const handlePlaceholderChange = (value) => {
+    setPlaceholderValue(value);
+  };
   return (
     <Grid p={2.5} item md={12}>
       {showToast && (
@@ -529,8 +531,7 @@ const handleChange = (newValue) => {
                         <Tiles
                           label={keyValue.label}
                           handleChange={onChange}
-                          value={value || ""}
-                          placeholder={keyValue.placeholder}
+                        onChangePlaceholder={handlePlaceholderChange}
                           returnId={keyValue.returnId}
                         />
                       </Grid>
