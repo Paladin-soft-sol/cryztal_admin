@@ -54,7 +54,7 @@ export const ColorBanner = (props) => {
       <FormControl className="formControl" fullWidth size="small">
         <Select
           size="small"
-          className="color-vertical"
+          className="color-vertical"  
           fullWidth
           labelId="demo-select-small"
           id="demo-select-small"

@@ -55,7 +55,7 @@ export const CustomDropdown = (props) => {
           inputProps={{ "aria-label": "Without label" }}
         >
           <MenuItem>{placeholder}</MenuItem>
-          {data?.length &&
+          {data?.length &&  
             data?.map((item) => {
               return (
                 <MenuItem

@@ -20,11 +20,12 @@ const options = [
 const STORAGE_KEY = "selectedTiles";
 
 export const Tiles = (props) => {
-  const { label, requiredField ,onChangePlaceholder} = props;
+  const { label, requiredField, onChangePlaceholder } = props;
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [placeholder, setPlaceholder] = useState();
-    console.log(placeholder,"placeholder");
+  console.log(placeholder, "placeholder");
   const maxSelection = 3;
+  
 
   useEffect(() => {
     const storedOptions = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
@@ -34,26 +35,45 @@ export const Tiles = (props) => {
   useEffect(() => {
     generatePlaceholder(selectedOptions);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(selectedOptions));
-      onChangePlaceholder(placeholder);
-  }, [selectedOptions,placeholder,onChangePlaceholder]);
+    onChangePlaceholder(placeholder);
+  }, [selectedOptions, placeholder, onChangePlaceholder]);
 
-  const handleCheckboxChange = (option) => {
-    const isOptionSelected = selectedOptions.some((selectedOption) => selectedOption.value === option.value);
 
-    if (isOptionSelected) {
-      setSelectedOptions((prevOptions) => prevOptions.filter((o) => o.value !== option.value));
-    } else {
-      if (selectedOptions.length < maxSelection) {
+
+const handleCheckboxChange = (option) => {
+  const isOptionSelected = selectedOptions.some((selectedOption) => selectedOption.value === option.value);
+
+  if (isOptionSelected) {
+    setSelectedOptions((prevOptions) => prevOptions.filter((o) => o.value !== option.value));
+  } else {
+    if (selectedOptions.length < maxSelection) {
+      const isValidSelection = selectedOptions.every((selectedOption) => {
+        const selectedIndex = parseInt(selectedOption.value.replace("url", ""));
+        const optionIndex = parseInt(option.value.replace("url", ""));
+
+        const selectedRow = Math.floor((selectedIndex - 1) / 3);
+        const selectedCol = (selectedIndex - 1) % 3;
+        const optionRow = Math.floor((optionIndex - 1) / 3);
+        const optionCol = (optionIndex - 1) % 3;
+
+        return selectedRow === optionRow || selectedCol === optionCol;
+      });
+
+      if (isValidSelection) {
         setSelectedOptions((prevOptions) => [...prevOptions, option]);
+      } else {
+        console.log("Diagonal selection is not allowed.");
       }
     }
-  };
-
+  }
+};
 
 
   const generatePlaceholder = (selectedOptions) => {
     if (selectedOptions.length === maxSelection) {
-      const sortedValues = selectedOptions.map((option) => parseInt(option.value.replace("url", ""), 10)).sort((a, b) => a - b);
+      const sortedValues = selectedOptions
+        .map((option) => parseInt(option.value.replace("url", ""), 10))
+        .sort((a, b) => a - b);
       setPlaceholder(sortedValues.join(", "));
     } else {
       setPlaceholder("");
@@ -65,43 +85,35 @@ export const Tiles = (props) => {
   return (
     <div className="App">
       <div className="col-sm">
-        <CustomTypography
-          type="caption"
-          text={label}
-          customClass="labelTextDrop"
-          colorType="senary"
-          requiredField={requiredField}
-        />
+        <CustomTypography type="caption" text={label} customClass="labelTextDrop" colorType="senary" requiredField={requiredField} />
 
         <FormControl className="colorBanner bye" fullWidth size="small">
-        <Select
-            value=""
-            displayEmpty
-            inputProps={{ "aria-label": "Without label" }}
-            className="tiles-select"
-          >
-            <MenuItem value="" disabled>{placeholder}</MenuItem>
-          
-        
-          <FormGroup className="checkbox-grid">
-            <div className="grid-container Grid_alignment">  
-              {options.map((option) => (
-                <div key={option.value} className="grid-item">
-                  <FormControlLabel
-                    control={
-                      <><Checkbox
-                        checked={selectedOptions.some((o) => o.value === option.value)}
-                        onChange={() => handleCheckboxChange(option)}
-                        disabled={isOptionDisabled(option)} /><span className="disabled"></span></>
-                    }
-                    label={option.label}
-                  />
-                </div>  
-              ))}
-            </div>
-          </FormGroup>
+          <Select value="" displayEmpty inputProps={{ "aria-label": "Without label" }} className="tiles-select">
+            <MenuItem value="" disabled>
+              {placeholder}
+            </MenuItem>
 
-       
+            <FormGroup className="checkbox-grid">
+              <div className="grid-container Grid_alignment">
+                {options.map((option) => (
+                  <div key={option.value} className="grid-item">
+                    <FormControlLabel
+                      control={
+                        <>
+                          <Checkbox
+                            checked={selectedOptions.some((o) => o.value === option.value)}
+                            onChange={() => handleCheckboxChange(option)}
+                            disabled={isOptionDisabled(option)}
+                          />
+                          <span className="disabled"></span>
+                        </>
+                      }
+                      label={option.label}
+                    />
+                  </div>
+                ))}
+              </div>
+            </FormGroup>
           </Select>
         </FormControl>
       </div>
@@ -112,9 +124,12 @@ export const Tiles = (props) => {
 Tiles.propTypes = {
   label: PropTypes.string,
   requiredField: PropTypes.bool,
+  onChangePlaceholder: PropTypes.func.isRequired,
 };
 
 Tiles.defaultProps = {
   label: "",
   requiredField: false,
 };
+
+export default Tiles;

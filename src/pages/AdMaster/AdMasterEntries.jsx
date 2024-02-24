@@ -10,7 +10,7 @@ export const AdMasterEntries = [
 
     {
       isDropdown: true,
-      name: 'ad_vis_id',
+      name: 'shop_id',
       label: 'Select Shop',
       // placeholder: 'Role',
       breakpoint: 3,
@@ -102,7 +102,7 @@ export const AdMasterEntries = [
   ];
   export const DefaultAdMasterEntriesValues = {
     ad_title: "",
-    ad_vis_id:"",
+    shop_id:"",
  
     shop_ad: "",
     tiles: "",

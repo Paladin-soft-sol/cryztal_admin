@@ -263,7 +263,7 @@ function AdScreen() {
   const handleCancel = () => {
     reset({
       ad_title: "",
-      shop_ad: "",
+      shop_id: "",
       ad_master: "",
       ad_vis_location: "",
       ad_from_date: "",
@@ -299,7 +299,7 @@ function AdScreen() {
     const formData = new FormData();
    
     formData.append("ad_title", data1.ad_title);
-    formData.append("shop_id", 1);
+    formData.append("shop_id", selectedAdVisId);
     if (data1?.shop_ad.length > 0) {
       if (!Array.isArray(data1?.shop_ad)) {
         formData.append("shop_ad", data1?.shop_ad instanceof File ? "" : "");
@@ -318,7 +318,7 @@ function AdScreen() {
     // const arr = placeholderValue.split(',');
     formData.append("tiles", JSON.stringify(splitArray));
     formData.append("palette_id", selectedPaletteColorId || "");
-    formData.append("ad_vis_id", selectedAdVisId);
+    formData.append("ad_vis_id", 1);
     formData.append("ad_vis_location", pincodeValue || "");
     // formData.append("ad_vis_location", JSON.stringify(tilesArray) );
     formData.append("ad_from_date", startDate || "");
@@ -438,25 +438,21 @@ useEffect(() => {
         ad_title: admasterGet?.admasterGet?.data?.[0]?.ad_title,
         ad_vis_location: admasterGet?.admasterGet?.data?.[0]?.ad_vis_location,
         palette_id: admasterGet?.admasterGet?.data?.[0]?.palette_id,
-        ad_vis_id: admasterGet?.admasterGet?.data?.[0]?.ad_vis_id,
+        shop_id: admasterGet?.admasterGet?.data?.[0]?.shop_id,
         ad_from_date: admasterGet?.admasterGet?.data?.[0]?.ad_from_date,
         ad_to_date: admasterGet?.admasterGet?.data?.[0]?.ad_to_date,
       } 
       setEditAbleValues(editObj);
-      setSelectedAdVisId(editObj.ad_vis_id);
-      // Call the onchange function and pass the ad_vis_location value
-      handleChange(admasterGet?.admasterGet?.data?.[0]?.ad_vis_id);
+      setSelectedAdVisId(editObj.shop_id);
+      setPincodeValue(editObj.ad_vis_location);
+      setSelectedDates(editObj.ad_from_date);
+      setSelectedDates(editObj.ad_to_date);
     }
   }, [admasterGet]);
-const handleChange = (newValue) => {
-  // Do whatever you want with the new value of ad_vis_location
-  console.log("ad_vis_location changed to: ", newValue);
-};
-  
-    const [placeholderValue, setPlaceholderValue] = useState(""); // State to store placeholder value
 
-  // Handler function to handle placeholder change
-  const handlePlaceholderChange = (value) => {
+  
+    const [placeholderValue, setPlaceholderValue] = useState(""); 
+    const handlePlaceholderChange = (value) => {
     setPlaceholderValue(value);
   };
   return (
@@ -567,14 +563,20 @@ const handleChange = (newValue) => {
                           nationDropdownList={nationDropdownList}
                           placeholder={keyValue.placeholder}
                           returnId={keyValue.returnId}
+
+                              handleChange={(event) => {
+                            setPincodeValue(event.target.value);
+                            onChange(event.target.value);
+                          }}
                         />
                       </Grid>
                     )}
                     {keyValue?.isDateDropdown && (
                       <Grid item md={12} sm={12}>
-                        <DateRangePicker
+                        <DateRangePicker 
                           label={keyValue.label}
                           handleChange={handleDateChange}
+                        
                           date={value || ""}
                           placeholder={keyValue.placeholder}
                           returnId={keyValue.returnId}
@@ -589,10 +591,8 @@ const handleChange = (newValue) => {
                             setSelectedAdVisId(event.target.value);
                             onChange(event.target.value);
                           }}
-                          value={selectedAdVisId || ""}
-                          // value="jhkjhjhh"
+                          value={selectedAdVisId || ""}                      
                           data={dropdownList}
-                          // data="manoj"
                           placeholder={keyValue.placeholder}
                           returnId={keyValue.returnId}
                         />
