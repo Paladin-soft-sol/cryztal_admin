@@ -272,7 +272,7 @@ function Register() {
 		// 		icon: 'check',
 		// 	},
 		// ]);
-		console.log(Array.isArray(data?.shop_logo), 'skferrewe');
+		// console.log(Array.isArray(data?.shop_logo), 'skferrewe');
 		// if (data?.shop_images.length > 0) {
 		// 	alert('1');
 		// 	data?.shop_images.map((item) => {
@@ -285,14 +285,14 @@ function Register() {
 		// 		});
 		// 	});
 		// }
-		if (data?.shop_images.length > 0) {
+		if (data?.shop_images?.length > 0) {
 			const tempArr = [];
 			data?.shop_images.map((item) => {
 				Object.entries(item).map(([key, value]) => tempArr.push(value));
 			});
 			const fileImages = tempArr.filter((image) => image instanceof File);
 
-			if (fileImages.length > 0) {
+			if (fileImages?.length > 0) {
 				fileImages.forEach((image) => {
 					formData.append('shop_images', image);
 				});
@@ -319,7 +319,7 @@ function Register() {
 		// 	});
 		// }
 
-		if (data?.shop_logo.length > 0) {
+		if (data?.shop_logo?.length > 0) {
 			if (!Array.isArray(data?.shop_logo)) {
 				formData.append('shop_logo', data?.shop_logo instanceof File ? '' : '');
 			} else {

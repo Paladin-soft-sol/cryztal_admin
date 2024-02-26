@@ -94,6 +94,7 @@ function AdScreen() {
   const [post, setPost] = useState(null);
   const [selectedPaletteColorId, setSelectedPaletteColorId] = useState(null);
   const [selectedAdVisId, setSelectedAdVisId] = useState(null);
+  const [selectedTiles, setSelectedTiles] = useState(null);
   const [pincodeValue, setPincodeValue] = useState("");
   const shopValue = admasterdropdown?.admasterdropdown?.data?.map(
     (data) => data?.store_name
@@ -268,6 +269,7 @@ function AdScreen() {
       ad_vis_location: "",
       ad_from_date: "",
       ad_to_date: "",
+      tiles: ""
     });
     setBtnTitle("SUBMIT");
     setEditId("");
@@ -279,10 +281,10 @@ function AdScreen() {
   });
 
   const startDate = selectedDates?.startDate
-    ? format(selectedDates.startDate, "yyyy/MM/dd")
+    ? format(selectedDates.startDate, "dd/MM/yyyy")
     : null;
   const endDate = selectedDates?.endDate
-    ? format(selectedDates.endDate, "yyyy/MM/dd")
+    ? format(selectedDates.endDate, "dd/MM/yyyy")
     : null;
 
   const handleDateChange = (dates) => {
@@ -316,7 +318,9 @@ function AdScreen() {
     const splitArray = placeholderValue.split(',');
 
     // const arr = placeholderValue.split(',');
-    formData.append("tiles", JSON.stringify(splitArray));
+    // formData.append("tiles", JSON.stringify(splitArray));
+    // formData.append("tiles", data1.tiles);
+    formData.append("tiles", selectedTiles )
     formData.append("palette_id", selectedPaletteColorId || "");
     formData.append("ad_vis_id", 1);
     formData.append("ad_vis_location", pincodeValue || "");
@@ -441,9 +445,11 @@ useEffect(() => {
         shop_id: admasterGet?.admasterGet?.data?.[0]?.shop_id,
         ad_from_date: admasterGet?.admasterGet?.data?.[0]?.ad_from_date,
         ad_to_date: admasterGet?.admasterGet?.data?.[0]?.ad_to_date,
+        tiles: admasterGet?.admasterGet?.data?.[0]?.tiles,
       } 
       setEditAbleValues(editObj);
       setSelectedAdVisId(editObj.shop_id);
+      setSelectedTiles(editObj.tiles);
       setPincodeValue(editObj.ad_vis_location);
       setSelectedDates(editObj.ad_from_date);
       setSelectedDates(editObj.ad_to_date);
@@ -522,12 +528,28 @@ useEffect(() => {
                         />
                       </Grid>
                     )}
-                    {keyValue?.isChooseTiles && (
+                    {/* {keyValue?.isChooseTiles && (
                       <Grid item md={12} sm={12}>
                         <Tiles
                           label={keyValue.label}
                           handleChange={onChange}
                         onChangePlaceholder={handlePlaceholderChange}
+                          returnId={keyValue.returnId}
+                        />
+                      </Grid>
+                    )} */}
+      {keyValue?.isChooseTiles && (
+                      <Grid item md={12} sm={12}>
+                        <CustomDropdown
+                          label={keyValue.label}
+                          handleChange={(event) => {
+                            setSelectedTiles(event.target.value);
+                            onChange(event.target.value);
+                          }}
+                              
+                           value={selectedTiles || ""}   
+                          data={keyValue.DropdownData}
+                          placeholder={keyValue.placeholder}
                           returnId={keyValue.returnId}
                         />
                       </Grid>

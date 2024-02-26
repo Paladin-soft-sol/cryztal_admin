@@ -40,18 +40,44 @@ export const AdMasterEntries = [
 
 
     
-      {
-        isChooseTiles: true,
-        name: 'tiles',
-        label: 'Choose Tiles',
-        placeholder: 'Role',
-        breakpoint: 3,
-        disabled: true,
-        DropdownData: [
+      // {
+      //   isChooseTiles: true,
+      //   name: 'tiles',
+      //   label: 'Choose Tiles',
+      //   placeholder: 'Role',
+      //   breakpoint: 3,
+      //   disabled: true,
+      //   DropdownData: [
         
-        ],
-        customClass: 'drop_align_edit',
-      },
+      //   ],
+      //   customClass: 'drop_align_edit',
+      // },
+
+        {
+      isChooseTiles: true,
+      name: 'tiles',
+      label: 'Choose Tiles',
+      // placeholder: 'Role',
+      breakpoint: 3,
+      disabled: true,
+          DropdownData: [
+             {
+            id: 1,
+            value: 'Top',
+          },
+          {
+            id: 2,
+            value: 'Middle',
+          },
+          {
+            id: 3,
+            value: 'Bottom',
+          },
+      ],
+      customClass: 'drop_align_edit',
+      returnId:true,
+    },
+      
       {
         isColorBanner: true,
         name: 'palette_id',

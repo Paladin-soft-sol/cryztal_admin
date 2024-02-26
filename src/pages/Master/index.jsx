@@ -307,7 +307,7 @@ function MasterScreen() {
 	}, [deleteId, deleteApi]);
 
 	const callOnSubmit = (submitData) => {
-		alert('fghfghf')
+		// alert('fghfghf')
 		if (tabValue === 0) {
 			if (editId) {
 			

@@ -4,7 +4,7 @@ import Layout from "./layouts";
 
 function RoutePage() {
   return (
-    <Router basename="/crystal-webadmin">
+    <Router basename="/cryztal_testing">
       <Layout />
     </Router>
   );

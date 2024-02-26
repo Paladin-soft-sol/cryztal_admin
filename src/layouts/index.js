@@ -5,10 +5,10 @@ import Dashboard from "../pages/Dashboard/Dashboard";
 import Approval from "../pages/Approval";
 import Login from "../pages/Login/Login";
 import Reports from "../pages/Reports";
-// import Master from '../pages/Master';
+
 import ReportView from "../pages/Reports/Report";
 import Ad from "../pages/AdMaster";
-// import AdView from "../pages/AdMaster/adViewModal";
+
 import Customer from "../pages/customer";
 import CustomerView from "../pages/customer/userViewModal";
 import AdView from "../pages/AdMaster/adViewModal";
@@ -16,12 +16,12 @@ import Partner from "../pages/Partner/Partner";
 import Registration from "../pages/Partner/RegisterForm";
 import ApprovalView from "../pages/Approval/Model/Model";
 import ProtectedLayout from "./ProtectedRoute";
-// import { HomeLayout } from './HomeLayout';
+
 import NotFoundError from "../pages/NotFoundError";
 import MasterScreen from "../pages/Master";
 import DealEditForm from "../pages/Approval/DealEditForm";
 
-// import { HomeLayout } from './HomeLayout';
+
 
 /**
  *
@@ -29,11 +29,11 @@ import DealEditForm from "../pages/Approval/DealEditForm";
  */
 function Layout() {
   const navigate = useNavigate();
-  // const match = useMatch();
+ 
 
   const loginAdmin = useSelector((state) => state?.login?.login);
 
-  // const callNavigateFunction = () => <Navigate to="/cryztal" replace />;
+ 
 
   useEffect(() => {
     if (loginAdmin?.data?.data?.token.length) {
@@ -49,7 +49,7 @@ function Layout() {
         <Route path="master" element={<MasterScreen />} />
         <Route path="approval" element={<Approval />} />
         <Route path="Reports" element={<Reports />} />
-        {/*<Route path="/cryztal/Reports/ReportsView" element={<ReportView />} /> */}
+       
         <Route path="AdMaster" element={<Ad />} />
         <Route
           path="/cryztal/AdMaster/AdView"
@@ -61,7 +61,7 @@ function Layout() {
           element={<CustomerView />}
         />
         
-        {/* <Route path="/Partner" element={<HomeLayout />}> */}
+        
         <Route path="Partner" element={<Partner />} />
         <Route path="/cryztal/Partner/Register" element={<Registration />} />
         <Route
