@@ -80,7 +80,7 @@ const ADMASTER_EDIT = createAsyncThunk(
       return {
         ...defaultState.List,
         message: data?.data.Message,
-        data: data?.data?.data,
+        editData: data?.data?.data,
       };
     } catch (error) {
       return rejectWithValue({
@@ -190,8 +190,38 @@ const ADMASTER_GET = createAsyncThunk(
       );
       return {
         ...defaultState.List,
+        loading: true,
         message: data?.data.Message,
-        data: data?.data?.data,
+        editData: data?.data?.data?.[0],
+      };
+    } catch (error) {
+      return rejectWithValue({
+        ...defaultReject.List,
+        message: error.message,
+      });
+    }
+  }
+);
+
+const ADMASTER_VIEW = createAsyncThunk(
+  "admaster/admasterView",
+  // eslint-disable-next-line default-param-last
+  async (
+    // eslint-disable-next-line default-param-last
+    payload = {},
+    { rejectWithValue }
+  ) => {
+    try {
+      const data = await fetchData(
+        payload?.data,
+        payload?.method,
+        payload?.apiName
+      );
+      return {
+        ...defaultState.List,
+        loading: true,
+        message: data?.data.Message,
+        data: data?.data?.data?.[0],
       };
     } catch (error) {
       return rejectWithValue({
@@ -212,6 +242,9 @@ const admasterSlice = createSlice({
       ...defaultState.List,
     },
     admasterCreate: {
+      ...defaultState.List,
+    },
+    admasterView: {
       ...defaultState.List,
     },
     admasterDelete: {
@@ -288,11 +321,6 @@ const admasterSlice = createSlice({
         (state.admasterDelete.error = true),
         (state.admasterDelete = action.payload);
     },
-    [ADMASTER_GET.fulfilled]: (state, action) => {
-      (state.admasterGet.loading = false),
-        (state.admasterGet.error = false),
-        (state.admasterGet = action.payload);
-    },
     [ADMASTER_GET.pending]: (state, action) => {
       (state.admasterGet.loading = true),
         (state.admasterGet.error = false),
@@ -302,6 +330,26 @@ const admasterSlice = createSlice({
       (state.admasterGet.loading = false),
         (state.admasterGet.error = true),
         (state.admasterGet = action.payload);
+    },
+    [ADMASTER_GET.fulfilled]: (state, action) => {
+      (state.admasterGet.loading = false),
+      (state.admasterGet.error = false),
+      (state.admasterGet = action.payload);
+    },
+    [ADMASTER_VIEW.pending]: (state, action) => {
+      (state.admasterView.loading = true),
+        (state.admasterView.error = false),
+        (state.admasterView.loading = true);
+    },
+    [ADMASTER_VIEW.rejected]: (state, action) => {
+      (state.admasterView.loading = false),
+        (state.admasterView.error = true),
+        (state.admasterView = action.payload);
+    },
+    [ADMASTER_VIEW.fulfilled]: (state, action) => {
+      (state.admasterView.loading = false),
+        (state.admasterView.error = false),
+        (state.admasterView = action.payload);
     },
     	[ADMASTER_DETAILS.fulfilled]: (state, action) => {
 			(state.admaster_details.loading = false),
@@ -344,7 +392,8 @@ const admasterAction = {
   ADMASTER_DELETE,
   ADMASTER_GET,
   ADMASTER_DETAILS,
-	ADMASTER_STATUS,
+  ADMASTER_STATUS,
+  ADMASTER_VIEW,
 };
 export { admasterAction };
 export default admasterSlice.reducer;

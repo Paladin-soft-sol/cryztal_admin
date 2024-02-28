@@ -1,6 +1,6 @@
 {
   "name": "cryztal-webadmin",
-  "homepage": "http://122.165.52.124:8081/cryztal_testing/",
+  "homepage": "http://122.165.52.124:8081/crystal-webadmin/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

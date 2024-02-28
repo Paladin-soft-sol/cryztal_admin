@@ -27,8 +27,8 @@ export const AdMasterEntries = [
         label: 'Profile',
         regForm: true,
         pattern: /\.(jpeg|png|gif|bmp)$/i,
-        validation: { required: true },
-        requiredField: true,
+        // validation: { required: true },
+        // requiredField: true,
         error_message: 'Image',
         className: 'logoText',
       },
@@ -105,6 +105,7 @@ export const AdMasterEntries = [
         name: 'ad_from_date',
         label: 'Ad Duration',
         placeholder: 'Role',
+        dateKeys: { start: 'ad_from_date', end: 'ad_to_date' },
         breakpoint: 3,
         disabled: true,
         DropdownData: [

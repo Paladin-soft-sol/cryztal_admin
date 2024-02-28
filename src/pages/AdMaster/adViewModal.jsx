@@ -16,7 +16,7 @@ import './adView.css';
   
 
 function AdView(props) {
-const { admaster_details } = useSelector((state) => state?.admaster);
+const admaster_details  = useSelector((state) => state?.admaster?.admasterView?.data);
  
   const style = {
     position: 'absolute',
@@ -50,8 +50,8 @@ const { admaster_details } = useSelector((state) => state?.admaster);
   	const ToDate = 'To Date';
   const Footer = 'Store Images';
   
-  const result = admaster_details?.data?.approval_status;
-  console.log(result,"resultresult");
+  const result = admaster_details?.approval_status;
+  console.log(admaster_details,"resultresult");
 
 	useEffect(() => {
 		const actionData = {
@@ -60,7 +60,7 @@ const { admaster_details } = useSelector((state) => state?.admaster);
 			apiName: `getAdMasterById/${viewId}`,
 		};
     console.log(actionData,"actionData");
-		dispatch(actions.ADMASTER_GET(actionData));
+		dispatch(actions.ADMASTER_VIEW(actionData));
 	}, [dispatch]);
 
 
@@ -105,7 +105,7 @@ const { admaster_details } = useSelector((state) => state?.admaster);
 				<Grid container item md={12} sm={12}>
 					<Grid item md={4} sm={12}>
 						<div className="Discount_Image">
-							<img src={admasterGet?.admasterGet?.data?.[0]?.shop_images} alt="" className="Dog" />
+							<img src={admaster_details?.shop_images} alt="" className="Dog" />
 						</div>
 					</Grid>
 					<Grid item md={8} sm={12}>
@@ -120,7 +120,7 @@ const { admaster_details } = useSelector((state) => state?.admaster);
 									<CustomTypography
 										customClass="customarData"
 										type="caption"
-										text={admasterGet?.admasterGet?.data?.[0]?.ad_title}
+										text={admaster_details?.ad_title}
                         />
                         </Grid>
                       <Grid>
@@ -130,7 +130,7 @@ const { admaster_details } = useSelector((state) => state?.admaster);
 									<CustomTypography
 										customClass="customarData"
 										type="caption"
-										text={admasterGet?.admasterGet?.data?.[0]?.ad_vis_location}
+										text={admaster_details?.ad_vis_location}
                         />{' '}
                         </Grid>
 								</Grid>
@@ -144,7 +144,7 @@ const { admaster_details } = useSelector((state) => state?.admaster);
 										<CustomTypography
 											customClass="customarData"
 											type="caption"
-											text={admasterGet?.admasterGet?.data?.[0]?.store_name}
+											text={admaster_details?.store_name}
 										/>
 									</div>
 								</Grid>
@@ -157,7 +157,7 @@ const { admaster_details } = useSelector((state) => state?.admaster);
 									<CustomTypography
 										type="caption"
 										customClass="customarData"
-										text={admasterGet?.admasterGet?.data?.[0]?.tiles}
+										text={admaster_details?.tiles}
 									/>
 								</Grid>
 							</Grid>
@@ -170,7 +170,7 @@ const { admaster_details } = useSelector((state) => state?.admaster);
 										<CustomTypography
 											customClass="customarData"
 											type="caption"
-											text={admasterGet?.admasterGet?.data?.[0]?.palette_color}
+											text={admaster_details?.palette_color}
 										/>
 									</div>
 								</Grid>
@@ -186,7 +186,7 @@ const { admaster_details } = useSelector((state) => state?.admaster);
 									<CustomTypography
 										customClass="customarData"
 										type="caption"
-										text={admasterGet?.admasterGet?.data?.[0]?.ad_from_date}
+										text={admaster_details?.ad_from_date}
 									/>{' '}
                     </Grid>
                     <Grid item md={6}>
@@ -196,7 +196,7 @@ const { admaster_details } = useSelector((state) => state?.admaster);
 									<CustomTypography
 										customClass="customarData"
 										type="caption"
-										text={admasterGet?.admasterGet?.data?.[0]?.ad_to_date}
+										text={admaster_details?.ad_to_date}
                         />{' '}
                         </Grid>
                         </Grid>

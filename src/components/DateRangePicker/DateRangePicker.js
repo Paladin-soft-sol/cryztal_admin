@@ -5,12 +5,18 @@ import './DateRangePicker.css';
 import PropTypes from "prop-types";
 import { CustomTypography } from "../Typography/Typography";
 import { FormControl, Select, MenuItem, Box, Grid } from "@mui/material";
-
+const checkData = (val) => {
+  try {
+    return new Date(val);
+  } catch (e) {
+    return ''
+  }
+}
 export const DateRangePicker = (props) => {
   const {
     data,
     handleChange,  
-  
+    date,
     value,
     disabled,
     name,
@@ -19,25 +25,27 @@ export const DateRangePicker = (props) => {
     placeholder,
     requiredField,
     returnId,
+    dateKeys = {},
+    edit = false,
   } = props;
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
 
   useEffect(() => {
-    console.log('datae', value);
-    if (value) {
-      console.log('datae', value)
-      handleStartDateChange(new Date(value));
+    console.log('dataeee', props);
+    if (date && edit) {
+      console.log(date, "date1");
+      if (dateKeys.start) {
+          console.log(dateKeys.start, "date1hgjh");
+        handleStartDateChange(checkData(date[dateKeys.start]));
+      }
+      if (dateKeys.end) { 
+        handleEndDateChange(checkData(date[dateKeys.end]));
+      }
     }
-  }, [value])
+  }, [date, edit]);
 
-  // const handleStartDateChange = (date) => {
-  //   setStartDate(date);
-  // };
 
-  // const handleEndDateChange = (date) => {
-  //   setEndDate(date);
-  // };
 
   const handleStartDateChange = (date) => {
       console.log(date,"datedate");
@@ -64,6 +72,7 @@ export const DateRangePicker = (props) => {
       </Box>
     
         <DatePicker
+          // dateFormat = "yyyy/MM/dd"
           selected={startDate}
           onChange={handleStartDateChange}
           className="fromDate"
@@ -82,6 +91,7 @@ export const DateRangePicker = (props) => {
       </Box>
        
         <DatePicker
+          // dateFormat = "yyyy/MM/dd"
           selected={endDate}
           onChange={handleEndDateChange}
           minDate={startDate}
@@ -105,6 +115,7 @@ DateRangePicker.propTypes = {
   requiredField: PropTypes.bool,
   placeholder: PropTypes.string,
   returnId: PropTypes.bool,
+  dateKeys: PropTypes.any
 };
 DateRangePicker.defaultProps = {
   disabled: false,
@@ -113,4 +124,5 @@ DateRangePicker.defaultProps = {
   requiredField: false,
   placeholder: "",
   returnId: false,
+  dateKeys: null,
 };

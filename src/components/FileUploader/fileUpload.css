@@ -62,3 +62,152 @@ padding-left: 10px;
   cursor: pointer;
   display: none;
 }
+
+#file-upload-button::-webkit-file-upload-button {
+  background-color: red;
+  /* width: 250px;
+  height: 30px; */
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  row-gap: 10px;
+}
+
+#file-upload-button::-moz-file-upload-button {
+  background-color: red;
+  width: 250px;
+  height: 30px;
+  color: #fff;
+  padding: 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  row-gap: 10px;
+}
+
+.uploadImageContainerNew {
+  background-color: red;
+  width: 250px;
+  height: 30px;
+  color: #fff;
+  padding: 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Button-Style {
+  background-color: red;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 0px;
+}
+
+.Image-Size {
+  width: 100px;
+  height: 100px;
+}
+
+/* .selectedImagesTiles {
+  position: absolute !important;
+} */
+.Button-Position {
+  position: relative !important;
+  bottom: 105px;
+  left: 75px;
+}
+
+.Delete-Button-Style {
+  background-color: #000 !important;
+  width: 25px !important;
+  height: 25px !important;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid #ff9062 !important;
+  color: #ff9062 !important;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 10px !important;
+}
+
+.Align-Selsections {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 50px;
+}
+
+.Arrow-Style {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: none;
+  background-color: #ff9062;
+  color: white;
+}
+
+.Arrow-Position {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.imageProfile {
+  border-radius: 50% !important;
+  width: 100px !important;
+  height: 100px !important;
+  margin-left: 5px !important;
+}
+
+.imageProfile img {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.AddYourProfile {
+  text-align: center;
+
+}
+
+.chooesImage {
+  border: 1px solid #000;
+  padding: 5px;
+  background-color: #e7796b;
+  color: #fff !important;
+}
+
+.uploadSingleImageContainer {
+  background-color: red;
+  width: 250px;
+  height: 30px;
+  color: #fff;
+  padding: 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
