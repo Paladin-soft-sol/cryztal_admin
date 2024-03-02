@@ -19,7 +19,6 @@ import {
   MultiImage,
   Tiles,
 } from "../../components/index";
-
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -49,7 +48,7 @@ import { format } from "date-fns";
 
 function AdScreen() {
   const defaultValues = DefaultAdMasterEntriesValues;
-  // console.log(defaultValues, "defaultValuesdefaultValues");
+  console.log(defaultValues,"defaultValues123")
   const [editAbleValues, setEditAbleValues] = useState({});
   const {
     control,
@@ -62,7 +61,6 @@ function AdScreen() {
     defaultValues: JSON.parse(JSON.stringify(editAbleValues)),
   });
   const isEdit =  Object.keys(editAbleValues).length > 0;
-  console.log('getValues', getValues(), editAbleValues);
   const getFormValues = getValues();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -70,9 +68,7 @@ function AdScreen() {
   const admasterdropdown = useSelector((state) => state?.admasterdropdown);
   const palettedropdown = useSelector((state) => state?.palettedropdown);
   const admaster = useSelector((state) => state?.admaster);
-  // const admasterGet = useSelector((state) => state?.admaster);
-  // console.log("🚀 ~ AdScreen ~ admasterGet:", admasterGet)
-  const adMasterGet = useSelector((state) => state?.admaster?.admasterGet?.editData);
+  const adMasterGet = useSelector((state) => state?.admaster?.admasterGet?.editData);  
   const admasterCreate = useSelector((state) => state?.admaster);
   const [showToast, setShowToast] = useState();
   const [list, setList] = useState();
@@ -98,13 +94,7 @@ function AdScreen() {
   const [selectedPaletteColorId, setSelectedPaletteColorId] = useState(null);
   const [selectedAdVisId, setSelectedAdVisId] = useState(null);
   const [selectedTiles, setSelectedTiles] = useState(null);
-  // const [startDate, setStartDate] = useState(null);
   const [pincodeValue, setPincodeValue] = useState("");
-  const shopValue = admasterdropdown?.admasterdropdown?.data?.map(
-    (data) => data?.store_name
-  );
-
-
 
 
   useEffect(() => {
@@ -166,13 +156,12 @@ function AdScreen() {
     admasterstatedropdown?.admasterstatedropdown?.data?.map((values, index) =>
       tempArr.push({
         id: values?.state_id,
-
         value: values?.state,
       })
     );
-    // console.log(tempArr, "statetempArr");
     setStateDropdownList(tempArr);
   }, [admasterstatedropdown]);
+
   useEffect(() => {
     const statedropdownData = {
       data: {},
@@ -195,8 +184,6 @@ function AdScreen() {
         value: values?.city,
       })
     );
-    console.log(tempArr, "citytempArr");
-    // alert('tempArr')
     setCityDropdownList(tempArr);
   }, [admastercitydropdown]);
   useEffect(() => {
@@ -220,7 +207,6 @@ function AdScreen() {
         value: values?.country,
       })
     );
-    // console.log(tempArr, "countrytempArr");
     setNationDropdownList(tempArr);
   }, [admasternationdropdown]);
 
@@ -303,10 +289,8 @@ function AdScreen() {
   function onSubmit(data1) {
    
     const formData = new FormData();
-   
     formData.append("ad_title", data1.ad_title);
     formData.append("shop_id", selectedAdVisId);
-    // formData.append("shop_ad", image.raw);
     if (data1?.shop_ad?.length > 0) {
       if (!Array.isArray(data1?.shop_ad)) {
         formData.append("shop_ad", data1?.shop_ad instanceof File ? "" : "");
@@ -315,27 +299,18 @@ function AdScreen() {
           formData.append("shop_ad", item instanceof File ? item : "");
         });
       }
-    } 
-
-
-
-    // const tilesArray = [placeholderValue];
+    }
     const splitArray = placeholderValue.split(',');
-
-    // const arr = placeholderValue.split(',');
-    // formData.append("tiles", JSON.stringify(splitArray));
-    // formData.append("tiles", data1.tiles);
+  
     formData.append("tiles", selectedTiles )
     formData.append("palette_id", selectedPaletteColorId || "");
     formData.append("ad_vis_id", 1);
     formData.append("ad_vis_location", pincodeValue || "");
-  formData.append("ad_from_date", startDate || "");
+    formData.append("ad_from_date", startDate || "");
     formData.append("ad_to_date", endDate || "");
-    // formData.append("ad_from_date", format(getFormValues?.ad_from_date, 'yyyy/mm/dd') || "");
-    // formData.append("ad_to_date", format(getFormValues?.ad_to_date, 'yyyy/mm/dd') || "");
     formData.append("created_by", 1);
     formData.append("updated_by", 1);
-    reset(defaultValues);
+    reset(defaultValues); 
     setResetValue(defaultValues);
     callOnSubmit(formData);
     setBtnTitle("SUBMIT");
@@ -344,45 +319,44 @@ function AdScreen() {
  
 
   const callOnSubmit = (formData) => {
-    if (editId) {
-      updateAdMasterPayload.data = { ...formData };
-      updateAdMasterPayload.id = editId;
+    if (adMasterGet) {
+      const adEditId = adMasterGet?.ad_id;
       const data = {
         data: formData,
         method: "put",
         apiName: "updateAdMaster",
-        id : editId
+        id : adEditId
       };
       dispatch(actions.ADMASTER_EDIT(data));
-      
-    
-    } else { 
+    }
+    else { 
       createAdMasterPayload.data = { ...formData };
       const data = {
         data: formData,
         method: "post",
         apiName: "createAdMaster",
       };
-      dispatch(actions.ADMASTER(data));
-     
+      dispatch(actions.ADMASTER(data));     
     }
     setEditId();
-    setBtnTitle("UPDATE");
   };
+  useEffect(() => {
+    if (adMasterGet) {
+      setBtnTitle("UPDATE");
+      reset(editAbleValues);
+    }
+  }, [editAbleValues,adMasterGet]);
+
   const handleCityChange = (cityValue) => {
- 
     setPincodeValue(cityValue);
-    console.log("City changed:", cityValue);
   };
 
   const handleStateChange = (stateValue) => {
     setPincodeValue(stateValue);
-    console.log("State changed:", stateValue);
   };
 
   const handleNationChange = (nationValue) => {
     setPincodeValue(nationValue);
-    console.log("Nation changed:", nationValue);
   };
 
   // Get Function
@@ -407,8 +381,7 @@ function AdScreen() {
     dispatch(actions.ADMASTER_DELETE(deleteData));
     setList([
       {
-        id: 1,
-    
+        id: 1,   
         description: "Data Removed successfully",
         backgroundColor: "check",
         icon: "check",
@@ -417,20 +390,7 @@ function AdScreen() {
     setShowToast(true);
   };
 
-
-
-  
-  useEffect(() => {
-    
-      setBtnTitle("SUBMIT");
-      reset(editAbleValues);
- 
-  }, [editAbleValues]);
-
- 
-
-
-  const getEditData = (editId) => {
+const getEditData = (editId) => {
     const actionData = {
 			data: {},
 			method: 'get',
@@ -439,14 +399,11 @@ function AdScreen() {
 		};
     console.log(actionData,"actionData");
     dispatch(actions.ADMASTER_GET(actionData));  
-    // setBtnTitle("UPDATE");
 };
 
   useEffect(() => {
-  console.log('admasterGet2', adMasterGet)
-    if (adMasterGet) {
-      console.log(adMasterGet, "setEditAbleValues123"); 
-      let editObj = {
+   if (adMasterGet) {
+        let editObj = {
         ad_title: adMasterGet.ad_title,
         ad_vis_location: adMasterGet.ad_vis_location,
         palette_id: adMasterGet.palette_id,
@@ -654,9 +611,7 @@ function AdScreen() {
                     )}
                     {keyValue?.isSingleImageUpload && (
                       <Grid item md={12} sm={12} className="shop_img_align">
-                      
-
-                        <CustomFileUploader
+                         <CustomFileUploader
                           Label="Upload Ad"
                           upLoad={CustomIcons.UploadIcon}
                           getImage={(val) => {
@@ -678,9 +633,7 @@ function AdScreen() {
                   />
                 </Grid>
               )}
-          
-                
-            </Grid>
+             </Grid>
           ))}
         </Grid>
         <Grid

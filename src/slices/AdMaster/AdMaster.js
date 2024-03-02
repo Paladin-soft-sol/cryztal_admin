@@ -14,7 +14,7 @@ const ADMASTER = createAsyncThunk(
     payload = {},
     { rejectWithValue }
   ) => {
-    // console.log(payload,"payloadpayloadpayload");
+    // console.log(payload,"payload");
     try {
       const data = await fetchData(
         payload?.data,

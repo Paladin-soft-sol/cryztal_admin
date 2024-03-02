@@ -130,7 +130,6 @@ export const AdMasterEntries = [
   export const DefaultAdMasterEntriesValues = {
     ad_title: "",
     shop_id:"",
- 
     shop_ad: "",
     tiles: "",
     palette_id: "",

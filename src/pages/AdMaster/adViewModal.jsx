@@ -29,7 +29,7 @@ const admaster_details  = useSelector((state) => state?.admaster?.admasterView?.
     boxShadow: 24,
   };
 
-  const { viewId ,editId } = props;
+  const { viewId  } = props;
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
