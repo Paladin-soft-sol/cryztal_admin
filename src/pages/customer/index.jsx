@@ -71,7 +71,7 @@ function CustomerScreen() {
 	}, [customer]);
 
 	return (
-		<Grid p={2.5} item md={12}>
+		<Grid pl={4} item md={12}>
 			<Grid container md={12}>
 				<CustomTypography
 					type="header"

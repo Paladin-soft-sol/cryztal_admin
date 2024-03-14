@@ -446,7 +446,7 @@ function Register() {
 	// }, [logoImage]);
 
 	return (
-		<Grid container item md={12} pt={2}>
+		<Grid container item md={12} pt={2} pl={4}>
 			<Grid
 				container
 				item
@@ -486,7 +486,7 @@ function Register() {
 								render={({ field: { onChange, value } }) => (
 									<>
 										{keyValue?.isTextInput && (
-											<Grid item md={12} sm={12}>
+											<Grid item md={12} sm={12} className="partner-text">
 												<TextInput
 													InputProps={{ style: { fontSize: 4 } }}
 													label={keyValue.label}

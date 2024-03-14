@@ -125,9 +125,9 @@ function Partner() {
           customClass="headTextReg"
           text={label}
         />
-        <NavLink to="Register">
+        {/* <NavLink to="Register">
 					<img src={CustomIcons.AddIcon} alt="" />
-				</NavLink>
+				</NavLink> */}
       </Grid>
 
       <Grid item p={2.5} className="table">

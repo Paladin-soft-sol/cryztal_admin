@@ -67,7 +67,7 @@ export const MultiImage = (props) => {
       </div>
 
       <div className="form-group preview">
-        {file.length > 0 &&
+        {file?.length > 0 &&
           file.map((item, index) => {
             return (
               <div className="imageViewer" key={item}>

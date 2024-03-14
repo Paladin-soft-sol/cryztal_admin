@@ -456,7 +456,7 @@ function MasterScreen() {
 	};
 	return (
 		<div>
-			<Grid item container>
+			<Grid item container pl={4}>
 				{showToast && (
 					<>
 						<Stack sx={{ width: '100%', color: 'grey.500' }} spacing={2}>
@@ -506,7 +506,7 @@ function MasterScreen() {
 							}}
 						/>
 					</Grid>
-					<Grid container item p={2} md={12} display="flex">
+					<Grid container item p={2}  md={12} display="flex">
 						<Grid container item md={10} sm={12} spacing={1} display="flex">
 							{entries?.map((keyValue) => (
 								<Grid item md={keyValue.breakpoint} pl={2} sm={6}>
@@ -627,7 +627,7 @@ function MasterScreen() {
 							action
 							actionItem={
 								tabValue === 0
-									? { edit: true, deleteIcon: false }
+									? { edit: true, deleteIcon: true }
 									: tabValue === 2
 									? { view: true, edit: true, deleteIcon: true }
 									: tabValue === 3

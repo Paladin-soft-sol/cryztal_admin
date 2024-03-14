@@ -36,7 +36,7 @@ function Layout() {
  
 
   useEffect(() => {
-    if (loginAdmin?.data?.data?.token.length) {
+    if (loginAdmin?.data?.data?.token?.length) {
       localStorage.setItem("LoginChecker", loginAdmin?.data?.data?.token);
     }
   }, [loginAdmin]);

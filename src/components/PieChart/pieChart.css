@@ -2,3 +2,10 @@
   margin-top: -18% !important;
   margin-left: -16px;
 }
+.recharts-legend-wrapper{
+  position: absolute;
+    width: auto;
+    height: auto;
+    right: 48px !important;
+    top: 173px;
+}

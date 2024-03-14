@@ -110,13 +110,14 @@ export const PincodeDropdown = (props) => {
               // className="PincodeTextInput"
               value={value}
               customClass="capitalize"
+              type= "number"
               onHandleChange={handlePincodeInputChange}
             />
-          </Grid>
+          </Grid>  
         )}
         {personName === "City Wide" && (
           <CustomDropdown
-            data={cityDropdownList}
+            data={cityDropdownList} 
             placeholder="Select City"
             customClass="PincodeDropdown"
             handleChange={(event) => {

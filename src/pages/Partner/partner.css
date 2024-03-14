@@ -82,3 +82,6 @@
 .shop_img_align {
 	position: relative;
 }
+.partner-text>div>div>.textLabel{
+	font-size: 17px;
+}

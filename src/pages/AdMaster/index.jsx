@@ -33,13 +33,12 @@ import AdView from "./adViewModal";
 import Toast from "../../utils/Notification/Toast";
 import {
   AdMasterEntries,
-  DefaultAdMasterEntriesValues,  
+  DefaultAdMasterEntriesValues,
   updateAdMasterPayload,
   createAdMasterPayload,
 } from "./AdMasterEntries";
 import "./main.css";
 import { format } from "date-fns";
-
 
 /**
  *
@@ -48,7 +47,7 @@ import { format } from "date-fns";
 
 function AdScreen() {
   const defaultValues = DefaultAdMasterEntriesValues;
-  console.log(defaultValues,"defaultValues123")
+  console.log(defaultValues, "defaultValues123");
   const [editAbleValues, setEditAbleValues] = useState({});
   const {
     control,
@@ -60,7 +59,7 @@ function AdScreen() {
   } = useForm({
     defaultValues: JSON.parse(JSON.stringify(editAbleValues)),
   });
-  const isEdit =  Object.keys(editAbleValues).length > 0;
+  const isEdit = Object.keys(editAbleValues)?.length > 0;
   const getFormValues = getValues();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -68,7 +67,9 @@ function AdScreen() {
   const admasterdropdown = useSelector((state) => state?.admasterdropdown);
   const palettedropdown = useSelector((state) => state?.palettedropdown);
   const admaster = useSelector((state) => state?.admaster);
-  const adMasterGet = useSelector((state) => state?.admaster?.admasterGet?.editData);  
+  const adMasterGet = useSelector(
+    (state) => state?.admaster?.admasterGet?.editData
+  );
   const admasterCreate = useSelector((state) => state?.admaster);
   const [showToast, setShowToast] = useState();
   const [list, setList] = useState();
@@ -95,7 +96,6 @@ function AdScreen() {
   const [selectedAdVisId, setSelectedAdVisId] = useState(null);
   const [selectedTiles, setSelectedTiles] = useState(null);
   const [pincodeValue, setPincodeValue] = useState("");
-
 
   useEffect(() => {
     const tempArr = [];
@@ -259,7 +259,7 @@ function AdScreen() {
       ad_vis_location: "",
       ad_from_date: "",
       ad_to_date: "",
-      tiles: ""
+      tiles: "",
     });
     setBtnTitle("SUBMIT");
     setEditId("");
@@ -281,13 +281,19 @@ function AdScreen() {
     setSelectedDates(dates);
   };
 
-
   const handlePincodeChange = (value) => {
-  setPincodeValue(value);
+    setPincodeValue(value);
   };
 
+  function resetAllValues() {
+    setSelectedAdVisId("");
+    setSelectedTiles([]);
+    setSelectedPaletteColorId("");
+    setPincodeValue("");
+    reset(defaultValues);
+  }
+
   function onSubmit(data1) {
-   
     const formData = new FormData();
     formData.append("ad_title", data1.ad_title);
     formData.append("shop_id", selectedAdVisId);
@@ -300,9 +306,9 @@ function AdScreen() {
         });
       }
     }
-    const splitArray = placeholderValue.split(',');
-  
-    formData.append("tiles", selectedTiles )
+    const splitArray = placeholderValue.split(",");
+
+    formData.append("tiles", JSON.stringify(splitArray));
     formData.append("palette_id", selectedPaletteColorId || "");
     formData.append("ad_vis_id", 1);
     formData.append("ad_vis_location", pincodeValue || "");
@@ -310,13 +316,12 @@ function AdScreen() {
     formData.append("ad_to_date", endDate || "");
     formData.append("created_by", 1);
     formData.append("updated_by", 1);
-    reset(defaultValues); 
+    reset(defaultValues);
     setResetValue(defaultValues);
     callOnSubmit(formData);
     setBtnTitle("SUBMIT");
     setEditId();
   }
- 
 
   const callOnSubmit = (formData) => {
     if (adMasterGet) {
@@ -325,18 +330,17 @@ function AdScreen() {
         data: formData,
         method: "put",
         apiName: "updateAdMaster",
-        id : adEditId
+        id: adEditId,
       };
       dispatch(actions.ADMASTER_EDIT(data));
-    }
-    else { 
+    } else {
       createAdMasterPayload.data = { ...formData };
       const data = {
         data: formData,
         method: "post",
         apiName: "createAdMaster",
       };
-      dispatch(actions.ADMASTER(data));     
+      dispatch(actions.ADMASTER(data));
     }
     setEditId();
   };
@@ -345,7 +349,7 @@ function AdScreen() {
       setBtnTitle("UPDATE");
       reset(editAbleValues);
     }
-  }, [editAbleValues,adMasterGet]);
+  }, [editAbleValues, adMasterGet]);
 
   const handleCityChange = (cityValue) => {
     setPincodeValue(cityValue);
@@ -368,7 +372,6 @@ function AdScreen() {
 
   // Delete Function
   const handleDelete = (id) => {
-   
     setDeleteApi(true);
     setTimeout(() => setDeleteApi(false), 1000);
     setOpen(false);
@@ -377,11 +380,11 @@ function AdScreen() {
       method: "delete",
       apiName: `deleteAdMaster/${id}`,
     };
-   
+
     dispatch(actions.ADMASTER_DELETE(deleteData));
     setList([
       {
-        id: 1,   
+        id: 1,
         description: "Data Removed successfully",
         backgroundColor: "check",
         icon: "check",
@@ -390,20 +393,20 @@ function AdScreen() {
     setShowToast(true);
   };
 
-const getEditData = (editId) => {
+  const getEditData = (editId) => {
     const actionData = {
-			data: {},
-			method: 'get',
+      data: {},
+      method: "get",
       apiName: `getAdMasterById/${editId}`,
       edit: true,
-		};
-    console.log(actionData,"actionData");
-    dispatch(actions.ADMASTER_GET(actionData));  
-};
+    };
+    console.log(actionData, "actionData");
+    dispatch(actions.ADMASTER_GET(actionData));
+  };
 
   useEffect(() => {
-   if (adMasterGet) {
-        let editObj = {
+    if (adMasterGet) {
+      let editObj = {
         ad_title: adMasterGet.ad_title,
         ad_vis_location: adMasterGet.ad_vis_location,
         palette_id: adMasterGet.palette_id,
@@ -411,7 +414,7 @@ const getEditData = (editId) => {
         ad_from_date: adMasterGet.ad_from_date,
         ad_to_date: adMasterGet.ad_to_date,
         tiles: adMasterGet.tiles,
-      } 
+      };
       setEditAbleValues(editObj);
       setSelectedAdVisId(editObj.shop_id);
       setSelectedTiles(editObj.tiles);
@@ -419,14 +422,13 @@ const getEditData = (editId) => {
     }
   }, [adMasterGet]);
 
-  
-    const [placeholderValue, setPlaceholderValue] = useState(""); 
-    const handlePlaceholderChange = (value) => {
+  const [placeholderValue, setPlaceholderValue] = useState("");
+  const handlePlaceholderChange = (value) => {
     setPlaceholderValue(value);
-    };
+  };
 
   return (
-    <Grid p={2.5} item md={12}>
+    <Grid pl={3} item md={12}>
       {showToast && (
         <>
           <Stack sx={{ width: "100%", color: "grey.500" }} spacing={2}></Stack>
@@ -492,17 +494,17 @@ const getEditData = (editId) => {
                         />
                       </Grid>
                     )}
-                    {/* {keyValue?.isChooseTiles && (
+                    {keyValue?.isChooseTiles && (
                       <Grid item md={12} sm={12}>
                         <Tiles
                           label={keyValue.label}
                           handleChange={onChange}
-                        onChangePlaceholder={handlePlaceholderChange}
+                          onChangePlaceholder={handlePlaceholderChange}
                           returnId={keyValue.returnId}
                         />
                       </Grid>
-                    )} */}
-      {keyValue?.isChooseTiles && (
+                    )}
+                    {/* {keyValue?.isChooseTiles && (
                       <Grid item md={12} sm={12}>
                         <CustomDropdown
                           label={keyValue.label}
@@ -517,7 +519,7 @@ const getEditData = (editId) => {
                           returnId={keyValue.returnId}
                         />
                       </Grid>
-                    )}
+                    )} */}
 
                     {keyValue?.isColorBanner && (
                       <Grid item md={12} sm={12}>
@@ -525,9 +527,8 @@ const getEditData = (editId) => {
                           label={keyValue.label}
                           handleChange={(selectedColorId) => {
                             onChange(selectedColorId);
-                            setSelectedPaletteColorId(selectedColorId)
-                          }
-                          }
+                            setSelectedPaletteColorId(selectedColorId);
+                          }}
                           value={value || ""}
                           colors={paletteList}
                           placeholder={keyValue.placeholder}
@@ -549,8 +550,7 @@ const getEditData = (editId) => {
                           nationDropdownList={nationDropdownList}
                           placeholder={keyValue.placeholder}
                           returnId={keyValue.returnId}
-
-                              handleChange={(event) => {
+                          handleChange={(event) => {
                             setPincodeValue(event.target.value);
                             onChange(event.target.value);
                           }}
@@ -559,7 +559,7 @@ const getEditData = (editId) => {
                     )}
                     {keyValue?.isDateDropdown && (
                       <Grid item md={12} sm={12}>
-                        <DateRangePicker 
+                        <DateRangePicker
                           label={keyValue.label}
                           handleChange={handleDateChange}
                           date={editAbleValues}
@@ -578,7 +578,7 @@ const getEditData = (editId) => {
                             setSelectedAdVisId(event.target.value);
                             onChange(event.target.value);
                           }}
-                          value={selectedAdVisId || ""}                      
+                          value={selectedAdVisId || ""}
                           data={dropdownList}
                           placeholder={keyValue.placeholder}
                           returnId={keyValue.returnId}
@@ -611,7 +611,7 @@ const getEditData = (editId) => {
                     )}
                     {keyValue?.isSingleImageUpload && (
                       <Grid item md={12} sm={12} className="shop_img_align">
-                         <CustomFileUploader
+                        <CustomFileUploader
                           Label="Upload Ad"
                           upLoad={CustomIcons.UploadIcon}
                           getImage={(val) => {
@@ -619,7 +619,6 @@ const getEditData = (editId) => {
                             getImage(val);
                           }}
                         />
-                     
                       </Grid>
                     )}
                   </>
@@ -633,7 +632,7 @@ const getEditData = (editId) => {
                   />
                 </Grid>
               )}
-             </Grid>
+            </Grid>
           ))}
         </Grid>
         <Grid
@@ -678,20 +677,22 @@ const getEditData = (editId) => {
           </>
         </Grid>
       </Grid>
-      <Table
-        header={header}
-        rows={table}
-        printer={CustomIcons.Printer1}
-        view={CustomIcons.View}
-        edit={CustomIcons.EditIcon}
-        editOpen={(id) => getEditData(id)}
-        deleteIconSrc={CustomIcons.DeleteIcon}
-        modalOpen={(id) => handleOpen(id)}
-        action
-        actionItem={{ view: true, deleteIcon: true, edit: true }}
-        isDrop={false}
-        deleteData={(id) => handleDelete(id)}
-      />
+      <Grid pl={3}>
+        <Table
+          header={header}
+          rows={table}
+          printer={CustomIcons.Printer1}
+          view={CustomIcons.View}
+          edit={CustomIcons.EditIcon}
+          editOpen={(id) => getEditData(id)}
+          deleteIconSrc={CustomIcons.DeleteIcon}
+          modalOpen={(id) => handleOpen(id)}
+          action
+          actionItem={{ view: true, deleteIcon: true, edit: true }}
+          isDrop={false}
+          deleteData={(id) => handleDelete(id)}
+        />
+      </Grid>
       {adView && <AdView viewId={viewId} />}
     </Grid>
   );

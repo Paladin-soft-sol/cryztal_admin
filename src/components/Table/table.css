@@ -20,12 +20,13 @@
   top: 0;
   /* z-index: 9; */
 }
+
 .iconStyles {
   width: 20px;
-  filter: invert(72%) sepia(12%) saturate(258%) hue-rotate(189deg)
-    brightness(97%) contrast(86%);
+  filter: invert(72%) sepia(12%) saturate(258%) hue-rotate(189deg) brightness(97%) contrast(86%);
   cursor: pointer;
 }
+
 .thData {
   padding: 10px;
 }
@@ -65,32 +66,36 @@ div::-webkit-scrollbar-thumb {
   background-color: var(--pinkPrimary);
   outline: 1px solid var(--pinkPrimary);
 }
+
 .tableTitle {
   font-weight: 600 !important;
   font-size: 16px !important;
   padding: 24px 0px 0px 0px !important;
   color: #204768 !important;
 }
+
 .filter {
   color: #acb0be !important;
   padding: 27px 5px 0px 29px !important;
 }
+
 /* .filterIcon {
   width: 20px;
   align-content: center;
   padding-left: 10px;
 } */
 .iconStyle {
-  filter: invert(38%) sepia(2%) saturate(29%) hue-rotate(323deg)
-    brightness(103%) contrast(92%) !important;
+  filter: invert(38%) sepia(2%) saturate(29%) hue-rotate(323deg) brightness(103%) contrast(92%) !important;
 }
+
 .tableDropdown {
   border: none !important;
   width: 150px !important;
   /* border-radius: 10px !important; */
   background: #f2f4f6;
-  margin: 0px 10px;
+  margin: 0px 10px 10px 0px;
 }
+
 .iconStyle {
   justify-content: center;
   align-items: center;
@@ -98,8 +103,7 @@ div::-webkit-scrollbar-thumb {
   padding-left: 8px;
   padding-top: 5px;
   padding-right: 7px;
-  filter: invert(100%) sepia(80%) saturate(0%) hue-rotate(302deg)
-    brightness(290%) contrast(100%);
+  filter: invert(100%) sepia(80%) saturate(0%) hue-rotate(302deg) brightness(290%) contrast(100%);
 }
 
 .viewIcon {
@@ -109,11 +113,11 @@ div::-webkit-scrollbar-thumb {
   padding-left: 8px;
   padding-top: 5px;
   padding-right: 7px;
-  filter: invert(72%) sepia(12%) saturate(258%) hue-rotate(189deg)
-    brightness(97%) contrast(86%);
+  filter: invert(72%) sepia(12%) saturate(258%) hue-rotate(189deg) brightness(97%) contrast(86%);
   padding: 7px;
   border-radius: 5px;
 }
+
 .tableDropdown .MuiOutlinedInput-root {
   padding-right: 3px !important;
   border-radius: 10px !important;
@@ -127,17 +131,20 @@ div::-webkit-scrollbar-thumb {
 .tableDropdown .MuiOutlinedInput-notchedOutline {
   border-color: snow !important;
 }
+
 .optionalIcon {
   padding-top: 5px;
   padding-right: 5px;
-  display: flex;
+  /* display: flex; */
   cursor: pointer;
   /* overflow: hidden; */
 }
+
 .tableTitle {
   font-size: 20px !important;
   white-space: nowrap;
 }
+
 tbody::-webkit-scrollbar {
   width: 0.6em !important;
   height: 1px !important;
@@ -150,13 +157,16 @@ tbody::-webkit-scrollbar-track {
   /* margin-top: 10px;
   margin-bottom: 10px; */
 }
+
 tbody::-webkit-scrollbar-button {
   height: 5px;
 }
+
 tbody::-webkit-scrollbar-thumb {
   /* background-color: var(--pinkPrimary); */
   border-radius: 20px;
 }
+
 div::-webkit-scrollbar {
   width: 0.6em !important;
   height: 5px !important;
@@ -172,29 +182,36 @@ div::-webkit-scrollbar-thumb {
   background-color: var(--pinkPrimary);
   border-radius: 20px;
 }
+
 .emptyData {
   width: 200px;
   height: 190px;
 }
+
 .emptyDataDiv {
   width: 100%;
   display: flex;
   justify-content: center;
 }
+
 tbody {
   /* display: block;
   height: 360px;
   overflow: auto; */
 }
+
 thead,
 tbody tr {
   display: table;
   width: 100%;
-  table-layout: fixed; /* even columns width , fix width of table too*/
+  table-layout: fixed;
+  /* even columns width , fix width of table too*/
 }
+
 .tdDataNumber {
   text-align: left !important;
 }
+
 /* .MuiFormControl-root.MuiFormLabel-root-MuiInputLabel-root {
   padding: 11px 0px 3px 32px !important;
 } */
@@ -209,6 +226,7 @@ tbody tr {
   top: 22px;
   cursor: pointer;
 }
-.csv-link{
+
+.csv-link {
   position: relative;
 }

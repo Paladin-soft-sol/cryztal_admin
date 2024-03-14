@@ -50,15 +50,7 @@ function Dashboard() {
 			value: 'bbb',
 		},
 	];
-	// const getPartnerCount = () => {
-	// 	// eslint-disable-next-line no-unsafe-optional-chaining
-	// 	const partnerCount = Math.round(
-	// 		dashboardCount?.data?.partnersInActiveCount +
-	// 			dashboardCount?.data?.partnersActiveCount
-	// 	);
-	// 	return partnerCount;
-	// };
-	// const totalPartnerCount = `${dashboardCount?.data?.partnersInActiveCount}+ ${dashboardCount?.data?.partnersActiveCount}`;
+	
 	const dashboardCard = [
 		{
 			header: 'Total Deals',
@@ -73,7 +65,7 @@ function Dashboard() {
 			header: 'Total Partners',
 			inActiveCount: dashboardCount?.data?.partnersInActiveCount,
 			partnerCount: dashboardCount?.data?.totalPartnersCount,
-			// partnerCount: getPartnerCount(),
+			
 			iconChange: CustomIcons.Partner,
 			subtitle2: 'Active',
 			activeCount: dashboardCount?.data?.partnersActiveCount,
@@ -86,7 +78,7 @@ function Dashboard() {
 			header: 'Total Customers',
 			inActiveCount: dashboardCount?.data?.customersInActiveCount,
 			partnerCount: dashboardCount?.data?.customersCount,
-			// partnerCount: getPartnerCount(),
+			
 			iconChange: CustomIcons.Partner,
 			subtitle2: 'Active',
 			activeCount: dashboardCount?.data?.customersActiveCount,
@@ -129,7 +121,7 @@ function Dashboard() {
 			tmpArr.push({
 				id: values.id,
 				store_name: values.store_name,
-				// typeof: values?.type_of_store,
+				
 				typeof: values?.type_of_store?.toString(),
 				store_email: values.store_email,
 				primary_contact: values.primary_contact,
@@ -160,7 +152,7 @@ function Dashboard() {
 	};
 
 	return (
-		<Grid container item md={12} pl={4} pr={1.2}>
+		<Grid container item md={12} pl={6} pr={1.2}>
 			<Grid container item md={12} display="flex" spacing={1}>
 				<Grid
 					item

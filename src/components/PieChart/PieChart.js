@@ -5,6 +5,12 @@ import { PieChart, Pie, Cell, Legend, LabelList } from "recharts";
 import "./pieChart.css";
 
 const COLORS = ["#FECD66", "#A3A1FB", "#FB718A", "#0083ff"];
+const data01 = [
+  { name: "Pending", value: 100 },
+  { name: "Approved", value: 500 },
+  { name: "Rejected", value: 1000 },
+];
+
 /**
  *
  * @param {*} props -- required props
@@ -19,7 +25,7 @@ export const CustomPieChart = (props) => {
           className="pie-chart1"
           width={50}
           height={50}
-          data={data}
+          data={data01}
           cx={120}
           cy={200}
           innerRadius={60}
@@ -28,7 +34,7 @@ export const CustomPieChart = (props) => {
           paddingAngle={3}
           dataKey="value"
         >
-          {data.map((entry, index) => {
+          {data01.map((entry, index) => {
             const key = index;
             return <Cell fill={COLORS[index % COLORS.length]} key={key} />;
           })}

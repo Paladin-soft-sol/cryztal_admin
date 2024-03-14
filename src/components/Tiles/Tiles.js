@@ -43,41 +43,13 @@ export const Tiles = (props) => {
   }, [selectedOptions, placeholder, onChangePlaceholder]);
 
 
-
-// const handleCheckboxChange = (option) => {
-//   const isOptionSelected = selectedOptions.some((selectedOption) => selectedOption.value === option.value);
-
-//   if (isOptionSelected) {
-//     setSelectedOptions((prevOptions) => prevOptions.filter((o) => o.value !== option.value));
-//   } else {
-//     if (selectedOptions.length < threeSelection) {
-//       const isValidSelection = selectedOptions.every((selectedOption) => {
-//         const selectedIndex = parseInt(selectedOption.value.replace("url", ""));
-//         const optionIndex = parseInt(option.value.replace("url", ""));
-
-//         const selectedRow = Math.floor((selectedIndex - 1) / 3);
-//         const selectedCol = (selectedIndex - 1) % 3;
-//         const optionRow = Math.floor((optionIndex - 1) / 3);
-//         const optionCol = (optionIndex - 1) % 3;
-
-//         return selectedRow === optionRow || selectedCol === optionCol;
-//       });
-
-//       if (isValidSelection) {
-//         setSelectedOptions((prevOptions) => [...prevOptions, option]);
-//       } else {
-//         console.log("Diagonal selection is not allowed.");
-//       }
-//     }
-//   }
-// };
 const handleCheckboxChange = (option) => {
   const isOptionSelected = selectedOptions.some((selectedOption) => selectedOption.value === option.value);
 
   if (isOptionSelected) {
     setSelectedOptions((prevOptions) => prevOptions.filter((o) => o.value !== option.value));
   } else {
-    if (selectedOptions.length < threeSelection) {
+    if (selectedOptions?.length < threeSelection) {
       const isValidSelection = selectedOptions.every((selectedOption) => {
         const selectedIndex = parseInt(selectedOption.value.replace("url", ""));
         const optionIndex = parseInt(option.value.replace("url", ""));
@@ -95,7 +67,7 @@ const handleCheckboxChange = (option) => {
       } else {
         console.log("Diagonal selection is not allowed.");
       }
-    } else if (selectedOptions.length < twoSelection) {
+    } else if (selectedOptions?.length < twoSelection) {
       const isValidSelection = selectedOptions.every((selectedOption) => {
         const selectedIndex = parseInt(selectedOption.value.replace("url", ""));
         const optionIndex = parseInt(option.value.replace("url", ""));
@@ -113,7 +85,7 @@ const handleCheckboxChange = (option) => {
       } else {
         console.log("Diagonal selection is not allowed.");
       }
-    } else if (selectedOptions.length < singleSelection) {
+    } else if (selectedOptions?.length < singleSelection) {
       const isValidSelection = selectedOptions.every((selectedOption) => {
         const selectedIndex = parseInt(selectedOption.value.replace("url", ""));
         const optionIndex = parseInt(option.value.replace("url", ""));
@@ -137,17 +109,17 @@ const handleCheckboxChange = (option) => {
 
 
   const generatePlaceholder = (selectedOptions) => {
-    if (selectedOptions.length === threeSelection) {
+    if (selectedOptions?.length === threeSelection) {
       const sortedValues = selectedOptions
         .map((option) => parseInt(option.value.replace("url", ""), 10))
         .sort((a, b) => a - b);
       setPlaceholder(sortedValues.join(", "));
-    }  else if (selectedOptions.length === twoSelection) {
+    }  else if (selectedOptions?.length === twoSelection) {
       const sortedValues = selectedOptions
         .map((option) => parseInt(option.value.replace("url", ""), 10))
         .sort((a, b) => a - b);
       setPlaceholder(sortedValues.join(", "));
-    } else if (selectedOptions.length === singleSelection) {
+    } else if (selectedOptions?.length === singleSelection) {
       const sortedValues = selectedOptions
         .map((option) => parseInt(option.value.replace("url", ""), 10))
         .sort((a, b) => a - b);
@@ -158,7 +130,7 @@ const handleCheckboxChange = (option) => {
     }
   };
 
-  const isOptionDisabled = (option) => selectedOptions.length === threeSelection && !selectedOptions.some((o) => o.value === option.value);
+  const isOptionDisabled = (option) => selectedOptions?.length === threeSelection && !selectedOptions.some((o) => o.value === option.value);
 
   return (
     <div className="App">

@@ -4,7 +4,7 @@ import Layout from "./layouts";
 
 function RoutePage() {
   return (
-    <Router basename="/cryztal_testing">
+    <Router>
       <Layout />
     </Router>
   );

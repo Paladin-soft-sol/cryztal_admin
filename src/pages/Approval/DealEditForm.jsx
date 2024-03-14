@@ -235,7 +235,7 @@ function DealEditForm() {
 		// formData.append('images', data?.images);
 		formData.append('from_date', data?.from_date);
 		formData.append('to_date', data?.to_date);
-		if (data?.image.length > 0) {
+		if (data?.image?.length > 0) {
 			if (!Array.isArray(data?.image)) {
 				// alert('1');
 				formData.append('image', '');

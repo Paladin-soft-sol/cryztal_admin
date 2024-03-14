@@ -394,7 +394,7 @@ function Report() {
   console.log(table, "table");
   console.log(header, "header");
   return (
-    <Grid container item md={12} sm={12}>
+    <Grid container item md={12} sm={12} pl={4}>
       <Grid item md={12} p={2}>
         <CustomTypography type="header" text="Report" customClass="headText" />
       </Grid>
@@ -424,7 +424,7 @@ function Report() {
           isDrop
           isShopFilter={value !== 0}
           tabValue={value}
-          downloadj
+          download
           handleDownloadClick={handleDownloadClick}
         />
       </Grid>

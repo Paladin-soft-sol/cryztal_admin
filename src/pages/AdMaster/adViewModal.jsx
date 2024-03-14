@@ -17,7 +17,7 @@ import './adView.css';
 
 function AdView(props) {
 const admaster_details  = useSelector((state) => state?.admaster?.admasterView?.data);
- 
+ console.log(admaster_details.shop_images, "admaster_details");
   const style = {
     position: 'absolute',
     top: '50%',
@@ -91,186 +91,189 @@ const admaster_details  = useSelector((state) => state?.admaster?.admasterView?.
     >
       <Fade in={open}>
         <Box sx={style} className="modalBox">
-          <Grid container md={12} lg={12} sm={12} xs={12} className="modalHeader">
-            <Grid item md={12} lg={12} sm={12} xs={12} className="close" onClick={handleClose}>
+          <Grid
+            container
+            md={12}
+            lg={12}
+            sm={12}
+            xs={12}
+            className="modalHeader"
+          >
+            <Grid
+              item
+              md={12}
+              lg={12}
+              sm={12}
+              xs={12}
+              className="close"
+              onClick={handleClose}
+            >
               <img src={CustomIcons.ModalClose} alt="close" />
             </Grid>
-         
           </Grid>
-  
 
-
-
-<div className="second_div">
-				<Grid container item md={12} sm={12}>
-					<Grid item md={4} sm={12}>
-						<div className="Discount_Image">
-							<img src={admaster_details?.shop_images} alt="" className="Dog" />
-						</div>
-					</Grid>
-					<Grid item md={8} sm={12}>
-						<Grid display="flex">
-							<Grid item md={4} sm={12}>
-						
+          <div className="second_div">
+            <Grid container item md={12} sm={12}>
+              <Grid item md={4} sm={12}>
+                <div className="Discount_Image">
+                  <img src={admaster_details?.shop_ad} alt="" className="Dog" />
+                </div>
+              </Grid>
+              <Grid item md={8} sm={12}>
+                <Grid display="flex">
+                  <Grid item md={4} sm={12}>
                     <Grid>
-                      <Grid className='main_div'>
-									<div className="Heading_color">
-										<CustomTypography type="title" text={SecondLabel} />
-									</div>
-									<CustomTypography
-										customClass="customarData"
-										type="caption"
-										text={admaster_details?.ad_title}
+                      <Grid className="main_div">
+                        <div className="Heading_color">
+                          <CustomTypography type="title" text={SecondLabel} />
+                        </div>
+                        <CustomTypography
+                          customClass="customarData"
+                          type="caption"
+                          text={admaster_details?.ad_title}
                         />
-                        </Grid>
+                      </Grid>
                       <Grid>
-                      <div className="Heading_color">
-										<CustomTypography type="title" text={SixthLabel} />
-									</div>
-									<CustomTypography
-										customClass="customarData"
-										type="caption"
-										text={admaster_details?.ad_vis_location}
-                        />{' '}
-                        </Grid>
-								</Grid>
-							</Grid>
-							<Grid item md={4} sm={12}>
-								<Grid>
-									<div className="main_div">
-										<div className="Heading_color">
-											<CustomTypography type="title" text={ThirdLabel} />
-										</div>
-										<CustomTypography
-											customClass="customarData"
-											type="caption"
-											text={admaster_details?.store_name}
-										/>
-									</div>
-								</Grid>
-
-								<Grid>
-									<div className="Heading_color">
-										<CustomTypography type="title" text={FourthLabel} />
-									</div>
-
-									<CustomTypography
-										type="caption"
-										customClass="customarData"
-										text={admaster_details?.tiles}
-									/>
-								</Grid>
-							</Grid>
-							<Grid item md={6} sm={12}>
-								<Grid>
-									<div className="main_div">
-										<div className="Heading_color">
-											<CustomTypography type="title" text={FifthLabel} />
-										</div>
-										<CustomTypography
-											customClass="customarData"
-											type="caption"
-											text={admaster_details?.palette_color}
-										/>
-									</div>
-								</Grid>
-								<Grid>
-									
-                    {/* </Grid>
-                    <Grid> */}
-                        <Grid container md={12}>
-                      <Grid item md={6}>
-									<div className="Heading_color">
-										<CustomTypography type="title" text={FromDate} />
-									</div>
-									<CustomTypography
-										customClass="customarData"
-										type="caption"
-										text={admaster_details?.ad_from_date}
-									/>{' '}
+                        <div className="Heading_color">
+                          <CustomTypography type="title" text={SixthLabel} />
+                        </div>
+                        <CustomTypography
+                          customClass="customarData"
+                          type="caption"
+                          text={admaster_details?.ad_vis_location}
+                        />{" "}
+                      </Grid>
                     </Grid>
-                    <Grid item md={6}>
-									<div className="Heading_color">
-										<CustomTypography type="title" text={ToDate} />
-									</div>
-									<CustomTypography
-										customClass="customarData"
-										type="caption"
-										text={admaster_details?.ad_to_date}
-                        />{' '}
+                  </Grid>
+                  <Grid item md={4} sm={12}>
+                    <Grid>
+                      <div className="main_div">
+                        <div className="Heading_color">
+                          <CustomTypography type="title" text={ThirdLabel} />
+                        </div>
+                        <CustomTypography
+                          customClass="customarData"
+                          type="caption"
+                          text={admaster_details?.store_name}
+                        />
+                      </div>
+                    </Grid>
+
+                    <Grid>
+                      <div className="Heading_color">
+                        <CustomTypography type="title" text={FourthLabel} />
+                      </div>
+
+                      <CustomTypography
+                        type="caption"
+                        customClass="customarData"
+                        text={admaster_details?.tiles}
+                      />
+                    </Grid>
+                  </Grid>
+                  <Grid item md={6} sm={12}>
+                    <Grid>
+                      <div className="main_div">
+                        <div className="Heading_color">
+                          <CustomTypography type="title" text={FifthLabel} />
+                        </div>
+                        <CustomTypography
+                          customClass="customarData"
+                          type="caption"
+                          text={admaster_details?.palette_color}
+                        />
+                      </div>
+                    </Grid>
+                    <Grid>
+                      {/* </Grid>
+                    <Grid> */}
+                      <Grid container md={12}>
+                        <Grid item md={6}>
+                          <div className="Heading_color">
+                            <CustomTypography type="title" text={FromDate} />
+                          </div>
+                          <CustomTypography
+                            customClass="customarData"
+                            type="caption"
+                            text={admaster_details?.ad_from_date}
+                          />{" "}
                         </Grid>
+                        <Grid item md={6}>
+                          <div className="Heading_color">
+                            <CustomTypography type="title" text={ToDate} />
+                          </div>
+                          <CustomTypography
+                            customClass="customarData"
+                            type="caption"
+                            text={admaster_details?.ad_to_date}
+                          />{" "}
                         </Grid>
-								</Grid>
-							</Grid>
-						</Grid>
-						
-					</Grid>
-				</Grid>
-			</div>
-			{/* <div className="Footer">
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          </div>
+          {/* <div className="Footer">
 				<Grid container item md={12} sm={12}>
 					<CustomTypography type="title" text={Footer} />
 				</Grid>
 			</div> */}
 
-
-
-
-
-
-
-
-          <Grid sx={{ display: 'flex', justifyContent: 'end',paddingTop:"80px" }}>
-				{result !== 1 ? (
-					<CustomButton
-						btnTitle="APPROVE"
-						color="primary"
-						variant="contained"
-						btnStyles={{
-							width: '150px',
-							color: 'white',
-							margin: '10px',
-							backgroundColor: '#01BF38',
-						}}
-						onClickHandle={() => statusHandle(1)}
-					/>
-				) : ( 
-					'' 
-				)} 
-				{result !== 2 ? (
-					<CustomButton
-						btnTitle="REJECT"
-						color="primary"
-						variant="contained"
-						btnStyles={{
-							width: '150px',
-							color: 'white',
-							margin: '10px',
-							backgroundColor: '#FF6060',
-						}}
-						onClickHandle={() => statusHandle(2)}
-					/>
-				 ) : ( 
-					 '' 
-				 )} 
-				 {result !== 3 ? ( 
-					<CustomButton
-						btnTitle="QUARANTINE"
-						iii
-						color="primary"
-						variant="contained"
-						btnStyles={{
-							width: '150px',
-							color: 'white',
-							margin: '10px',
-							backgroundColor: '#0093FF',
-						}}
-						onClickHandle={() => statusHandle(3)}
-					/>
-				 ) : ( 
-					 '' 
-				 )} 
-			    </Grid>
+          <Grid
+            sx={{ display: "flex", justifyContent: "end", paddingTop: "80px" }}
+          >
+            {result !== 1 ? (
+              <CustomButton
+                btnTitle="APPROVE"
+                color="primary"
+                variant="contained"
+                btnStyles={{
+                  width: "150px",
+                  color: "white",
+                  margin: "10px",
+                  backgroundColor: "#01BF38",
+                }}
+                onClickHandle={() => statusHandle(1)}
+              />
+            ) : (
+              ""
+            )}
+            {result !== 2 ? (
+              <CustomButton
+                btnTitle="REJECT"
+                color="primary"
+                variant="contained"
+                btnStyles={{
+                  width: "150px",
+                  color: "white",
+                  margin: "10px",
+                  backgroundColor: "#FF6060",
+                }}
+                onClickHandle={() => statusHandle(2)}
+              />
+            ) : (
+              ""
+            )}
+            {result !== 3 ? (
+              <CustomButton
+                btnTitle="QUARANTINE"
+                iii
+                color="primary"
+                variant="contained"
+                btnStyles={{
+                  width: "150px",
+                  color: "white",
+                  margin: "10px",
+                  backgroundColor: "#0093FF",
+                }}
+                onClickHandle={() => statusHandle(3)}
+              />
+            ) : (
+              ""
+            )}
+          </Grid>
         </Box>
       </Fade>
     </Modal>
